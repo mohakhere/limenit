@@ -1,0 +1,627 @@
+<!doctype html> 
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>LimeNit - Tools for the Modern B2B</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: { accent: '#ff6b6b' },
+          fontFamily: {
+            display: ['Poppins', 'Inter', 'sans-serif'],
+            body: ['Inter', 'system-ui', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root { --accent: #ff6b6b; --bg: #070708; --muted: #aeb3b8; --glass-bg: rgba(255,255,255,0.03); }
+    html,body { height:100%; }
+    body { margin:0; font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial; background:var(--bg); color:#ffff; -webkit-font-smoothing:antialiased; }
+    .display { font-family:Poppins,Inter,sans-serif; font-weight:700; }
+    .glass { background: var(--glass-bg); backdrop-filter: blur(8px); border: 1px solid rgba(255,255,255,0.03); }
+    .smooth { transition: all 360ms cubic-bezier(.2,.9,.2,1); }
+    .nav-link { position: relative; padding-bottom:6px; color: #e9edf0; }
+    .nav-link::after { content:""; position:absolute; left:0; bottom:0; height:2px; width:0; background:var(--accent); border-radius:2px; transition: width .36s cubic-bezier(.2,.9,.2,1); }
+    .nav-link.active::after { width:100%; }
+    .feature-detail { max-height:0; overflow:hidden; transition:max-height .34s ease; }
+    .feature-expanded .feature-detail { max-height:260px; }
+    /* hero offset accounting for fixed header (header ~64px) */
+    .hero-min { min-height: calc(100vh - 64px); }
+    .section-pad { padding-top: 4.5rem; padding-bottom: 4.5rem; }
+    .section-pad-lg { padding-top: 6rem; padding-bottom: 6rem; }
+    .ring-svg { filter: drop-shadow(0 6px 18px rgba(0,0,0,0.6)); }
+    .modal-backdrop { background: rgba(0,0,0,0.75); }
+    .btn-accent { background: var(--accent); color: black; }
+    .btn-outline { border: 1px solid rgba(255,255,255,0.08); color: #eef0f2; }
+
+    /* NEW: Tab component styles (based on your credit-tabs look, adapted to LimeNit) */
+    .tabs-wrap { max-width: 1100px; margin-left:auto; margin-right:auto; }
+    .tabs-grid { display:grid; grid-template-columns:repeat(5, 1fr); gap:16px; }
+    .tab-item { display:flex; align-items:center; justify-content:center; padding:14px; border-radius:14px; cursor:pointer; background: rgba(255,255,255,0.01); border:1px solid rgba(255,255,255,0.03); }
+    .tab-item .label { text-align:center; font-size:13px; color: #e6e9eb; line-height:1.05; }
+    .tab-item .label .muted { display:block; font-size:11px; color: #9aa1a6; font-weight:500; }
+    .active-tab { transform: translateY(-6px); box-shadow: 0 18px 40px rgba(255,107,107,0.06); border-color: rgba(255,107,107,0.14); background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)); }
+    @media (max-width: 780px) {
+      .tabs-grid { grid-template-columns:repeat(2, 1fr); }
+    }
+    @media (max-width: 520px) {
+      .tabs-grid { grid-template-columns:repeat(1, 1fr); }
+    }
+
+    /* ensure hero typography scales nicely */
+    @media (min-width: 768px) {
+      .hero-title-lg { font-size: clamp(40px, 6.2vw, 64px); line-height: 1.02; }
+      .section-pad { padding-top: 5.5rem; padding-bottom: 5.5rem; }
+    }
+/*change if needed*/
+/* LimeNit Dark Palette Tabs */
+.tab-active {
+  background-color: #414040;   /* slightly lighter dark navy background */
+  border-left: 3px solid #ff6b6b; /* LimeNit blue highlight */ 
+  color: #ffffff;
+  font-weight: 600;
+}
+
+.tab-inactive {
+  background-color: #171717;   /* deep dark background */
+  border-left: 3px solid transparent;
+  color: var(--muted); /* muted gray text */
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.tab-inactive:hover {
+  background-color: #373737;  /* same as active background on hover */
+  border-left: 3px solid #374151; /* subtle gray border */
+  color: #ffffff;
+}
+
+/* Flip card styles */
+.flip-card {
+  perspective: 1000px;
+}
+.flip-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.7s cubic-bezier(.4,.2,.2,1);
+  transform-style: preserve-3d;
+}
+.flip-card:hover .flip-card-inner {
+  transform: rotateY(180deg);
+}
+.flip-card-front,
+.flip-card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  border-radius: 1rem;
+}
+.flip-card-back {
+  transform: rotateY(180deg);
+}
+
+/* Make flip cards hold their height */
+.flip-card {
+  perspective: 1000px;
+  min-height: 280px; /* adjust based on your design */
+}
+
+.flip-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.7s cubic-bezier(.4,.2,.2,1);
+  transform-style: preserve-3d;
+}
+
+.flip-card-front,
+.flip-card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  border-radius: 1rem;
+}
+
+
+  </style>
+</head>
+<body>
+
+  <canvas id="bgCanvas" class="fixed inset-0 -z-10 w-full h-full"></canvas>
+
+  <header class="fixed inset-x-0 top-0 z-50 bg-black/28 backdrop-blur-sm border-b border-gray-800">
+    <div class="max-w-7xl mx-auto px-5 md:px-8 lg:px-12 flex items-center justify-between h-16">
+      <a href="#hero" class="flex items-center gap-1">
+       <!-- <svg width="36" height="36" viewBox="0 0 24 24" class="text-accent"><circle cx="12" cy="12" r="10" fill="currentColor"/></svg> -->
+        <img src="C:\Users\mohak\OneDrive\Desktop\anotherwobg.png" alt="LimeNit Logo" class= "w-14 h-14 inline-block"/>
+        <!-- C:\Users\mohak\OneDrive\Desktop\android-chrome-192x192.png -->
+        <span class="display text-white text-lg -ml-3.5">LimeNit</span>
+      </a>
+
+      <nav class="hidden md:flex items-center gap-8 text-sm font-medium">
+        <a href="#showcase" class="nav-link">Curated Tools</a>
+        <a href="#perspectives" class="nav-link">Resources</a>
+        <a href="#community" class="nav-link">Community</a>
+        <a href="#contact" class="nav-link">Contact</a>
+      </nav>
+
+      <div class="flex items-center gap-3">
+        <a href="#contact" class="hidden md:inline-flex items-center gap-2 px-4 py-2 rounded-full btn-accent text-black font-semibold smooth shadow-sm hover:scale-[1.03]">Intigration Req.</a>
+        <button id="mobileBtn" class="md:hidden p-2 rounded-md bg白/5 hover:bg-white/6 smooth" aria-label="Open menu">
+          <svg width="20" height="20" viewBox="0 0 24 24" class="text-white"><path stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M4 7h16M4 12h16M4 17h16"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <div id="mobileMenu" class="md:hidden hidden bg-black/70">
+      <div class="px-5 py-4 flex flex-col gap-3">
+        <a href="#showcase" class="py-2 px-3 rounded-md nav-link text-gray-200">Curated Tools</a>
+        <a href="#resources" class="py-2 px-3 rounded-md nav-link text-gray-200">Resources</a>
+        <a href="#community" class="py-2 px-3 rounded-md nav-link text-gray-200">Community</a>
+        <a href="#contact" class="py-2 px-3 rounded-md nav-link text-gray-200">Contact</a>
+        <a href="#contact" class="mt-2 inline-block px-4 py-2 rounded-full btn-accent text-black text-center font-semibold">Intigration Req.</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="pt-16"> <section class="min-h-screen flex flex-col justify-center items-center text-center px-6 bg-gradient-to-b from-darkbg to-black">
+    <h1 class="text-5xl md:text-7xl font-display font-bold leading-tight mb-6">
+      Faithful <span class="text-accent">B2B Tools,</span> unlike your Ex...
+    </h1>
+    <p class="max-w-2xl text-xl md:text-2xl opacity-90 mb-10">
+      Simple, powerful B2B solutions designed for real teams, not just tech wizards.
+    </p>
+    <div class="space-x-4">
+      <a href="#contact" class="px-8 py-4 rounded-xl bg-accent font-semibold shadow-lg hover:scale-105 transition">Intigration Req.</a>
+      <a href="#perspectives" class="px-8 py-4 rounded-xl border border-accent text-accent font-semibold hover:bg-accent hover:text-white transition">Read Our Playbooks</a>
+    </div>
+  </section>
+
+    <section id="showcase" class="py-20 bg-gradient-to-b from-black/60 to-black/80">
+    <div class="container mx-auto px-6">
+        <h2 class="text-4xl md:text-5xl display text-white text-center mb-8">
+            Curated tools we love
+        </h2>
+        <div class="flex flex-col lg:flex-row gap-8 bg-gradient-to-b from-black/60 to-black/80 p-4 rounded-3xl">
+            <div class="glass lg:w-1/3 flex-shrink-0 rounded-2xl p-4">
+                <ul id="features-tabs" class="space-y-2">
+                    </ul>
+            </div>
+
+            <div id="features-content" class="lg:w-2/3 flex-grow p-4 rounded-2xl">
+                </div>
+        </div>
+    </div>
+</section>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+
+        // Data for the Features section (Showcase sidebar)
+        const features = [
+            {
+                title: "Simplicity First",
+                description: "Tools should solve problems, not create new ones. We design with a 'less is more' approach, so you can get to work, not get stuck in a menu.",
+                image: "https://placehold.co/1000x600/171717/ffffff?text=Simplicity+First+Graphic",
+                buttons: ["Explore", "More Info"]
+            },
+            {
+                title: "Integrations, Not Silos",
+                description: "A great tool plays well with others. Our solutions are built to integrate seamlessly with your existing workflow, not replace it.",
+                image: "https://placehold.co/1000x600/171717/ffffff?text=Integration+Graphic",
+                buttons: ["Explore", "More info"]
+            },
+            {
+                title: "Actionable Insights",
+                description: "We don't just dump data. Our tools provide clear, actionable insights that help you make smarter decisions, faster.",
+                image: "https://placehold.co/1000x600/171717/ffffff?text=Insights+Graphic",
+                buttons: ["Explore", "More Info"]
+            },
+            {
+                title: "Built for Humans",
+                description: "We believe the best technology empowers people. Our interfaces are intuitive, our support is responsive, and our mission is to make your job easier.",
+                image: "https://placehold.co/1000x600/171717/ffffff?text=Human+Centered+Design+Graphic",
+                buttons: ["Explore", "More Info"]
+            },
+            {
+                title: "Transparent & Honest",
+                description: "No hidden fees, no confusing terms. We believe in honest pricing and open communication, because that’s what a good partnership is built on.",
+                image: "https://placehold.co/1000x600/171717/ffffff?text=Transparency+Graphic",
+                buttons: ["Explore", "More Info"]
+            },
+            {
+                title: "Always Improving",
+                description: "The B2B landscape is always changing. We are too. Our roadmap is driven by a constant loop of user feedback and innovation.",
+                image: "https://placehold.co/1000x600/171717/ffffff?text=Continuous+Improvement+Graphic",
+                buttons: ["Explore", "More Info"]
+            },
+            {
+                title: "Always Improving",
+                description: "The B2B landscape is always changing. We are too. Our roadmap is driven by a constant loop of user feedback and innovation.",
+                image: "https://placehold.co/1000x600/171717/ffffff?text=Continuous+Improvement+Graphic",
+                buttons: ["Explore", "More Info"]
+            }
+        ];
+
+        const featureTabs = document.getElementById('features-tabs');
+        const featureContent = document.getElementById('features-content');
+
+        function renderFeatures() {
+            featureTabs.innerHTML = '';
+            features.forEach((feature, index) => {
+                const li = document.createElement('li');
+                li.innerHTML = `
+                    <button class="w-full text-left p-4 rounded-xl space-y-1 transition-all duration-300 ${index === 0 ? 'tab-active' : 'tab-inactive'}" data-index="${index}">
+                        <h4 class="text-sm font-semibold">${feature.title}</h4>
+                        <p class="text-xs">Click to explore</p>
+                    </button>
+                `;
+                featureTabs.appendChild(li);
+            });
+            updateFeatureContent(0);
+        }
+
+        function updateFeatureContent(index) {
+            const feature = features[index];
+            featureContent.innerHTML = `
+                <div class="relative w-full h-80 lg:h-96 rounded-2xl overflow-hidden shadow-xl mb-6">
+                    <img src="${feature.image}" alt="${feature.title}" class="w-full h-full object-cover">
+                </div>
+                <h3 class="text-2xl font-bold mb-2">${feature.title}</h3>
+                <p class="text-gray-400 mb-6">${feature.description}</p>
+                <div class="flex space-x-4">
+                    ${feature.buttons.map(btn => `
+                        <a href="#contact" class="px-6 py-3 font-semibold rounded-full border border-gray-700 hover:bg-gray-700 transition-colors">${btn}</a>
+                    `).join('')}
+                </div>
+            `;
+            document.querySelectorAll('#features-tabs button').forEach((btn, i) => {
+                btn.classList.remove('tab-active');
+                btn.classList.add('tab-inactive');
+                if (i === index) {
+                    btn.classList.add('tab-active');
+                    btn.classList.remove('tab-inactive');
+                }
+            });
+        }
+
+        featureTabs.addEventListener('click', (e) => {
+            const button = e.target.closest('button');
+            if (button) {
+                const index = parseInt(button.dataset.index, 10);
+                updateFeatureContent(index);
+            }
+        });
+
+        renderFeatures();
+    });
+</script>
+
+    <section id="perspectives" class="section-pad px-6">
+      <div class="max-w-6xl mx-auto relative">
+        <h2 class="text-3xl md:text-4xl display text-white text-center mb-6">Perspectives & Playbooks</h2>
+
+        <div id="storyPanel" class="glass rounded-2xl p-6 overflow-hidden">
+          <div id="storyContent" class="min-h-[160px]"></div>
+        </div>
+
+        <button id="prevStory" aria-label="Previous story" class="absolute left-[-48px] top-1/2 -translate-y-1/2 p-3 rounded-full bg-black/40 smooth hidden md:flex">
+          <svg width="18" height="18" viewBox="0 0 24 24" class="text-white"><path stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M15 18l-6-6 6-6"/></svg>
+        </button>
+        <button id="nextStory" aria-label="Next story" class="absolute right-[-48px] top-1/2 -translate-y-1/2 p-3 rounded-full bg-black/40 smooth hidden md:flex">
+          <svg width="18" height="18" viewBox="0 0 24 24" class="text-white"><path stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M9 6l6 6-6 6"/></svg>
+        </button>
+
+        <div id="storyDots" class="flex items-center justify-center gap-3 mt-6"></div>
+      </div>
+    </section>
+
+      <section id="community" class="py-32 bg-gradient-to-r from-accent to-pink-500 text-center text-white">
+    <h2 class="text-4xl md:text-6xl font-display font-bold mb-8">Let's Build Something Better. Together.</h2>
+    <p class="text-lg md:text-xl max-w-2xl mx-auto mb-10 opacity-90">
+      Join a community of builders, founders, and operators. No fluff, just good conversation.
+    </p>
+    <a href="https://discord.gg/your-community-link" class="px-10 py-5 rounded-xl bg-white text-accent font-semibold shadow-lg hover:scale-105 transition">
+      Join Our Community
+    </a>
+  </section>
+
+<!--Stats-->
+<section id="stats" class="section-pad-lg px-6 bg-gradient-to-b from-black to-black/95">
+  <div class="max-w-6xl mx-auto grid md:grid-cols-3 gap-6">
+
+    <!-- Card 1 -->
+    <div class="flip-card">
+      <div class="flip-card-inner">
+        <!-- Front -->
+        <div class="flip-card-front p-6 rounded-2xl bg-[#0b0b0b] text-center">
+          <svg class="mx-auto ring-svg" width="115" height="115" viewBox="0 0 120 120">
+            <circle cx="60" cy="60" r="44" stroke="rgba(255,255,255,0.06)" stroke-width="12" fill="none"/>
+            <circle id="ring1" cx="60" cy="60" r="44" stroke="var(--accent)" stroke-width="12" fill="none" stroke-linecap="round" stroke-dasharray="276.46" stroke-dashoffset="276.46" transform="rotate(-90 60 60)"/>
+          </svg>
+          <div class="text-4xl font-semibold mt-4" id="statVal1">0%</div>
+          <div class="mt-2 text-lg text-gray-300">Less busywork</div>
+        </div>
+        <!-- Back -->
+        <div class="flip-card-back p-6 rounded-2xl bg-[#0b0b0b] text-center flex flex-col justify-center">
+          <p class="text-2xl font-semibold">Save hours weekly</p>
+          <p class="text-lg  text-gray-400 mt-2">Cut out repetitive tasks with automation designed for real workflows.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 2 -->
+    <div class="flip-card">
+      <div class="flip-card-inner">
+        <!-- Front -->
+        <div class="flip-card-front p-6 rounded-2xl bg-[#0b0b0b] text-center">
+          <svg class="mx-auto ring-svg" width="115" height="115" viewBox="0 0 120 120">
+            <circle cx="60" cy="60" r="44" stroke="rgba(255,255,255,0.06)" stroke-width="12" fill="none"/>
+            <circle id="ring2" cx="60" cy="60" r="44" stroke="#6ee7b7" stroke-width="12" fill="none" stroke-linecap="round" stroke-dasharray="276.46" stroke-dashoffset="276.46" transform="rotate(-90 60 60)"/>
+          </svg>
+          <div class="text-4xl font-semibold mt-4" id="statVal2">0%</div>
+          <div class="mt-2 text-lg text-gray-300">More clarity</div>
+        </div>
+        <!-- Back -->
+        <div class="flip-card-back p-6 rounded-2xl bg-[#0b0b0b] text-center flex flex-col justify-center">
+          <p class="text-2xl font-semibold">Decisions, simplified</p>
+          <p class="text-lg text-gray-400 mt-2">Our dashboards highlight what matters, nothing more.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 3 -->
+    <div class="flip-card">
+      <div class="flip-card-inner">
+        <!-- Front -->
+        <div class="flip-card-front p-6 rounded-2xl bg-[#0b0b0b] text-center">
+          <svg class="mx-auto ring-svg" width="115" height="115" viewBox="0 0 120 120">
+            <circle cx="60" cy="60" r="44" stroke="rgba(255,255,255,0.06)" stroke-width="12" fill="none"/>
+            <circle id="ring3" cx="60" cy="60" r="44" stroke="#60a5fa" stroke-width="12" fill="none" stroke-linecap="round" stroke-dasharray="276.46" stroke-dashoffset="276.46" transform="rotate(-90 60 60)"/>
+          </svg>
+          <div class="text-4xl font-semibold mt-4" id="statVal3">0%</div>
+          <div class="mt-2 text-sm text-gray-300">Zero complexity</div>
+        </div>
+        <!-- Back -->
+        <div class="flip-card-back p-6 rounded-2xl bg-[#0b0b0b] text-center flex flex-col justify-center">
+          <p class="text-2xl font-semibold">Tools that feel natural</p>
+          <p class="text-lg text-gray-400 mt-2">No steep learning curves—just clean, intuitive design.</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+    <section id="contact" class="py-16 px-6">
+      <div class="max-w-3xl mx-auto glass p-8 rounded-2xl">
+        <h3 class="text-2xl font-semibold">Request or Suggest a Tool
+</h3>
+        <p class="mt-2 text-sm text-gray-300">Every suggetion and feedback counts!</p>
+
+        <form id="contactForm" class="mt-6 grid gap-3">
+          <input name="name" placeholder="Your name" class="p-3 bg-transparent border border-white/8 rounded-md focus:outline-none" />
+          <input name="email" placeholder="Your email" class="p-3 bg-transparent border border-white/8 rounded-md focus:outline-none" />
+          <textarea name="msg" rows="4" placeholder="What's on your mind? (New tool request, feedback, support, etc.)" class="p-3 bg-transparent border border-white/8 rounded-md focus:outline-none"></textarea>
+          <div class="flex gap-3">
+            <button type="submit" class="px-5 py-2 rounded-full btn-accent text-black font-semibold smooth">Submit</button>
+            <button type="button" onclick="alert('Try demo')" class="px-5 py-2 rounded-full btn-outline">Explore Tools</button>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <footer class="py-12 bg-black/60 border-t border-white/6">
+      <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-4 gap-8">
+        <div>
+          <div class="flex items-center gap-3 mb-4">
+            <svg width="36" height="36" viewBox="0 0 24 24" class="text-accent"><circle cx="12" cy="12" r="10" fill="currentColor"/></svg>
+            <div>
+              <div class="font-semibold">LimeNit</div>
+              <div class="text-sm text-gray-400">Tools for the modern B2B.</div>
+            </div>
+          </div>
+          <div class="text-sm text-gray-400">© 2025 LimeNit. Built for modern teams.</div>
+        </div>
+
+        <div>
+          <div class="col-title mb-3">Product</div>
+          <ul class="space-y-2 text-sm text-gray-300">
+            <li><a href="#showcase" class="hover:underline">Curated Tools</a></li>
+            <li><a href="#Resources" class="hover:underline">Resources</a></li>
+            <li><a href="#community" class="hover:underline">Community</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <div class="col-title mb-3">Company</div>
+          <ul class="space-y-2 text-sm text-gray-300">
+            <li><a href="#" class="hover:underline">About</a></li>
+            <li><a href="mailto:contact@LimeNit.com" class="hover:underline">Contact</a></li>
+            <li><a href="#" class="hover:underline">Careers</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <div class="col-title mb-3">Legal & Support</div>
+          <ul class="space-y-2 text-sm text-gray-300">
+            <li><a href="#" class="hover:underline">Privacy</a></li>
+            <li><a href="#" class="hover:underline">Terms</a></li>
+            <li><a href="#" class="hover:underline">Support</a></li>
+          </ul>
+        </div>
+      </div>
+    </footer>
+
+  </main>
+
+  <script>
+    /* ---------- Canvas background: subtle, cursor reactive ---------- */
+    (function(){
+      const c = document.getElementById('bgCanvas'), ctx = c.getContext('2d');
+      let w = c.width = innerWidth, h = c.height = innerHeight;
+      window.addEventListener('resize', ()=> { w = c.width = innerWidth; h = c.height = innerHeight; });
+      let mouse = { x:w/2, y:h/2 };
+      window.addEventListener('mousemove', e => { mouse.x = e.clientX; mouse.y = e.clientY; });
+
+      const particles = [];
+      const count = Math.max(36, Math.floor((w*h)/180000));
+      for(let i=0;i<count;i++) particles.push({ x: Math.random()*w, y: Math.random()*h, r: 1 + Math.random()*2, vx: (Math.random()-0.5)*0.25, vy: (Math.random()-0.5)*0.25 });
+
+      function loop(){
+        ctx.clearRect(0,0,w,h);
+        const g = ctx.createRadialGradient(mouse.x, mouse.y, 50, w/2, h/2, Math.max(w,h));
+        g.addColorStop(0, 'rgba(255,107,107,0.04)'); g.addColorStop(0.45, 'rgba(0,0,0,0)'); g.addColorStop(1, 'rgba(0,0,0,0)');
+        ctx.fillStyle = g; ctx.fillRect(0,0,w,h);
+
+        for(const p of particles){
+          p.x += p.vx + (mouse.x - p.x) * 0.00045;
+          p.y += p.vy + (mouse.y - p.y) * 0.00045;
+          if(p.x < -10) p.x = w+10;
+          if(p.x > w+10) p.x = -10;
+          if(p.y < -10) p.y = h+10;
+          if(p.y > h+10) p.y = -10;
+          ctx.beginPath();
+          ctx.fillStyle = 'rgba(255,107,107,0.06)';
+          ctx.arc(p.x, p.y, p.r, 0, Math.PI*2);
+          ctx.fill();
+        }
+        requestAnimationFrame(loop);
+      }
+      loop();
+    })();
+
+    /* ---------- Mobile menu toggle ---------- */
+    (function(){
+      const btn = document.getElementById('mobileBtn'), menu = document.getElementById('mobileMenu');
+      btn.addEventListener('click', ()=> menu.classList.toggle('hidden'));
+    })();
+
+    /* ---------- Stories carousel with outside arrows ---------- */
+    (function(){
+      const slides = [
+        {title:'The One-Page Guide to Tool Selection', text:"Choosing the right B2B tools can be a nightmare. We simplified it down to one page.", img:'https://picsum.photos/seed/201/1000/600'},
+        {title:'Why Complex Tools Are Holding You Back', text:'Break down the hidden costs of software complexity and find a better way forward.', img:'https://picsum.photos/seed/202/1000/600'},
+        {title:'The Future is Simple: Our 2025 B2B Tech Predictions', text:'A look at the trends we’re betting on and why user-centric design will win.', img:'https://picsum.photos/seed/203/1000/600'}
+      ];
+      let active = 0, timer = null;
+      const content = document.getElementById('storyContent');
+      const dotsWrap = document.getElementById('storyDots');
+      const prev = document.getElementById('prevStory'), next = document.getElementById('nextStory');
+
+      function render(){
+        const s = slides[active];
+        content.innerHTML = `
+          <div class="md:flex gap-6 items-center">
+            <img src="${s.img}" class="w-full md:w-1/2 h-52 object-cover rounded-md" />
+            <div class="md:flex-1 mt-4 md:mt-0">
+              <h3 class="text-xl font-semibold">${s.title}</h3>
+              <p class="mt-2 text-gray-300">${s.text}</p>
+              <div class="mt-4"><a href="#contact" class="px-4 py-2 rounded-full btn-accent text-black font-semibold">Let’s talk</a></div>
+            </div>
+          </div>`;
+        // dots
+        dotsWrap.innerHTML = '';
+        slides.forEach((_, i)=> {
+          const b = document.createElement('button');
+          b.className = (i===active) ? 'h-3 w-6 rounded-full bg-[--accent] smooth' : 'h-3 w-3 rounded-full bg-white/20 smooth';
+          b.addEventListener('click', ()=> { active = i; reset(); });
+          dotsWrap.appendChild(b);
+        });
+      }
+
+      function start(){ timer = setInterval(()=> { active = (active+1) % slides.length; render(); }, 4500); }
+      function reset(){ clearInterval(timer); render(); start(); }
+
+      prev.addEventListener('click', ()=> { active = (active-1+slides.length)%slides.length; reset(); });
+      next.addEventListener('click', ()=> { active = (active+1)%slides.length; reset(); });
+
+      window.addEventListener('keydown', (e)=> {
+        if(e.key === 'ArrowLeft') prev.click();
+        if(e.key === 'ArrowRight') next.click();
+      });
+
+      render(); start();
+    })();
+
+    /* ---------- Rings animation for stats when in view ---------- */
+    (function(){
+      const ring1 = document.getElementById('ring1');
+      const ring2 = document.getElementById('ring2');
+      const ring3 = document.getElementById('ring3');
+      const val1 = document.getElementById('statVal1');
+      const val2 = document.getElementById('statVal2');
+      const val3 = document.getElementById('statVal3');
+
+      function animateRing(circle, targetPct, labelEl) {
+        const circumference = 2 * Math.PI * 44;
+        circle.style.strokeDasharray = circumference;
+        circle.style.strokeDashoffset = circumference;
+        let current = 0;
+        const steps = 60;
+        const stepVal = targetPct / steps;
+        let i = 0;
+        const t = setInterval(()=> {
+          i++;
+          current += stepVal;
+          if(i >= steps) { current = targetPct; clearInterval(t); }
+          const offset = circumference * (1 - (current / 100));
+          circle.style.strokeDashoffset = offset;
+          labelEl.textContent = Math.round(current) + '%';
+        }, 14);
+      }
+
+      const io = new IntersectionObserver(entries=>{
+        entries.forEach(entry=>{
+          if(entry.isIntersecting){
+            animateRing(ring1, 72, val1);
+            animateRing(ring2, 89, val2);
+            animateRing(ring3, 45, val3);
+            io.disconnect();
+          }
+        });
+      }, {threshold: 0.4});
+
+      const statsEl = document.getElementById('stats');
+      if(statsEl) io.observe(statsEl);
+    })();
+
+    /* ---------- Contact form (demo) ---------- */
+    (function(){
+      const f = document.getElementById('contactForm');
+      if(!f) return;
+      f.addEventListener('submit', e => {
+        e.preventDefault();
+        alert('Thanks — demo request received (demo flow).');
+        f.reset();
+      });
+    })();
+
+    /* ---------- Scroll spy for nav underline ---------- */
+    (function(){
+      const navLinks = document.querySelectorAll('nav .nav-link');
+      const sections = document.querySelectorAll('main section[id]');
+      const obs = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if(entry.isIntersecting) {
+            navLinks.forEach(l => l.classList.toggle('active', l.getAttribute('href') === '#' + entry.target.id));
+          }
+        });
+      }, {threshold: 0.55});
+      sections.forEach(s => obs.observe(s));
+    })();
+  </script>
+</body>
+</html>
