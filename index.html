@@ -209,51 +209,72 @@
     document.addEventListener('DOMContentLoaded', () => {
 
         // Data for the Features section (Showcase sidebar)
-        const features = [
-            {
-                title: "Simplicity First",
-                description: "Tools should solve problems, not create new ones. We design with a 'less is more' approach, so you can get to work, not get stuck in a menu.",
-                image: "https://placehold.co/1000x600/171717/ffffff?text=Simplicity+First+Graphic",
-                buttons: ["Explore", "More Info"]
-            },
-            {
-                title: "Integrations, Not Silos",
-                description: "A great tool plays well with others. Our solutions are built to integrate seamlessly with your existing workflow, not replace it.",
-                image: "https://placehold.co/1000x600/171717/ffffff?text=Integration+Graphic",
-                buttons: ["Explore", "More info"]
-            },
-            {
-                title: "Actionable Insights",
-                description: "We don't just dump data. Our tools provide clear, actionable insights that help you make smarter decisions, faster.",
-                image: "https://placehold.co/1000x600/171717/ffffff?text=Insights+Graphic",
-                buttons: ["Explore", "More Info"]
-            },
-            {
-                title: "Built for Humans",
-                description: "We believe the best technology empowers people. Our interfaces are intuitive, our support is responsive, and our mission is to make your job easier.",
-                image: "https://placehold.co/1000x600/171717/ffffff?text=Human+Centered+Design+Graphic",
-                buttons: ["Explore", "More Info"]
-            },
-            {
-                title: "Transparent & Honest",
-                description: "No hidden fees, no confusing terms. We believe in honest pricing and open communication, because that’s what a good partnership is built on.",
-                image: "https://placehold.co/1000x600/171717/ffffff?text=Transparency+Graphic",
-                buttons: ["Explore", "More Info"]
-            },
-            {
-                title: "Always Improving",
-                description: "The B2B landscape is always changing. We are too. Our roadmap is driven by a constant loop of user feedback and innovation.",
-                image: "https://placehold.co/1000x600/171717/ffffff?text=Continuous+Improvement+Graphic",
-                buttons: ["Explore", "More Info"]
-            },
-            {
-                title: "Always Improving",
-                description: "The B2B landscape is always changing. We are too. Our roadmap is driven by a constant loop of user feedback and innovation.",
-                image: "https://placehold.co/1000x600/171717/ffffff?text=Continuous+Improvement+Graphic",
-                buttons: ["Explore", "More Info"]
-            }
-        ];
-
+const features = [
+    {
+        title: "Simplicity First",
+        description: "Tools should solve problems, not create new ones. We design with a 'less is more' approach, so you can get to work, not get stuck in a menu.",
+        image: "https://placehold.co/1000x600/171717/ffffff?text=Simplicity+First+Graphic",
+        buttons: [
+            { text: "Explore", url: "/tools/sentiment-analyzer" },
+            { text: "More Info", url: "/simplicity/info" }
+        ]
+    },
+    {
+        title: "Integrations, Not Silos",
+        description: "A great tool plays well with others. Our solutions are built to integrate seamlessly with your existing workflow, not replace it.",
+        image: "https://placehold.co/1000x600/171717/ffffff?text=Integration+Graphic",
+        buttons: [
+            { text: "Explore", url: "/integrations/explore" },
+            { text: "More info", url: "/integrations/info" }
+        ]
+    },
+    {
+        title: "Actionable Insights",
+        description: "We don't just dump data. Our tools provide clear, actionable insights that help you make smarter decisions, faster.",
+        image: "https://placehold.co/1000x600/171717/ffffff?text=Insights+Graphic",
+        buttons: [
+            { text: "Explore", url: "/insights/explore" },
+            { text: "More Info", url: "/insights/info" }
+        ]
+    },
+    {
+        title: "Built for Humans",
+        description: "We believe the best technology empowers people. Our interfaces are intuitive, our support is responsive, and our mission is to make your job easier.",
+        image: "https://placehold.co/1000x600/171717/ffffff?text=Human+Centered+Design+Graphic",
+        buttons: [
+            { text: "Explore", url: "/human-design/explore" },
+            { text: "More Info", url: "/human-design/info" }
+        ]
+    },
+    {
+        title: "Transparent & Honest",
+        description: "No hidden fees, no confusing terms. We believe in honest pricing and open communication, because that’s what a good partnership is built on.",
+        image: "https://placehold.co/1000x600/171717/ffffff?text=Transparency+Graphic",
+        buttons: [
+            { text: "Explore", url: "/transparency/explore" },
+            { text: "More Info", url: "/transparency/info" }
+        ]
+    },
+    {
+        title: "Always Improving",
+        description: "The B2B landscape is always changing. We are too. Our roadmap is driven by a constant loop of user feedback and innovation.",
+        image: "https://placehold.co/1000x600/171717/ffffff?text=Continuous+Improvement+Graphic",
+        buttons: [
+            { text: "Explore", url: "/improving-1/explore" }, // Changed URL to be unique
+            { text: "More Info", url: "/improving-1/info" }    // Changed URL to be unique
+        ]
+    },
+    {
+        // This is a duplicate feature, so I've given it unique URLs
+        title: "Always Improving",
+        description: "The B2B landscape is always changing. We are too. Our roadmap is driven by a constant loop of user feedback and innovation.",
+        image: "https://placehold.co/1000x600/171717/ffffff?text=Continuous+Improvement+Graphic",
+        buttons: [
+            { text: "Explore", url: "/improving-2/explore" }, // Changed URL to be unique
+            { text: "More Info", url: "/improving-2/info" }    // Changed URL to be unique
+        ]
+    }
+];
         const featureTabs = document.getElementById('features-tabs');
         const featureContent = document.getElementById('features-content');
 
@@ -282,7 +303,7 @@
                 <p class="text-gray-400 mb-6">${feature.description}</p>
                 <div class="flex space-x-4">
                     ${feature.buttons.map(btn => `
-                        <a href="/tools/sentiment-analyzer" class="px-6 py-3 font-semibold rounded-full border border-gray-700 hover:bg-gray-700 transition-colors">${btn}</a>
+                        <a href=${btn.url} class="px-6 py-3 font-semibold rounded-full border border-gray-700 hover:bg-gray-700 transition-colors">${btn.text}</a>
                     `).join('')}
                 </div>
             `;
@@ -625,6 +646,7 @@
   </script>
 </body>
 </html>
+
 
 
 
