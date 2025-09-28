@@ -1,0 +1,757 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Limenit - Free Sentiment Analyzer | Analyze sentiment data</title>
+  <meta name="title" content="Text Sentiment Analysis Online" />
+  <meta name="description" content="Free Sentiment Analyzer for analyzing text sentiment. Dual-mode: lexicon (fast) and USE (semantic) for better scores. Paste text or upload CSV for batch analysis." />
+
+  <!-- Fonts & Tailwind -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>tailwind.config={theme:{extend:{colors:{accent:'#ff6b6b'},fontFamily:{display:['Poppins','Inter','sans-serif'],body:['Inter','system-ui','sans-serif']}}}}</script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+
+  <!-- Optional TFJS + USE (only used when user picks USE mode) -->
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.4.0/dist/tf.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/universal-sentence-encoder@1.3.3/dist/universal-sentence-encoder.min.js"></script>
+
+  <!-- PapaParse for CSV -->
+  <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
+
+  <style>
+    :root{--bg:#070708;--accent:#ff6b6b;--glass:rgba(255,255,255,0.03);--muted:#aeb3b8}
+    html,body{height:100%}
+    body{margin:0;background:var(--bg);color:#fff;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;-webkit-font-smoothing:antialiased}
+    .display{font-family:Poppins,Inter,sans-serif;font-weight:700}
+    .glass{background:var(--glass);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,0.03)}
+    .btn-accent{background:var(--accent);color:#000}
+    .btn-outline{border:1px solid rgba(255,255,255,0.08)}
+    .muted{color:var(--muted)}
+    .small{font-size:13px}
+    pre{background:#0b0b0b;padding:12px;border-radius:8px;overflow:auto;color:#dbeafe}
+    .k{color:var(--accent)}
+    .tool-card{transition:transform .22s cubic-bezier(.2,.9,.2,1), box-shadow .22s}
+    .pill{padding:6px 10px;border-radius:999px;background:rgba(255,255,255,0.02);font-size:13px}
+    .muted-2{color:rgba(255,255,255,0.65)}
+    .token-pos{background:rgba(72,187,120,0.12);color:#9be7a9;padding:2px 6px;border-radius:6px}
+    .token-neg{background:rgba(245,101,101,0.08);color:#ffb4b4;padding:2px 6px;border-radius:6px}
+    .bar-bg{background:linear-gradient(90deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));height:10px;border-radius:6px;overflow:hidden}
+    .bar-fill{height:100%;border-radius:6px}
+    @media (max-width:900px){ .sidebar{display:none} .grid-cols-responsive{grid-template-columns:1fr} }
+    .model-toggle { display:inline-flex; gap:4px; border-radius:8px; }
+    .model-toggle button{ -webkit-appearance:none; appearance:none; background:transparent; border:1px solid rgba(255,255,255,0.03); color:#E6EEF7; padding:6px 10px; border-radius:8px; font-size:0.95rem; transition:all .16s ease; }
+    .model-toggle button.active{ background:var(--accent); color:#000; box-shadow:0 10px 30px rgba(255,107,107,0.12); border-color: rgba(255,255,255,0.02); }
+    .model-toggle button:focus{ outline: none; box-shadow:0 6px 18px rgba(255,107,107,0.08); }
+    .custom-select { -webkit-appearance:none; -moz-appearance:none; appearance:none; background-color: rgba(255,255,255,0.02); color:#E6EEF7; border:1px solid rgba(255,255,255,0.08); padding:0.5rem 2.25rem 0.5rem 0.75rem; border-radius:0.5rem; width:100%; font-size:0.95rem; }
+    .select-wrap{position:relative}
+    .select-wrap .select-arrow{position:absolute;right:0.75rem;top:50%;transform:translateY(-50%);pointer-events:none;color:var(--muted);opacity:.95;width:1rem;height:1rem}
+    .custom-select option{background:#0b0b0b;color:#e6eef7}
+    .dict-row { display:flex; align-items:center; justify-content:space-between; gap:8px; padding:6px; border-radius:8px; border:1px solid rgba(255,255,255,0.03); background:transparent; }
+    .dict-word { font-weight:600; }
+    .small-muted { font-size:12px; color:var(--muted); }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header class="fixed inset-x-0 top-0 z-50 bg-black/28 backdrop-blur-sm border-b border-gray-800">
+    <div class="px-5 md:px-8 lg:px-12 flex items-center h-16">
+      <a href="#" class="flex items-center gap-3 mr-auto">
+        <svg width="36" height="36" viewBox="0 0 24 24" class="text-accent" aria-hidden><circle cx="12" cy="12" r="10" fill="currentColor"/></svg>
+        <span class="display text-white text-lg">Limenit — Sentiment Analyzer</span>
+      </a>
+
+      <div class="hidden md:flex items-center gap-6 ml-auto">
+        <nav class="flex items-center text-sm font-medium"><a href="#" class="nav-link muted">Back to tools</a></nav>
+        <a href="#" class="px-4 py-2 rounded-full btn-accent text-black font-semibold">Request feature</a>
+      </div>
+
+      <button id="mobileToggle" class="md:hidden p-2 rounded-md bg-white/5 ml-auto">☰</button>
+    </div>
+  </header>
+
+  <main class="pt-24 pb-16">
+    <div class="max-w-6xl mx-auto px-5">
+      <div class="tool-card glass p-6 rounded-2xl">
+        <div class="flex items-start justify-between gap-4">
+          <div>
+            <h1 class="text-2xl font-semibold">Free Sentiment Analyzer | Paste Text or Upload CSV | Custom dictionary and Historical Mode Available</h1>
+            <p class="text-sm muted mt-1">Dual-mode sentiment (semantic USE or lexicon). Analyze the score for the text and get ready to paste the text for your professional use case. Add a company-specific dictionary, and new words merge into scoring &amp; highlighting immediately.</p>
+          </div>
+          <div class="text-sm muted">Dept: Product / Ops · Front-end only</div>
+        </div>
+
+        <div class="mt-6 grid md:grid-cols-3 gap-6">
+          <!-- Left inputs -->
+          <div class="col-span-1">
+            <label class="text-sm muted">Input text</label>
+            <textarea id="text-input" rows="6" class="mt-2 p-3 rounded bg-transparent border border-white/8 w-full text-sm" placeholder="Paste text, customer quote, or bug report here..."></textarea>
+
+            <div class="mt-3">
+              <div class="text-sm muted">Model</div>
+              <div class="inline-flex rounded-md bg-[rgba(255,255,255,0.02)] p-1 mt-2">
+                <button id="mode-use" class="px-3 py-1 rounded-md font-medium text-sm">USE (semantic)</button>
+                <button id="mode-lex" class="px-3 py-1 rounded-md font-medium text-sm">Lexicon (fast)</button>
+              </div>
+              <div class="text-xs muted mt-2">USE provides semantic understanding (heavier). Lexicon is immediate and offline-friendly.</div>
+            </div>
+
+            <div class="mt-4 grid grid-cols-1 gap-2">
+              <button id="analyze-btn" class="px-4 py-2 rounded-full btn-accent">Analyze</button>
+              <button id="copySlack" class="px-4 py-2 rounded-full btn-outline">Copy Slack message</button>
+            </div>
+
+            <hr class="my-4 border-white/6" />
+
+            <!-- CSV batch -->
+            <div>
+              <div class="text-sm muted">Batch analyze (CSV)</div>
+              <input id="csvFile" type="file" accept=".csv" class="mt-2 text-sm" />
+              <div id="csvCols" class="mt-2 text-sm muted"></div>
+              <div class="mt-2 flex gap-2">
+                <button id="runCsv" class="px-3 py-2 rounded-full btn-accent">Analyze CSV</button>
+                <button id="downloadCsv" class="px-3 py-2 rounded-full btn-outline">Download results</button>
+              </div>
+            </div>
+
+            <!-- Custom dictionary UI -->
+            <hr class="my-4 border-white/6" />
+            <div>
+              <div class="flex items-center justify-between">
+                <div class="text-sm muted">Custom dictionary (company words)</div>
+                <div class="text-xs small-muted">Stored locally</div>
+              </div>
+
+              <div class="mt-2 grid grid-cols-3 gap-2">
+                <input id="customWord" placeholder="word (e.g., billing)" class="col-span-1 p-2 rounded bg-transparent border border-white/8 text-sm" />
+                <input id="customWeight" placeholder="weight (-5 .. 5)" type="number" step="0.1" class="col-span-1 p-2 rounded bg-transparent border border-white/8 text-sm" />
+                <button id="addCustomWord" class="col-span-1 px-3 py-2 rounded-full btn-accent">Add</button>
+              </div>
+
+              <div class="text-xs muted mt-2">Add domain-specific tokens and numeric weights. Positive favors positive sentiment; negative favors negative sentiment.</div>
+
+              <div id="customDictList" class="mt-3 max-h-36 overflow-auto space-y-2"></div>
+
+              <div class="mt-2 flex gap-2">
+                <button id="exportDict" class="px-3 py-2 rounded-full btn-outline">Export JSON</button>
+                <button id="importDictToggle" class="px-3 py-2 rounded-full btn-outline">Import</button>
+                <button id="resetDict" class="px-3 py-2 rounded-full btn-outline">Clear custom</button>
+              </div>
+
+              <div id="importArea" class="hidden mt-2">
+                <textarea id="importText" class="w-full p-2 rounded bg-transparent border border-white/8 h-20 text-sm" placeholder='Paste JSON: {"word":2,"badword":-3}'></textarea>
+                <div class="mt-2 flex gap-2"><button id="importDict" class="px-3 py-2 rounded-full btn-accent">Import</button><button id="cancelImport" class="px-3 py-2 rounded-full btn-outline">Cancel</button></div>
+              </div>
+            </div>
+
+            <div class="mt-4 text-xs muted">Tip: add product/feature names and company terms (e.g., "onboarding", "trial", "billing") to surface domain-specific sentiment.</div>
+          </div>
+
+          <!-- Middle / Right results -->
+          <div class="col-span-2">
+            <div class="glass p-4 rounded">
+              <div class="flex items-center justify-between">
+                <div>
+                  <div class="text-sm muted">Analysis result</div>
+                  <div id="overallTitle" class="text-lg font-semibold mt-1">No analysis yet</div>
+                </div>
+                <div><span class="pill muted">Mode: <span id="modeLabel" class="ml-2">Lexicon</span></span></div>
+              </div>
+
+              <div id="resultArea" class="mt-4 space-y-4">
+                <div id="resultSummary" class="hidden glass p-3 rounded">
+                  <div class="flex items-center justify-between">
+                    <div><strong>Sentiment</strong> · <span id="sentimentLabel" class="ml-2">—</span></div>
+                    <div class="text-sm muted">Score: <span id="sentimentScore">—</span></div>
+                  </div>
+                </div>
+
+                <div id="highlighted" class="hidden glass p-3 rounded"><div class="text-sm muted">Highlighted tokens</div><div id="highlightedText" class="mt-2 text-sm"></div></div>
+
+                <div id="perSentence" class="hidden glass p-3 rounded">
+                  <div class="text-sm muted">Per-sentence breakdown</div>
+                  <div id="sentList" class="mt-2 space-y-2 text-sm"></div>
+                </div>
+
+                <div id="chartWrap" class="hidden glass p-3 rounded">
+                  <div class="text-sm muted">Score distribution</div>
+                  <div id="bars" class="mt-2 flex gap-2"></div>
+                </div>
+
+                <div class="flex gap-2">
+                  <button id="exportJson" class="px-3 py-2 rounded-full btn-outline">Export JSON</button>
+                  <button id="saveHistory" class="px-3 py-2 rounded-full btn-accent">Save to history</button>
+                  <button id="clearResults" class="px-3 py-2 rounded-full btn-outline">Clear</button>
+                </div>
+
+                <div id="loading" class="hidden mt-2 text-sm muted">Loading model or processing...</div>
+              </div>
+            </div>
+
+            <!-- History -->
+            <div class="glass p-3 rounded mt-4">
+              <div class="flex items-center justify-between">
+                <div class="text-sm muted">Recent analyses</div>
+                <button id="clearHistory" class="text-xs muted">Clear</button>
+              </div>
+              <div id="historyList" class="mt-2 text-sm"></div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- NEW: Business copy and expanded FAQ (UI-friendly, SEO friendly) -->
+      <div class="glass p-6 rounded-2xl mt-6">
+        <h2 class="text-lg font-semibold">Best for businesses</h2>
+        <p class="muted mt-2">Designed for teams that need quick, explainable sentiment across reviews, support tickets, chat, and social — with company-specific tuning.</p>
+
+        <div class="mt-4 grid md:grid-cols-3 gap-4">
+          <div class="p-4 rounded border border-white/6">
+            <strong>Customer feedback</strong>
+            <div class="small-muted mt-2">Aggregate reviews, surface recurring complaints, and prioritize fixes.</div>
+          </div>
+          <div class="p-4 rounded border border-white/6">
+            <strong>Support & ops</strong>
+            <div class="small-muted mt-2">Monitor ticket sentiment, escalate negative threads, and coach reps.</div>
+          </div>
+          <div class="p-4 rounded border border-white/6">
+            <strong>Marketing & social</strong>
+            <div class="small-muted mt-2">Track campaign sentiment on Twitter, Reddit, and comments to react faster.</div>
+          </div>
+        </div>
+
+        <div class="mt-6">
+          <h3 class="font-semibold">Why dual-mode?</h3>
+          <p class="small-muted mt-2">Use the fast lexicon mode for offline, instant checks and the USE semantic mode when you need context-aware scoring (sarcasm and context-sensitive phrasing can be better captured with semantic embeddings).</p>
+        </div>
+
+        <div class="mt-6">
+          <h3 class="font-semibold">Quick features</h3>
+          <ul class="mt-2 small-muted">
+            <li>Analyze customer feedback, chat messages, and emails.</li>
+            <li>Customize scoring with company-specific keywords and weights.</li>
+            <li>Bulk analyze via CSV and export results.</li>
+            <li>Save history locally, no account required.</li>
+          </ul>
+        </div>
+
+        <div class="mt-6">
+          <h3 class="font-semibold">Frequently asked questions</h3>
+          <div class="mt-3 space-y-2">
+            <details class="p-3 bg-[rgba(255,255,255,0.02)] rounded"><summary class="font-medium">What’s the best use of sentiment analysis for businesses?</summary><div class="mt-2 small-muted">Sentiment analysis helps teams quantify customer opinion at scale — useful for product prioritization, support triage, brand monitoring, and measuring campaign impact.</div></details>
+
+            <details class="p-3 bg-[rgba(255,255,255,0.02)] rounded"><summary class="font-medium">How do I interpret the sentiment score?</summary><div class="mt-2 small-muted">Scores are normalized values; positive means favorable sentiment, negative means unfavorable, and a near-zero score is neutral. Use per-sentence breakdowns and token highlights to find root causes.</div></details>
+
+            <details class="p-3 bg-[rgba(255,255,255,0.02)] rounded"><summary class="font-medium">Which mode is best — USE (semantic) or Lexicon?</summary><div class="mt-2 small-muted">Lexicon is fast and deterministic (great for predictable domains). USE is context-aware and can better capture nuanced language — choose USE for higher accuracy when analyzing diverse or conversational text.</div></details>
+
+            <details class="p-3 bg-[rgba(255,255,255,0.02)] rounded"><summary class="font-medium">Can I bulk-analyze reviews with CSV?</summary><div class="mt-2 small-muted">Yes — upload a CSV and choose the text column. Results can be downloaded as a CSV with sentiment labels and scores.</div></details>
+
+            <details class="p-3 bg-[rgba(255,255,255,0.02)] rounded"><summary class="font-medium">Can the tool detect sarcasm?</summary><div class="mt-2 small-muted">Detecting sarcasm is challenging. USE semantic mode can sometimes capture contextual cues, but no automated method is perfect—use manual sampling to validate edge cases.</div></details>
+
+            <details class="p-3 bg-[rgba(255,255,255,0.02)] rounded"><summary class="font-medium">Is my data stored or shared?</summary><div class="mt-2 small-muted">By default, LimeNit stores custom dictionaries and history locally in your browser.</div></details>
+
+            <details class="p-3 bg-[rgba(255,255,255,0.02)] rounded"><summary class="font-medium">How can I integrate the sentiment analyzer into my workflow?</summary><div class="mt-2 small-muted">Use batch analyzer for bulk sentiment analysis. You can automate the sentiment analysis score recording to your own platform with automation tools.</div></details>
+
+          </div>
+        </div>
+      </div>
+
+      <!-- FAQ structured data for search / AI agents -->
+      <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+          {"@type":"Question","name":"What’s the best use of sentiment analysis for businesses?","acceptedAnswer":{"@type":"Answer","text":"Sentiment analysis helps teams quantify customer opinion at scale — useful for product prioritization, support triage, brand monitoring, and measuring campaign impact."}},
+          {"@type":"Question","name":"How do I interpret the sentiment score?","acceptedAnswer":{"@type":"Answer","text":"Scores are normalized values; positive means favorable sentiment, negative means unfavorable, and a near-zero score is neutral. Use per-sentence breakdowns and token highlights to find root causes."}},
+          {"@type":"Question","name":"Which mode is best USE (semantic) or Lexicon?","acceptedAnswer":{"@type":"Answer","text":"Lexicon is fast and deterministic (great for predictable domains). USE is context-aware and can better capture nuanced language — choose USE for higher accuracy when analyzing diverse or conversational text."}},
+          {"@type":"Question","name":"Can I bulk-analyze reviews with CSV?","acceptedAnswer":{"@type":"Answer","text":"Yes — upload a CSV and choose the text column. Results can be downloaded as a CSV with sentiment labels and scores."}},
+          {"@type":"Question","name":"Can the tool detect sarcasm?","acceptedAnswer":{"@type":"Answer","text":"Detecting sarcasm is challenging. USE semantic mode can sometimes capture contextual cues, but no automated method is perfect—use manual sampling to validate edge cases."}},
+          {"@type":"Question","name":"Is my data stored or shared?","acceptedAnswer":{"@type":"Answer","text":"By default, LimeNit stores custom dictionaries and history locally in your browser."}},
+          {"@type":"Question","name":"How can I integrate the sentiment analyzer into my workflow?","acceptedAnswer":{"@type":"Answer","text":"Use batch analyzer for bulk sentiment analysis. You can automate the sentiment analysis score recording to your own platform with automation tools."}}
+        ]
+      }
+      </script>
+
+      <footer class="py-8 text-center text-sm muted mt-6">© 2025 LimeNit - Sentiment Analyzer</footer>
+    </div>
+  </main>
+
+  <!-- Modal -->
+  <div id="modal" class="fixed inset-0 hidden items-center justify-center z-50">
+    <div class="bg-black/60 p-6 rounded text-sm glass max-w-md w-full">
+      <div id="modalText" class="text-sm"></div>
+      <div class="mt-4 text-right"><button id="modalClose" class="px-3 py-1 rounded btn-outline">Close</button></div>
+    </div>
+  </div>
+
+<script>
+/* ================= Utilities & Storage ================= */
+function showModal(msg){ document.getElementById('modalText').innerText = msg; const m=document.getElementById('modal'); m.classList.remove('hidden'); m.classList.add('flex'); }
+document.getElementById('modalClose').addEventListener('click', ()=>{ const m=document.getElementById('modal'); m.classList.add('hidden'); m.classList.remove('flex'); });
+
+function download(filename, content, mime='application/json'){ const a=document.createElement('a'); const blob=new Blob([content],{type:mime}); a.href=URL.createObjectURL(blob); a.download=filename; a.click(); URL.revokeObjectURL(a.href); }
+
+/* ================= Base lexicon (kept as original base) ================= */
+const baseLexicon = {
+  "good":3,"great":4,"excellent":5,"love":4,"liked":3,"happy":3,"amazing":4,"awesome":4,"fantastic":4,
+  "bad":-3,"terrible":-4,"awful":-4,"hate":-5,"disappointed":-3,"poor":-2,"slow":-1,"broken":-3,"bug":-2,"issue":-2,"fail":-3
+};
+
+/* ================= Custom dictionary (persistent) ================= */
+const STORAGE_KEY = 'ln_sentiment_custom_dict';
+let customDict = loadCustomDict();
+
+function loadCustomDict(){
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if(!raw) return {};
+    const parsed = JSON.parse(raw);
+    if(typeof parsed === 'object' && parsed !== null) return parsed;
+  } catch(e){ console.warn('custom dict load failed', e); }
+  return {};
+}
+function saveCustomDict(){
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(customDict));
+  } catch(e){ console.warn('save custom dict failed', e); }
+}
+
+/* merged lexicon used by analysis and highlighting */
+function getMergedLexicon(){
+  // ensure lowercasing keys
+  const merged = Object.assign({}, baseLexicon);
+  for(const k in customDict){
+    if(!customDict.hasOwnProperty(k)) continue;
+    merged[k.toLowerCase()] = Number(customDict[k]);
+  }
+  return merged;
+}
+
+/* ================= Lexicon analysis (uses merged dictionary) ================= */
+function analyzeLexiconSentence(s){
+  const merged = getMergedLexicon();
+  const words = s.toLowerCase().replace(/[^\w\s]/g,'').split(/\s+/).filter(Boolean);
+  let score=0, tokens=[];
+  for(const w of words){
+    if(merged[w]) { score += merged[w]; tokens.push({word:w,score:merged[w]}); }
+  }
+  const norm = words.length? score / Math.sqrt(words.length) : 0;
+  return {score: norm, tokens, wordsCount: words.length};
+}
+
+function renderHighlightedHTML(text){
+  const merged = getMergedLexicon();
+  const words = text.split(/(\s+)/); // keep spaces
+  return words.map(w=>{
+    const clean = w.toLowerCase().replace(/[^\w]/g,'');
+    if(merged[clean] && merged[clean] > 0) return `<span class="token-pos">${escapeHtml(w)}</span>`;
+    if(merged[clean] && merged[clean] < 0) return `<span class="token-neg">${escapeHtml(w)}</span>`;
+    return escapeHtml(w);
+  }).join('');
+}
+
+/* ================= USE semantic model helpers ================= */
+let useModel = null;
+let posAvgArr=null, negAvgArr=null;
+let modelLoading=false;
+async function loadUSE(){
+  if(useModel || modelLoading) return;
+  modelLoading = true;
+  document.getElementById('loading').classList.remove('hidden');
+  try{
+    useModel = await use.load();
+    const posSeeds = ["I love this","This is great","Amazing experience","Really happy","Excellent"];
+    const negSeeds = ["I hate this","This is terrible","Very bad experience","Really unhappy","Awful"];
+    const posEmb = await useModel.embed(posSeeds);
+    const negEmb = await useModel.embed(negSeeds);
+    const posMean = await posEmb.mean(0).array();
+    const negMean = await negEmb.mean(0).array();
+    posAvgArr = posMean; negAvgArr = negMean;
+    document.getElementById('loading').classList.add('hidden');
+  }catch(e){
+    document.getElementById('loading').classList.add('hidden');
+    showModal('Failed to load USE model. You can use Lexicon mode while offline.');
+    console.error(e);
+  } finally { modelLoading=false; }
+}
+function dot(a,b){ let s=0; for(let i=0;i<a.length;i++) s += a[i]*b[i]; return s; }
+function norm(a){ let s=0; for(let i=0;i<a.length;i++) s += a[i]*a[i]; return Math.sqrt(s); }
+function cosine(a,b){ const d=dot(a,b); const na=norm(a); const nb=norm(b); return na&&nb? d/(na*nb) : 0; }
+async function analyzeWithUSE(sentences){
+  await loadUSE();
+  if(!useModel || !posAvgArr || !negAvgArr) throw new Error('USE not ready');
+  const embeds = await useModel.embed(sentences);
+  const embedArr = await embeds.array();
+  const results = embedArr.map(v=>{
+    const simPos = cosine(v,posAvgArr);
+    const simNeg = cosine(v,negAvgArr);
+    const score = simPos - simNeg;
+    return {score,simPos,simNeg};
+  });
+  return results;
+}
+
+/* ================= UI wiring ================= */
+const modeUseBtn = document.getElementById('mode-use');
+const modeLexBtn = document.getElementById('mode-lex');
+let mode = 'lex'; // default
+
+function setMode(m){
+  mode=m;
+  document.getElementById('modeLabel').textContent = (m==='use'?'USE (semantic)':'Lexicon (fast)');
+  modeUseBtn.classList.toggle('btn-accent', m==='use');
+  modeLexBtn.classList.toggle('btn-accent', m==='lex');
+  if(m==='use') loadUSE();
+}
+modeUseBtn.addEventListener('click', ()=>setMode('use'));
+modeLexBtn.addEventListener('click', ()=>setMode('lex'));
+setMode('lex');
+
+function splitSentences(text){
+  if(!text) return [];
+  const arr = text.match(/[^.!?]+[.!?]+|[^.!?]+$/g) || [];
+  return arr.map(s=>s.trim()).filter(Boolean);
+}
+
+/* Main analyze button */
+document.getElementById('analyze-btn').addEventListener('click', async ()=>{
+  const text = document.getElementById('text-input').value.trim();
+  if(!text) { showModal('Please enter text to analyze.'); return; }
+  document.getElementById('loading').classList.remove('hidden');
+
+  try{
+    const sentences = splitSentences(text);
+    let perResults = [];
+    if(mode==='lex'){
+      perResults = sentences.map(s=>{
+        const r = analyzeLexiconSentence(s);
+        const normScore = Math.tanh(r.score/4);
+        return {text:s,score:normScore,tokens:r.tokens};
+      });
+    } else {
+      const useRes = await analyzeWithUSE(sentences);
+      perResults = useRes.map((r,i)=> ({text: sentences[i], score: r.score, simPos:r.simPos, simNeg:r.simNeg}) );
+    }
+
+    const overall = perResults.reduce((a,b)=>a+b.score,0)/ (perResults.length||1);
+    const overallLabel = overall > 0.05 ? 'Positive' : (overall < -0.05 ? 'Negative' : 'Neutral');
+
+    // render UI
+    document.getElementById('overallTitle').textContent = `${overallLabel} — ${ (overall*100).toFixed(1) } pts`;
+    document.getElementById('resultSummary').classList.remove('hidden');
+    document.getElementById('sentimentLabel').textContent = overallLabel;
+    document.getElementById('sentimentScore').textContent = overall.toFixed(3);
+
+    document.getElementById('highlighted').classList.remove('hidden');
+    document.getElementById('highlightedText').innerHTML = renderHighlightedHTML(text);
+
+    document.getElementById('perSentence').classList.remove('hidden');
+    const list = document.getElementById('sentList'); list.innerHTML='';
+    perResults.forEach((r)=>{
+      const normalized = Math.max(-1, Math.min(1, r.score));
+      const w = Math.round((normalized + 1)/2 * 100);
+      const color = normalized>0 ? 'linear-gradient(90deg, rgba(139,241,175,0.9), rgba(72,187,120,0.9))' : 'linear-gradient(90deg, rgba(255,160,160,0.9), rgba(245,101,101,0.9))';
+      const el = document.createElement('div');
+      el.className='p-2 border border-white/6 rounded';
+      el.innerHTML = `<div class="flex items-center justify-between"><div class="font-semibold">${escapeHtml(r.text)}</div><div class="text-sm muted">${(r.score>=0?'+':'')}${r.score.toFixed(3)}</div></div>
+        <div class="mt-2 bar-bg"><div class="bar-fill" style="width:${w}%; background:${color}"></div></div>`;
+      list.appendChild(el);
+    });
+
+    document.getElementById('chartWrap').classList.remove('hidden');
+    const bars = document.getElementById('bars'); bars.innerHTML='';
+    const counts = {pos:0,neu:0,neg:0};
+    perResults.forEach(r=>{
+      if(r.score>0.05) counts.pos++;
+      else if(r.score<-0.05) counts.neg++;
+      else counts.neu++;
+    });
+    ['pos','neu','neg'].forEach(k=>{
+      const pct = Math.round((counts[k]/(perResults.length||1))*100);
+      const div = document.createElement('div'); div.style.flex='1';
+      const color = k==='pos' ? 'linear-gradient(90deg,#9be7a9,#48bb78)' : (k==='neg' ? 'linear-gradient(90deg,#ffb4b4,#f56565)' : 'linear-gradient(90deg,#ffdca3,#ecc94b)');
+      div.innerHTML = `<div class="text-xs muted">${k.toUpperCase()} · ${pct}%</div><div class="bar-bg mt-1"><div style="height:10px;width:${pct}%;background:${color}"></div></div>`;
+      bars.appendChild(div);
+    });
+
+    window.__currentAnalysis = {text, mode, overall, overallLabel, perResults, ts: new Date().toISOString()};
+    document.getElementById('loading').classList.add('hidden');
+
+  }catch(err){
+    document.getElementById('loading').classList.add('hidden');
+    console.error(err); showModal('Analysis failed: '+ (err.message||err));
+  }
+});
+
+/* ============== Custom dictionary UI logic ============== */
+const customListWrap = document.getElementById('customDictList');
+const addBtn = document.getElementById('addCustomWord');
+const wordInput = document.getElementById('customWord');
+const weightInput = document.getElementById('customWeight');
+const exportDictBtn = document.getElementById('exportDict');
+const importToggle = document.getElementById('importDictToggle');
+const importArea = document.getElementById('importArea');
+const importBtn = document.getElementById('importDict');
+const cancelImportBtn = document.getElementById('cancelImport');
+const resetDictBtn = document.getElementById('resetDict');
+
+function renderCustomDict(){
+  customListWrap.innerHTML = '';
+  const keys = Object.keys(customDict).sort((a,b)=> a.localeCompare(b));
+  if(keys.length===0){
+    customListWrap.innerHTML = '<div class="text-sm muted">No custom words added.</div>';
+    return;
+  }
+  keys.forEach(k=>{
+    const row = document.createElement('div');
+    row.className = 'dict-row';
+    row.innerHTML = `<div style="display:flex;gap:10px;align-items:center">
+        <div class="dict-word">${escapeHtml(k)}</div>
+        <div class="text-sm small-muted"> ${Number(customDict[k]).toFixed(2)}</div>
+      </div>
+      <div style="display:flex;gap:6px">
+        <button class="edit-dict text-xs muted">Edit</button>
+        <button class="del-dict text-xs muted">Delete</button>
+      </div>`;
+    customListWrap.appendChild(row);
+
+    row.querySelector('.del-dict').addEventListener('click', ()=>{
+      if(!confirm(`Delete "${k}" from custom dictionary?`)) return;
+      delete customDict[k];
+      saveCustomDict();
+      onCustomDictChanged();
+    });
+    row.querySelector('.edit-dict').addEventListener('click', ()=>{
+      // replace row with inline inputs
+      const editRow = document.createElement('div'); editRow.className='dict-row';
+      editRow.innerHTML = `<input class="p-1 rounded bg-transparent border border-white/8 text-sm edit-word" value="${escapeHtml(k)}" />
+        <input class="p-1 rounded bg-transparent border border-white/8 text-sm edit-weight" value="${Number(customDict[k])}" style="width:80px" />
+        <div style="display:flex;gap:6px">
+          <button class="save-edit text-xs muted">Save</button>
+          <button class="cancel-edit text-xs muted">Cancel</button>
+        </div>`;
+      customListWrap.replaceChild(editRow, row);
+
+      editRow.querySelector('.cancel-edit').addEventListener('click', ()=> renderCustomDict());
+      editRow.querySelector('.save-edit').addEventListener('click', ()=>{
+        let newWord = editRow.querySelector('.edit-word').value.trim().toLowerCase().replace(/[^\w-]/g,'');
+        let newWeight = Number(editRow.querySelector('.edit-weight').value);
+        if(!newWord || isNaN(newWeight)){ showModal('Invalid word or weight'); return; }
+        // if changed key name, remove old one
+        if(newWord !== k) delete customDict[k];
+        customDict[newWord] = newWeight;
+        saveCustomDict();
+        onCustomDictChanged();
+      });
+    });
+  });
+}
+
+addBtn.addEventListener('click', ()=>{
+  const rawW = wordInput.value.trim().toLowerCase();
+  const w = rawW.replace(/[^\w-]/g,'');
+  const weight = parseFloat(weightInput.value);
+  if(!w){ showModal('Enter a valid word (letters, numbers, hyphen allowed)'); return; }
+  if(isNaN(weight) || weight < -20 || weight > 20){ showModal('Enter a numeric weight between -20 and 20'); return; }
+  customDict[w] = weight;
+  saveCustomDict();
+  wordInput.value = ''; weightInput.value = '';
+  onCustomDictChanged();
+});
+
+exportDictBtn.addEventListener('click', ()=>{
+  const payload = JSON.stringify(customDict, null, 2);
+  download('custom-dictionary.json', payload);
+});
+
+importToggle.addEventListener('click', ()=> { importArea.classList.toggle('hidden'); });
+cancelImportBtn.addEventListener('click', ()=>{ importArea.classList.add('hidden'); document.getElementById('importText').value=''; });
+
+importBtn.addEventListener('click', ()=>{
+  const raw = document.getElementById('importText').value.trim();
+  if(!raw){ showModal('Paste JSON into the textarea first'); return; }
+  try{
+    const parsed = JSON.parse(raw);
+    if(typeof parsed !== 'object' || parsed === null){ showModal('Invalid JSON format'); return; }
+    // merge
+    for(const k in parsed){
+      if(!parsed.hasOwnProperty(k)) continue;
+      const key = k.toLowerCase().replace(/[^\w-]/g,'');
+      const val = Number(parsed[k]);
+      if(isNaN(val)) continue;
+      customDict[key] = val;
+    }
+    saveCustomDict();
+    document.getElementById('importText').value='';
+    importArea.classList.add('hidden');
+    onCustomDictChanged();
+    showModal('Imported custom dictionary successfully');
+  }catch(e){ showModal('Invalid JSON: '+e.message); }
+});
+
+resetDictBtn.addEventListener('click', ()=>{
+  if(!confirm('Clear all custom dictionary entries? This cannot be undone.')) return;
+  customDict = {};
+  saveCustomDict();
+  onCustomDictChanged();
+});
+
+/* helper invoked when dictionary changes */
+function onCustomDictChanged(){
+  renderCustomDict();
+  // if user has a current analysis, recompute for lexicon mode so scores update immediately
+  if(window.__currentAnalysis){
+    if(mode === 'lex'){
+      // re-run analyze button flow (will use merged lexicon)
+      document.getElementById('analyze-btn').click();
+    } else {
+      // update highlighted tokens only
+      const text = window.__currentAnalysis.text || document.getElementById('text-input').value;
+      if(text) document.getElementById('highlightedText').innerHTML = renderHighlightedHTML(text);
+    }
+  }
+  // update history (labels might change)
+  renderHistory();
+}
+
+/* initial render */
+renderCustomDict();
+
+/* ================= Export / history / slack ================ */
+document.getElementById('exportJson').addEventListener('click', ()=>{
+  if(!window.__currentAnalysis) return showModal('No analysis to export.');
+  download('sentiment-analysis.json', JSON.stringify(window.__currentAnalysis, null, 2));
+});
+document.getElementById('copySlack').addEventListener('click', ()=>{
+  if(!window.__currentAnalysis) return showModal('Analyze text first.');
+  const msg = `Sentiment: ${window.__currentAnalysis.overallLabel}\nScore: ${window.__currentAnalysis.overall.toFixed(3)}\n\nExcerpt:\n${window.__currentAnalysis.text.slice(0,400)}`;
+  navigator.clipboard.writeText(msg).then(()=> showModal('Slack-ready message copied to clipboard.'));
+});
+document.getElementById('saveHistory').addEventListener('click', ()=>{
+  if(!window.__currentAnalysis) return showModal('Analyze text first.');
+  const hs = JSON.parse(localStorage.getItem('ln_sentiment_history')||'[]');
+  hs.unshift(window.__currentAnalysis);
+  if(hs.length>20) hs.splice(20);
+  localStorage.setItem('ln_sentiment_history', JSON.stringify(hs));
+  renderHistory();
+});
+document.getElementById('clearResults').addEventListener('click', ()=>{
+  document.getElementById('resultSummary').classList.add('hidden');
+  document.getElementById('perSentence').classList.add('hidden');
+  document.getElementById('highlighted').classList.add('hidden');
+  document.getElementById('chartWrap').classList.add('hidden');
+  window.__currentAnalysis=null;
+});
+
+function renderHistory(){
+  const hs = JSON.parse(localStorage.getItem('ln_sentiment_history')||'[]');
+  const wrap = document.getElementById('historyList'); wrap.innerHTML='';
+  if(hs.length===0){ wrap.innerHTML = '<div class="text-sm muted">No history yet</div>'; return; }
+  hs.forEach((h,i)=>{
+    const d = new Date(h.ts).toLocaleString();
+    const el = document.createElement('div');
+    el.className='p-2 rounded border border-white/6 mb-2 flex items-center justify-between';
+    el.innerHTML = `<div class="text-sm"><strong>${h.overallLabel}</strong> · ${h.text.slice(0,80)}${h.text.length>80?'…':''}<div class="text-xs muted mt-1">${d}</div></div><div class="text-xs"><button data-i="${i}" class="replay text-sm muted">Replay</button></div>`;
+    wrap.appendChild(el);
+  });
+  document.querySelectorAll('.replay').forEach(b=>{
+    b.addEventListener('click', (ev)=>{
+      const i = Number(ev.target.dataset.i);
+      const hs = JSON.parse(localStorage.getItem('ln_sentiment_history')||'[]');
+      const item = hs[i];
+      if(!item) return;
+      document.getElementById('text-input').value = item.text;
+      setMode(item.mode);
+      window.__currentAnalysis = item;
+      document.getElementById('overallTitle').textContent = `${item.overallLabel} — ${ (item.overall*100).toFixed(1) } pts`;
+      document.getElementById('resultSummary').classList.remove('hidden');
+      document.getElementById('sentimentLabel').textContent = item.overallLabel;
+      document.getElementById('sentimentScore').textContent = item.overall.toFixed(3);
+      document.getElementById('highlighted').classList.remove('hidden');
+      document.getElementById('highlightedText').innerHTML = renderHighlightedHTML(item.text);
+      document.getElementById('perSentence').classList.remove('hidden');
+      const list = document.getElementById('sentList'); list.innerHTML='';
+      item.perResults.forEach(r=>{
+        const normalized = Math.max(-1, Math.min(1, r.score));
+        const w = Math.round((normalized + 1)/2 * 100);
+        const color = normalized>0 ? 'linear-gradient(90deg, rgba(139,241,175,0.9), rgba(72,187,120,0.9))' : 'linear-gradient(90deg, rgba(255,160,160,0.9), rgba(245,101,101,0.9))';
+        const el = document.createElement('div');
+        el.className='p-2 border border-white/6 rounded';
+        el.innerHTML = `<div class="flex items-center justify-between"><div class="font-semibold">${escapeHtml(r.text)}</div><div class="text-sm muted">${(r.score>=0?'+':'')}${r.score.toFixed(3)}</div></div>
+          <div class="mt-2 bar-bg"><div class="bar-fill" style="width:${w}%; background:${color}"></div></div>`;
+        list.appendChild(el);
+      });
+    });
+  });
+}
+document.getElementById('clearHistory').addEventListener('click', ()=>{ localStorage.removeItem('ln_sentiment_history'); renderHistory(); });
+renderHistory();
+
+/* ================= CSV batch handling (unchanged semantics) ================= */
+let csvRows = null;
+let csvSelectedCol = null;
+document.getElementById('csvFile').addEventListener('change', (ev)=>{
+  const f = ev.target.files[0]; if(!f) return;
+  Papa.parse(f, {header:true, skipEmptyLines:true, complete: (res)=>{
+    csvRows = res.data;
+    if(res.meta.fields && res.meta.fields.length){
+      const wrap = document.getElementById('csvCols'); wrap.innerHTML = '<div class="text-sm muted">Select text column:</div>';
+      res.meta.fields.forEach((h,idx)=>{
+        const r = document.createElement('div');
+        r.innerHTML = `<label class="inline-flex items-center mt-1"><input type="radio" name="csvcol" value="${escapeHtml(h)}" ${idx===0?'checked':''} class="mr-2"/> ${escapeHtml(h)}</label>`;
+        wrap.appendChild(r);
+      });
+      Array.from(wrap.querySelectorAll('input[name="csvcol"]')).forEach(inp=>inp.addEventListener('change', ()=> csvSelectedCol = inp.value));
+      csvSelectedCol = res.meta.fields[0];
+    } else {
+      document.getElementById('csvCols').innerHTML = '<div class="text-sm muted">No header found — first column will be used</div>';
+      csvSelectedCol = null;
+    }
+  }});
+});
+
+document.getElementById('runCsv').addEventListener('click', async ()=>{
+  if(!csvRows){ showModal('Load a CSV first'); return; }
+  const out = [];
+  document.getElementById('loading').classList.remove('hidden');
+  for(let i=0;i<csvRows.length;i++){
+    const row = csvRows[i];
+    const text = csvSelectedCol ? (row[csvSelectedCol] || '') : (Object.values(row)[0]||'');
+    if(!text) { out.push({...row, __sentiment:'empty'}); continue; }
+    let analysis;
+    try{
+      if(mode==='lex'){
+        const r = analyzeLexiconSentence(text);
+        const score = Math.tanh(r.score/4);
+        analysis = {score, label: score>0.05? 'Positive' : (score<-0.05? 'Negative':'Neutral')};
+      } else {
+        const res = await analyzeWithUSE([text]);
+        const sc = res[0].score;
+        analysis = {score: sc, label: sc>0.05? 'Positive' : (sc<-0.05? 'Negative':'Neutral')};
+      }
+    }catch(e){
+      analysis = {score: null, label: 'error'};
+    }
+    out.push({...row, __sentiment: analysis.label, __score: analysis.score});
+    await new Promise(r=>setTimeout(r, 30));
+  }
+  document.getElementById('loading').classList.add('hidden');
+  window.__csvResults = out;
+  showModal('CSV processing complete. Use "Download results" to export.');
+});
+
+document.getElementById('downloadCsv').addEventListener('click', ()=>{
+  if(!window.__csvResults){ showModal('No CSV results yet'); return; }
+  const csv = Papa.unparse(window.__csvResults);
+  const blob = new Blob([csv], {type:'text/csv'});
+  const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'sentiment-batch.csv'; a.click();
+  URL.revokeObjectURL(a.href);
+});
+
+/* ================= small helpers ================= */
+function escapeHtml(s){ return (s||'').toString().replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+</script>
+</body>
+</html>
