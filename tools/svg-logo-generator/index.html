@@ -1,0 +1,2357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LimeNit Logo Generator - Create Professional Logos Instantly</title>
+  <meta name="description" content="Free professional logo generator. Create stunning SVG logos for your brand in seconds with AI-powered design tools.">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      background: #FAFAFA;
+      color: #1A1A1A;
+      overflow-x: hidden;
+    }
+
+    .header {
+      background: white;
+      border-bottom: 1px solid #E8E8E8;
+      padding: 16px 40px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .header-left h1 {
+      font-size: 20px;
+      font-weight: 700;
+      color: #1A1A1A;
+      margin-bottom: 2px;
+    }
+    
+    .header-left p {
+      font-size: 12px;
+      color: #666;
+    }
+    
+    .header-right {
+      display: flex;
+      gap: 24px;
+      align-items: center;
+    }
+    
+    .header-link {
+      font-size: 14px;
+      color: #666;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+    
+    .header-link:hover {
+      color: #FF5C5C;
+    }
+
+    .container {
+      display: grid;
+      grid-template-columns: 360px 1fr;
+      min-height: calc(100vh - 65px);
+    }
+
+    .sidebar {
+      background: white;
+      border-right: 1px solid #E8E8E8;
+      padding: 24px 20px;
+      overflow-y: auto;
+      height: calc(100vh - 65px);
+    }
+
+    .control-group {
+      margin-bottom: 24px;
+    }
+
+    .control-label {
+      font-size: 13px;
+      font-weight: 600;
+      color: #1A1A1A;
+      margin-bottom: 8px;
+      display: block;
+    }
+
+    .input-field {
+      width: 100%;
+      padding: 10px 12px;
+      background: #FAFAFA;
+      border: 1px solid #E0E0E0;
+      border-radius: 8px;
+      color: #1A1A1A;
+      font-size: 14px;
+      transition: all 0.2s;
+    }
+
+    .input-field:focus {
+      outline: none;
+      border-color: #FF5C5C;
+      background: white;
+    }
+
+    select.input-field {
+      cursor: pointer;
+    }
+
+    .color-picker-wrapper {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .color-option {
+      width: 40px;
+      height: 40px;
+      border-radius: 8px;
+      cursor: pointer;
+      border: 2px solid transparent;
+      transition: all 0.2s;
+      position: relative;
+    }
+
+    .color-option:hover {
+      transform: scale(1.08);
+    }
+
+    .color-option.selected {
+      border-color: #FF5C5C;
+      box-shadow: 0 0 0 2px rgba(255, 92, 92, 0.2);
+    }
+
+    .color-option.selected::after {
+      content: '✓';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: white;
+      font-size: 16px;
+      font-weight: bold;
+      text-shadow: 0 0 3px rgba(0,0,0,0.5);
+    }
+
+    .color-custom {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .color-custom::before {
+      content: '🎨';
+      font-size: 18px;
+      position: absolute;
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    .color-custom input[type="color"] {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      cursor: pointer;
+    }
+
+    .tile-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+    }
+
+    .tile-option {
+      padding: 10px 6px;
+      background: #FAFAFA;
+      border: 1.5px solid #E0E0E0;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.2s;
+      text-align: center;
+      font-size: 11px;
+      font-weight: 600;
+      color: #666;
+    }
+
+    .tile-option:hover {
+      border-color: #FF5C5C;
+      background: white;
+      color: #1A1A1A;
+    }
+
+    .tile-option.selected {
+      border-color: #FF5C5C;
+      background: #FFF5F5;
+      color: #FF5C5C;
+    }
+
+    .tile-option-icon {
+      width: 100%;
+      height: 36px;
+      margin: 0 auto 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .theme-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 8px;
+      max-height: 380px;
+      overflow-y: auto;
+      padding-right: 4px;
+    }
+
+    .theme-grid::-webkit-scrollbar {
+      width: 5px;
+    }
+
+    .theme-grid::-webkit-scrollbar-track {
+      background: #F5F5F5;
+      border-radius: 3px;
+    }
+
+    .theme-grid::-webkit-scrollbar-thumb {
+      background: #D0D0D0;
+      border-radius: 3px;
+    }
+
+    .theme-card {
+      padding: 12px;
+      background: #FAFAFA;
+      border: 1.5px solid #E0E0E0;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.2s;
+      text-align: center;
+      font-size: 12px;
+      font-weight: 600;
+      color: #666;
+    }
+
+    .theme-card:hover {
+      border-color: #FF5C5C;
+      background: white;
+      color: #1A1A1A;
+      transform: translateY(-1px);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    }
+
+    .theme-card.selected {
+      border-color: #FF5C5C;
+      background: #FFF5F5;
+      color: #FF5C5C;
+    }
+
+    .theme-icon {
+      font-size: 22px;
+      margin-bottom: 6px;
+    }
+
+    .slider-wrapper {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .slider-value {
+      font-size: 12px;
+      color: #999;
+      text-align: right;
+    }
+
+    input[type="range"] {
+      width: 100%;
+      height: 5px;
+      background: #E8E8E8;
+      border-radius: 3px;
+      outline: none;
+      -webkit-appearance: none;
+    }
+
+    input[type="range"]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 16px;
+      height: 16px;
+      background: #FF5C5C;
+      border-radius: 50%;
+      cursor: pointer;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.15);
+    }
+
+    .toggle-group {
+      display: flex;
+      gap: 6px;
+    }
+
+    .toggle-btn {
+      flex: 1;
+      padding: 9px;
+      background: #FAFAFA;
+      border: 1.5px solid #E0E0E0;
+      border-radius: 7px;
+      color: #666;
+      font-size: 12px;
+      cursor: pointer;
+      transition: all 0.2s;
+      font-weight: 600;
+    }
+
+    .toggle-btn.active {
+      background: #FF5C5C;
+      color: white;
+      border-color: #FF5C5C;
+    }
+
+    .canvas-area {
+      padding: 32px;
+      overflow-y: auto;
+      height: calc(100vh - 65px);
+      background: #FAFAFA;
+    }
+
+    .canvas-header {
+      display: flex;
+      justify-content: flex-end;
+      margin-bottom: 16px;
+    }
+
+    .theme-toggle {
+      display: flex;
+      background: white;
+      border: 1.5px solid #E0E0E0;
+      border-radius: 8px;
+      padding: 3px;
+      gap: 3px;
+    }
+
+    .theme-toggle-btn {
+      padding: 7px 14px;
+      background: transparent;
+      border: none;
+      color: #666;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      border-radius: 6px;
+      transition: all 0.2s;
+    }
+
+    .theme-toggle-btn.active {
+      background: #FF5C5C;
+      color: white;
+    }
+
+    .canvas-main {
+      background: white;
+      border: 1px solid #E8E8E8;
+      border-radius: 12px;
+      padding: 48px;
+      position: relative;
+      min-height: 450px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.3s ease;
+      margin-bottom: 24px;
+    }
+
+    .canvas-main.dark {
+      background: #1A1A1A;
+    }
+
+    .logo-container {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      transition: all 0.3s ease;
+    }
+
+    .logo-container.vertical {
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    .brand-name {
+      font-size: 44px;
+      font-weight: 800;
+      letter-spacing: -1.5px;
+      transition: all 0.3s ease;
+      color: #1A1A1A;
+    }
+
+    .brand-name.light-text {
+      color: #FAFAFA;
+    }
+
+    .canvas-controls {
+      position: absolute;
+      bottom: 16px;
+      right: 16px;
+      display: flex;
+      gap: 8px;
+    }
+
+    .btn {
+      padding: 9px 16px;
+      background: #FF5C5C;
+      color: white;
+      border: none;
+      border-radius: 7px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .btn:hover {
+      background: #ff4545;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(255, 92, 92, 0.3);
+    }
+
+    .btn-secondary {
+      background: white;
+      color: #666;
+      border: 1.5px solid #E0E0E0;
+    }
+
+    .btn-secondary:hover {
+      background: #FAFAFA;
+      border-color: #D0D0D0;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    }
+
+    .case-toggle {
+      display: flex;
+      gap: 5px;
+      margin-top: 6px;
+    }
+
+    .case-btn {
+      padding: 6px 10px;
+      background: #FAFAFA;
+      border: 1.5px solid #E0E0E0;
+      border-radius: 6px;
+      color: #666;
+      font-size: 11px;
+      cursor: pointer;
+      transition: all 0.2s;
+      font-weight: 600;
+    }
+
+    .case-btn.active {
+      background: #FF5C5C;
+      color: white;
+      border-color: #FF5C5C;
+    }
+
+    .preview-section {
+      margin-top: 24px;
+    }
+
+    .preview-title {
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 16px;
+      color: #1A1A1A;
+    }
+
+    .preview-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 16px;
+    }
+
+    .preview-card {
+      background: white;
+      border: 1px solid #E8E8E8;
+      border-radius: 10px;
+      padding: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 180px;
+      position: relative;
+    }
+
+    .preview-label {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      font-size: 10px;
+      color: #999;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      font-weight: 600;
+    }
+
+    .preview-card.light {
+      background: #FAFAFA;
+    }
+
+    .preview-card.colored {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    }
+
+    .divider {
+      height: 1px;
+      background: #E8E8E8;
+      margin: 20px 0;
+    }
+
+    .notification {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      background: #10b981;
+      color: white;
+      padding: 12px 18px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 600;
+      opacity: 0;
+      transform: translateY(15px);
+      transition: all 0.3s;
+      pointer-events: none;
+      z-index: 1000;
+      box-shadow: 0 4px 12px rgba(16, 185, 129, 0.4);
+    }
+
+    .notification.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .content-section {
+      max-width: 1200px;
+      margin: 48px auto;
+      padding: 0 32px;
+    }
+
+    .content-block {
+      background: white;
+      border: 1px solid #E8E8E8;
+      border-radius: 12px;
+      padding: 32px;
+      margin-bottom: 24px;
+    }
+
+    .content-block h2 {
+      font-size: 24px;
+      font-weight: 700;
+      color: #1A1A1A;
+      margin-bottom: 16px;
+    }
+
+    .content-block h3 {
+      font-size: 18px;
+      font-weight: 600;
+      color: #1A1A1A;
+      margin: 20px 0 12px 0;
+    }
+
+    .content-block p {
+      font-size: 15px;
+      line-height: 1.7;
+      color: #555;
+      margin-bottom: 12px;
+    }
+
+    .content-block ul {
+      list-style: none;
+      padding-left: 0;
+    }
+
+    .content-block li {
+      padding: 10px 0;
+      border-bottom: 1px solid #F5F5F5;
+      font-size: 15px;
+      color: #555;
+    }
+
+    .content-block li:last-child {
+      border-bottom: none;
+    }
+
+    .content-block strong {
+      color: #1A1A1A;
+      font-weight: 600;
+    }
+
+    .faq-item {
+      margin-bottom: 20px;
+    }
+
+    .faq-question {
+      font-size: 16px;
+      font-weight: 600;
+      color: #1A1A1A;
+      margin-bottom: 8px;
+    }
+
+    .faq-answer {
+      font-size: 15px;
+      line-height: 1.7;
+      color: #666;
+    }
+
+    .footer {
+      background: #1A1A1A;
+      color: #999;
+      text-align: center;
+      padding: 32px;
+      font-size: 13px;
+      margin-top: 48px;
+    }
+
+    .footer a {
+      color: #FF5C5C;
+      text-decoration: none;
+    }
+
+    @media (max-width: 1024px) {
+      .container {
+        grid-template-columns: 1fr;
+      }
+      .sidebar {
+        height: auto;
+        border-right: none;
+        border-bottom: 1px solid #E8E8E8;
+      }
+      .canvas-area {
+        height: auto;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="header">
+    <div class="header-left">
+      <h1>LimeNit Logo Generator</h1>
+      <p>Professional logo design made simple</p>
+    </div>
+    <div class="header-right">
+      <a href="#tools" class="header-link">Explore Tools</a>
+      <a href="#contact" class="header-link">Contact</a>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="sidebar">
+      
+      <div class="control-group">
+        <label class="control-label">Logo Type</label>
+        <select class="input-field" id="logoType">
+          <option value="combination">Combination (Icon + Word)</option>
+          <option value="icon">Icon Only</option>
+        </select>
+      </div>
+
+      <div class="control-group">
+        <label class="control-label">Brand Name</label>
+        <input type="text" class="input-field" id="brandName" value="LimeNit" placeholder="Enter brand name">
+        <div class="case-toggle">
+          <button class="case-btn" onclick="setCase('upper')">UPPER</button>
+          <button class="case-btn active" onclick="setCase('title')">Title</button>
+          <button class="case-btn" onclick="setCase('lower')">lower</button>
+        </div>
+      </div>
+
+      <div class="control-group">
+        <label class="control-label">Base Shape</label>
+        <div class="tile-grid">
+          <div class="tile-option selected" data-shape="circle" onclick="selectShape(this, 'circle')">
+            <div class="tile-option-icon">
+              <svg width="32" height="32" viewBox="0 0 40 40">
+                <circle cx="20" cy="20" r="15" fill="none" stroke="currentColor" stroke-width="2"/>
+              </svg>
+            </div>
+            Circle
+          </div>
+          <div class="tile-option" data-shape="square" onclick="selectShape(this, 'square')">
+            <div class="tile-option-icon">
+              <svg width="32" height="32" viewBox="0 0 40 40">
+                <rect x="7" y="7" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2"/>
+              </svg>
+            </div>
+            Square
+          </div>
+          <div class="tile-option" data-shape="rounded" onclick="selectShape(this, 'rounded')">
+            <div class="tile-option-icon">
+              <svg width="32" height="32" viewBox="0 0 40 40">
+                <rect x="7" y="7" width="26" height="26" rx="5" fill="none" stroke="currentColor" stroke-width="2"/>
+              </svg>
+            </div>
+            Rounded
+          </div>
+          <div class="tile-option" data-shape="hexagon" onclick="selectShape(this, 'hexagon')">
+            <div class="tile-option-icon">
+              <svg width="32" height="32" viewBox="0 0 40 40">
+                <polygon points="20,5 33,13 33,27 20,35 7,27 7,13" fill="none" stroke="currentColor" stroke-width="2"/>
+              </svg>
+            </div>
+            Hexagon
+          </div>
+          <div class="tile-option" data-shape="diamond" onclick="selectShape(this, 'diamond')">
+            <div class="tile-option-icon">
+              <svg width="32" height="32" viewBox="0 0 40 40">
+                <polygon points="20,5 35,20 20,35 5,20" fill="none" stroke="currentColor" stroke-width="2"/>
+              </svg>
+            </div>
+            Diamond
+          </div>
+          <div class="tile-option" data-shape="none" onclick="selectShape(this, 'none')">
+            <div class="tile-option-icon" style="font-size: 20px;">✕</div>
+            None
+          </div>
+        </div>
+      </div>
+
+      <div class="control-group">
+        <label class="control-label">Frame Style</label>
+        <div class="tile-grid">
+          <div class="tile-option selected" data-frame="none" onclick="selectFrame(this, 'none')">
+            <div class="tile-option-icon" style="font-size: 18px;">○</div>
+            None
+          </div>
+          <div class="tile-option" data-frame="shield" onclick="selectFrame(this, 'shield')">
+            <div class="tile-option-icon">
+              <svg width="32" height="32" viewBox="0 0 40 40">
+                <path d="M20,5 L33,11 L33,21 Q33,28 20,35 Q7,28 7,21 L7,11 Z" fill="none" stroke="currentColor" stroke-width="2"/>
+              </svg>
+            </div>
+            Shield
+          </div>
+          <div class="tile-option" data-frame="badge" onclick="selectFrame(this, 'badge')">
+            <div class="tile-option-icon">
+              <svg width="32" height="32" viewBox="0 0 40 40">
+                <circle cx="20" cy="20" r="13" fill="none" stroke="currentColor" stroke-width="2"/>
+                <circle cx="20" cy="20" r="9" fill="none" stroke="currentColor" stroke-width="1.5"/>
+              </svg>
+            </div>
+            Badge
+          </div>
+          <div class="tile-option" data-frame="ribbon" onclick="selectFrame(this, 'ribbon')">
+            <div class="tile-option-icon">
+              <svg width="32" height="32" viewBox="0 0 40 40">
+                <path d="M10,16 L10,11 L30,11 L30,16 M10,24 L10,29 L30,29 L30,24" fill="none" stroke="currentColor" stroke-width="2"/>
+              </svg>
+            </div>
+            Ribbon
+          </div>
+          <div class="tile-option" data-frame="gear" onclick="selectFrame(this, 'gear')">
+            <div class="tile-option-icon">⚙️</div>
+            Gear
+          </div>
+          <div class="tile-option" data-frame="bracket" onclick="selectFrame(this, 'bracket')">
+            <div class="tile-option-icon">{}</div>
+            Bracket
+          </div>
+        </div>
+      </div>
+
+      <div class="control-group">
+        <label class="control-label">Icon Theme</label>
+        <div class="theme-grid">
+          <div class="theme-card selected" data-theme="tech" onclick="selectTheme(this, 'tech')" onmouseenter="previewTheme('tech')" onmouseleave="restoreTheme()">
+            <div class="theme-icon">💻</div>
+            Tech
+          </div>
+          <div class="theme-card" data-theme="finance" onclick="selectTheme(this, 'finance')" onmouseenter="previewTheme('finance')" onmouseleave="restoreTheme()">
+            <div class="theme-icon">💰</div>
+            Finance
+          </div>
+          <div class="theme-card" data-theme="nature" onclick="selectTheme(this, 'nature')" onmouseenter="previewTheme('nature')" onmouseleave="restoreTheme()">
+            <div class="theme-icon">🌿</div>
+            Nature
+          </div>
+          <div class="theme-card" data-theme="food" onclick="selectTheme(this, 'food')" onmouseenter="previewTheme('food')" onmouseleave="restoreTheme()">
+            <div class="theme-icon">🍽️</div>
+            Food
+          </div>
+          <div class="theme-card" data-theme="luxury" onclick="selectTheme(this, 'luxury')" onmouseenter="previewTheme('luxury')" onmouseleave="restoreTheme()">
+            <div class="theme-icon">👑</div>
+            Luxury
+          </div>
+          <div class="theme-card" data-theme="craft" onclick="selectTheme(this, 'craft')" onmouseenter="previewTheme('craft')" onmouseleave="restoreTheme()">
+            <div class="theme-icon">🔨</div>
+            Craft
+          </div>
+          <div class="theme-card" data-theme="legal" onclick="selectTheme(this, 'legal')" onmouseenter="previewTheme('legal')" onmouseleave="restoreTheme()">
+            <div class="theme-icon">⚖️</div>
+            Legal
+          </div>
+          <div class="theme-card" data-theme="medical" onclick="selectTheme(this, 'medical')" onmouseenter="previewTheme('medical')" onmouseleave="restoreTheme()">
+            <div class="theme-icon">⚕️</div>
+            Medical
+          </div>
+          <div class="theme-card" data-theme="media" onclick="selectTheme(this, 'media')" onmouseenter="previewTheme('media')" onmouseleave="restoreTheme()">
+            <div class="theme-icon">🎬</div>
+            Media
+          </div>
+          <div class="theme-card" data-theme="education" onclick="selectTheme(this, 'education')" onmouseenter="previewTheme('education')" onmouseleave="restoreTheme()">
+            <div class="theme-icon">📚</div>
+            Education
+          </div>
+          <div class="theme-card" data-theme="ecommerce" onclick="selectTheme(this, 'ecommerce')" onmouseenter="previewTheme('ecommerce')" onmouseleave="restoreTheme()">
+            <div class="theme-icon">🛒</div>
+            E-commerce
+          </div>
+          <div class="theme-card" data-theme="realestate" onclick="selectTheme(this, 'realestate')" onmouseenter="previewTheme('realestate')" onmouseleave="restoreTheme()">
+            <div class="theme-icon">🏠</div>
+            Real Estate
+          </div>
+          <div class="theme-card" data-theme="travel" onclick="selectTheme(this, 'travel')" onmouseenter="previewTheme('travel')" onmouseleave="restoreTheme()">
+            <div class="theme-icon">✈️</div>
+            Travel
+          </div>
+          <div class="theme-card" data-theme="crypto" onclick="selectTheme(this, 'crypto')" onmouseenter="previewTheme('crypto')" onmouseleave="restoreTheme()">
+            <div class="theme-icon">🔷</div>
+            Crypto
+          </div>
+          <div class="theme-card" data-theme="fitness" onclick="selectTheme(this, 'fitness')" onmouseenter="previewTheme('fitness')" onmouseleave="restoreTheme()">
+            <div class="theme-icon">💪</div>
+            Fitness
+          </div>
+          <div class="theme-card" data-theme="beauty" onclick="selectTheme(this, 'beauty')" onmouseenter="previewTheme('beauty')" onmouseleave="restoreTheme()">
+            <div class="theme-icon">🌸</div>
+            Beauty
+          </div>
+          <div class="theme-card" data-theme="nonprofit" onclick="selectTheme(this, 'nonprofit')" onmouseenter="previewTheme('nonprofit')" onmouseleave="restoreTheme()">
+            <div class="theme-icon">❤️</div>
+            Nonprofit
+          </div>
+          <div class="theme-card" data-theme="startup" onclick="selectTheme(this, 'startup')" onmouseenter="previewTheme('startup')" onmouseleave="restoreTheme()">
+            <div class="theme-icon">🚀</div>
+            Startup
+          </div>
+        </div>
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="control-group">
+        <label class="control-label">Color Palette</label>
+        <div class="color-picker-wrapper">
+          <div class="color-option selected" style="background: linear-gradient(135deg, #FF5C5C 0%, #ff4545 100%);" onclick="selectColor(this, 'warm')"></div>
+          <div class="color-option" style="background: linear-gradient(135deg, #3B82F6 0%, #1D4ED8 100%);" onclick="selectColor(this, 'cool')"></div>
+          <div class="color-option" style="background: linear-gradient(135deg, #10B981 0%, #059669 100%);" onclick="selectColor(this, 'nature')"></div>
+          <div class="color-option" style="background: linear-gradient(135deg, #8B5CF6 0%, #6D28D9 100%);" onclick="selectColor(this, 'luxury')"></div>
+          <div class="color-option" style="background: linear-gradient(135deg, #F59E0B 0%, #D97706 100%);" onclick="selectColor(this, 'energetic')"></div>
+          <div class="color-option" style="background: linear-gradient(135deg, #6B7280 0%, #374151 100%);" onclick="selectColor(this, 'neutral')"></div>
+          <div class="color-option" style="background: linear-gradient(135deg, #1F2937 0%, #FAFAFA 100%);" onclick="selectColor(this, 'monochrome')"></div>
+          <div class="color-option color-custom" onclick="selectColor(this, 'custom')">
+            <input type="color" id="customColor" value="#FF5C5C">
+          </div>
+        </div>
+      </div>
+
+      <div class="control-group">
+        <label class="control-label">Complexity Level</label>
+        <div class="slider-wrapper">
+          <input type="range" id="complexity" min="1" max="5" value="3" step="1">
+          <span class="slider-value">Level <span id="complexityValue">3</span> / 5</span>
+        </div>
+      </div>
+
+      <div class="control-group">
+        <label class="control-label">Layout</label>
+        <div class="toggle-group">
+          <button class="toggle-btn active" id="layoutHorizontal" onclick="setLayout('horizontal')">Horizontal</button>
+          <button class="toggle-btn" id="layoutVertical" onclick="setLayout('vertical')">Vertical</button>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="canvas-area">
+      <div class="canvas-header">
+        <div class="theme-toggle">
+          <button class="theme-toggle-btn" id="canvasThemeDark" onclick="setCanvasTheme('dark')">🌙 Dark</button>
+          <button class="theme-toggle-btn active" id="canvasThemeLight" onclick="setCanvasTheme('light')">☀️ Light</button>
+        </div>
+      </div>
+
+      <div class="canvas-main" id="mainCanvas">
+        <div class="logo-container" id="logoContainer">
+          <svg id="logoPreview" width="160" height="160" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+          </svg>
+          <div class="brand-name" id="brandNameDisplay">LimeNit</div>
+        </div>
+
+        <div class="canvas-controls">
+          <button class="btn btn-secondary" onclick="copySVG()">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+              <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+            </svg>
+            Copy SVG
+          </button>
+          <button class="btn" onclick="downloadLogo()">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+              <polyline points="7 10 12 15 17 10"></polyline>
+              <line x1="12" y1="15" x2="12" y2="3"></line>
+            </svg>
+            Download
+          </button>
+        </div>
+      </div>
+
+      <div class="preview-section">
+        <h3 class="preview-title">Logo Variations & Previews</h3>
+        <div class="preview-grid">
+          <div class="preview-card">
+            <span class="preview-label">Dark Background</span>
+            <div id="preview1"></div>
+          </div>
+          <div class="preview-card light">
+            <span class="preview-label">Light Background</span>
+            <div id="preview2"></div>
+          </div>
+          <div class="preview-card colored">
+            <span class="preview-label">Colored Background</span>
+            <div id="preview3"></div>
+          </div>
+          <div class="preview-card">
+            <span class="preview-label">Symbol Only</span>
+            <div id="preview4"></div>
+          </div>
+          <div class="preview-card light">
+            <span class="preview-label">Small Size</span>
+            <div id="preview5"></div>
+          </div>
+          <div class="preview-card">
+            <span class="preview-label">Stacked Layout</span>
+            <div id="preview6"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="content-section">
+    <div class="content-block">
+      <h2>About LimeNit Logo Generator</h2>
+      <p>LimeNit Logo Generator is a professional, free online tool that empowers businesses, startups, and creators to design stunning logos in minutes. Our AI-powered platform combines industry-leading design principles with intuitive controls, giving you complete creative freedom without the need for design expertise.</p>
+      <p>Whether you're launching a tech startup, opening a restaurant, or building a personal brand, our generator offers 18 industry-specific themes, each with 5 complexity levels, ensuring your logo perfectly captures your brand's essence. From minimalist icons to detailed emblems, every design is crafted as scalable SVG format, ensuring crystal-clear quality across all platforms and sizes.</p>
+      
+      <h3>Key Features</h3>
+      <ul>
+        <li><strong>18 Industry Themes:</strong> Tech, Finance, Nature, Food, Luxury, Craft, Legal, Medical, Media, Education, E-commerce, Real Estate, Travel, Crypto, Fitness, Beauty, Nonprofit, and Startup</li>
+        <li><strong>5 Complexity Levels:</strong> Progressive detail from simple icons to intricate emblems</li>
+        <li><strong>Multiple Base Shapes:</strong> Circle, Square, Rounded, Hexagon, Diamond, or frameless</li>
+        <li><strong>Frame Styles:</strong> Shield, Badge, Ribbon, Gear, Brackets for added personality</li>
+        <li><strong>8 Color Palettes + Custom:</strong> Pre-designed harmonious color schemes or create your own</li>
+        <li><strong>Real-time Preview:</strong> Hover over themes to preview instantly before committing</li>
+        <li><strong>Export Options:</strong> Download as SVG or copy code directly to clipboard</li>
+        <li><strong>Responsive Design:</strong> Works perfectly on desktop, tablet, and mobile devices</li>
+      </ul>
+    </div>
+
+    <div class="content-block">
+      <h2>Frequently Asked Questions</h2>
+      
+      <div class="faq-item">
+        <div class="faq-question">Is LimeNit Logo Generator really free?</div>
+        <div class="faq-answer">Yes, absolutely! LimeNit Logo Generator is completely free to use with no hidden costs, watermarks, or sign-up requirements. Generate, download, and use your logos commercially without any restrictions.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">What format are the logos in?</div>
+        <div class="faq-answer">All logos are generated as SVG (Scalable Vector Graphics), which means they can be scaled to any size without losing quality. SVG files work perfectly for websites, print materials, social media, and any other application.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">Can I use these logos for commercial purposes?</div>
+        <div class="faq-answer">Yes! All logos generated with LimeNit are free for both personal and commercial use. You own the rights to your designed logo and can use it for your business, products, websites, and marketing materials.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">How do I change the complexity of my logo?</div>
+        <div class="faq-answer">Use the "Complexity Level" slider (1-5) in the sidebar. Level 1 creates simple, minimalist designs, while Level 5 adds intricate details, badges, ornaments, and layered effects. Each theme responds differently to complexity changes.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">What's the difference between base shapes and frames?</div>
+        <div class="faq-answer">Base shapes (Circle, Square, Hexagon, etc.) provide the foundational geometry for your logo icon. Frames (Shield, Badge, Ribbon, etc.) add decorative borders or containers around your logo for extra visual interest.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">Can I edit the logo after downloading?</div>
+        <div class="faq-answer">Yes! Since logos are in SVG format, you can edit them in vector graphics software like Adobe Illustrator, Inkscape (free), Figma, or any SVG editor. You can also copy the SVG code and modify it directly.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">Why should I use SVG instead of PNG or JPG?</div>
+        <div class="faq-answer">SVG is a vector format that scales infinitely without pixelation, making it perfect for logos. You can use the same file for a tiny favicon (16px) or a huge billboard (10 feet) with perfect clarity. SVGs are also smaller in file size and work great on all modern platforms.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">How do I preview different themes?</div>
+        <div class="faq-answer">Simply hover your mouse over any theme card to see an instant preview in the canvas. Click to select and lock that theme. This lets you explore all 18 industry options quickly without commitment.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">Can I create multiple logos?</div>
+        <div class="faq-answer">Absolutely! Generate as many logos as you want. Try different combinations of themes, colors, shapes, and complexity levels to find the perfect design for your brand.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">What if I need help or have suggestions?</div>
+        <div class="faq-answer">We'd love to hear from you! Click "Contact" in the header to reach out with questions, feedback, or feature requests. Your input helps us improve the tool for everyone.</div>
+      </div>
+    </div>
+
+    <div class="content-block" id="tools">
+      <h2>Explore More Tools</h2>
+      <p>LimeNit offers a suite of professional design tools to help you build your brand identity:</p>
+      <ul>
+        <li><strong>Color Palette Generator:</strong> Create harmonious color schemes for your brand</li>
+        <li><strong>Font Pairing Tool:</strong> Find perfect typography combinations</li>
+        <li><strong>Brand Name Generator:</strong> AI-powered business name suggestions</li>
+        <li><strong>Icon Library:</strong> Thousands of free SVG icons for your projects</li>
+        <li><strong>Mockup Creator:</strong> See your logo on real-world products</li>
+      </ul>
+    </div>
+
+    <div class="content-block" id="contact">
+      <h2>Contact Us</h2>
+      <p>Have questions, feedback, or need support? We're here to help!</p>
+      <p><strong>Email:</strong> support@limenit.com</p>
+      <p><strong>Twitter:</strong> @LimeNitDesign</p>
+      <p><strong>GitHub:</strong> github.com/limenit</p>
+      <p>For business inquiries and partnerships: partnerships@limenit.com</p>
+    </div>
+  </div>
+
+  <div class="footer">
+    <p>&copy; 2025 LimeNit. All rights reserved. | <a href="#tools">Tools</a> | <a href="#contact">Contact</a> | <a href="#">Privacy</a> | <a href="#">Terms</a></p>
+  </div>
+
+  <div class="notification" id="notification"></div>
+
+  <script>
+    const state = {
+      logoType: 'combination',
+      brandName: 'LimeNit',
+      textCase: 'title',
+      baseShape: 'circle',
+      frameStyle: 'none',
+      iconTheme: 'tech',
+      colorPalette: 'warm',
+      customColor: '#FF5C5C',
+      complexity: 3,
+      layout: 'horizontal',
+      canvasTheme: 'light',
+      previewingTheme: null
+    };
+
+    const colorPalettes = {
+      warm: { primary: '#FF5C5C', secondary: '#FF9A76', accent: '#FFC947' },
+      cool: { primary: '#3B82F6', secondary: '#60A5FA', accent: '#93C5FD' },
+      nature: { primary: '#10B981', secondary: '#34D399', accent: '#6EE7B7' },
+      luxury: { primary: '#8B5CF6', secondary: '#A78BFA', accent: '#C4B5FD' },
+      energetic: { primary: '#F59E0B', secondary: '#FBBF24', accent: '#FCD34D' },
+      neutral: { primary: '#6B7280', secondary: '#9CA3AF', accent: '#D1D5DB' },
+      monochrome: { primary: '#1F2937', secondary: '#6B7280', accent: '#D1D5DB' },
+      custom: { primary: '#FF5C5C', secondary: '#FF9A76', accent: '#FFC947' }
+    };
+
+    document.addEventListener('DOMContentLoaded', () => {
+      setupEventListeners();
+      generateLogo();
+    });
+
+    function setupEventListeners() {
+      document.getElementById('logoType').addEventListener('change', (e) => {
+        state.logoType = e.target.value;
+        generateLogo();
+      });
+
+      document.getElementById('brandName').addEventListener('input', (e) => {
+        state.brandName = e.target.value || 'Brand';
+        generateLogo();
+      });
+
+      document.getElementById('complexity').addEventListener('input', (e) => {
+        state.complexity = parseInt(e.target.value);
+        document.getElementById('complexityValue').textContent = state.complexity;
+        generateLogo();
+      });
+
+      document.getElementById('customColor').addEventListener('input', (e) => {
+        state.customColor = e.target.value;
+        if (state.colorPalette === 'custom') {
+          colorPalettes.custom.primary = state.customColor;
+          generateLogo();
+        }
+      });
+    }
+
+    function selectShape(element, shape) {
+      document.querySelectorAll('[data-shape]').forEach(el => el.classList.remove('selected'));
+      element.classList.add('selected');
+      state.baseShape = shape;
+      generateLogo();
+    }
+
+    function selectFrame(element, frame) {
+      document.querySelectorAll('[data-frame]').forEach(el => el.classList.remove('selected'));
+      element.classList.add('selected');
+      state.frameStyle = frame;
+      generateLogo();
+    }
+
+    function selectTheme(element, theme) {
+      document.querySelectorAll('[data-theme]').forEach(el => el.classList.remove('selected'));
+      element.classList.add('selected');
+      state.iconTheme = theme;
+      state.previewingTheme = null;
+      generateLogo();
+    }
+
+    function previewTheme(theme) {
+      if (state.iconTheme !== theme) {
+        state.previewingTheme = theme;
+        generateLogo();
+      }
+    }
+
+    function restoreTheme() {
+      if (state.previewingTheme) {
+        state.previewingTheme = null;
+        generateLogo();
+      }
+    }
+
+    function selectColor(element, palette) {
+      document.querySelectorAll('.color-option').forEach(el => el.classList.remove('selected'));
+      element.classList.add('selected');
+      state.colorPalette = palette;
+      if (palette === 'custom') {
+        colorPalettes.custom.primary = state.customColor;
+      }
+      generateLogo();
+    }
+
+    function setCase(caseType) {
+      document.querySelectorAll('.case-btn').forEach(btn => btn.classList.remove('active'));
+      event.target.classList.add('active');
+      state.textCase = caseType;
+      generateLogo();
+    }
+
+    function setLayout(layout) {
+      state.layout = layout;
+      document.querySelectorAll('#layoutHorizontal, #layoutVertical').forEach(btn => btn.classList.remove('active'));
+      document.getElementById(`layout${layout.charAt(0).toUpperCase() + layout.slice(1)}`).classList.add('active');
+      
+      const container = document.getElementById('logoContainer');
+      container.className = `logo-container ${layout === 'vertical' ? 'vertical' : ''}`;
+    }
+
+    function setCanvasTheme(theme) {
+      state.canvasTheme = theme;
+      document.querySelectorAll('.theme-toggle-btn').forEach(btn => btn.classList.remove('active'));
+      document.getElementById(`canvasTheme${theme.charAt(0).toUpperCase() + theme.slice(1)}`).classList.add('active');
+      
+      const canvas = document.getElementById('mainCanvas');
+      const brandName = document.getElementById('brandNameDisplay');
+      
+      if (theme === 'dark') {
+        canvas.classList.add('dark');
+        brandName.classList.add('light-text');
+      } else {
+        canvas.classList.remove('dark');
+        brandName.classList.remove('light-text');
+      }
+    }
+
+    function generateLogo() {
+      const activeTheme = state.previewingTheme || state.iconTheme;
+      const colors = colorPalettes[state.colorPalette];
+      const svg = document.getElementById('logoPreview');
+      
+      svg.innerHTML = '';
+      
+      if (state.frameStyle !== 'none') {
+        generateFrame(svg, colors);
+      }
+      
+      if (state.baseShape !== 'none') {
+        generateBaseShape(svg, colors);
+      }
+      
+      generateThemeIcon(svg, colors, activeTheme);
+      
+      updateBrandName();
+      updatePreviews();
+    }
+
+    function generateBaseShape(svg, colors) {
+      const g = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+      g.setAttribute('id', 'baseShape');
+      
+      let path;
+      
+      switch(state.baseShape) {
+        case 'circle':
+          path = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+          path.setAttribute('cx', '100');
+          path.setAttribute('cy', '100');
+          path.setAttribute('r', '85');
+          break;
+        case 'square':
+          path = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+          path.setAttribute('x', '15');
+          path.setAttribute('y', '15');
+          path.setAttribute('width', '170');
+          path.setAttribute('height', '170');
+          break;
+        case 'rounded':
+          path = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+          path.setAttribute('x', '15');
+          path.setAttribute('y', '15');
+          path.setAttribute('width', '170');
+          path.setAttribute('height', '170');
+          path.setAttribute('rx', '25');
+          break;
+        case 'hexagon':
+          path = document.createElementNS('http://www.w3.org/2000/svg', 'polygon');
+          path.setAttribute('points', '100,15 170,55 170,145 100,185 30,145 30,55');
+          break;
+        case 'diamond':
+          path = document.createElementNS('http://www.w3.org/2000/svg', 'polygon');
+          path.setAttribute('points', '100,15 185,100 100,185 15,100');
+          break;
+      }
+      
+      if (path) {
+        path.setAttribute('fill', colors.primary);
+        path.setAttribute('fill-opacity', '0.12');
+        path.setAttribute('stroke', colors.primary);
+        path.setAttribute('stroke-width', '3');
+        g.appendChild(path);
+      }
+      
+      svg.appendChild(g);
+    }
+
+    function generateFrame(svg, colors) {
+      const g = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+      g.setAttribute('id', 'frame');
+      
+      switch(state.frameStyle) {
+        case 'shield':
+          const shield = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+          shield.setAttribute('d', 'M100,20 L175,45 L175,100 Q175,145 100,180 Q25,145 25,100 L25,45 Z');
+          shield.setAttribute('fill', 'none');
+          shield.setAttribute('stroke', colors.primary);
+          shield.setAttribute('stroke-width', '4');
+          g.appendChild(shield);
+          break;
+        case 'badge':
+          const outer = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+          outer.setAttribute('cx', '100');
+          outer.setAttribute('cy', '100');
+          outer.setAttribute('r', '80');
+          outer.setAttribute('fill', 'none');
+          outer.setAttribute('stroke', colors.primary);
+          outer.setAttribute('stroke-width', '3');
+          g.appendChild(outer);
+          
+          const inner = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+          inner.setAttribute('cx', '100');
+          inner.setAttribute('cy', '100');
+          inner.setAttribute('r', '70');
+          inner.setAttribute('fill', 'none');
+          inner.setAttribute('stroke', colors.secondary);
+          inner.setAttribute('stroke-width', '2');
+          g.appendChild(inner);
+          break;
+        case 'ribbon':
+          const topRibbon = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+          topRibbon.setAttribute('d', 'M20,60 L20,50 L180,50 L180,60');
+          topRibbon.setAttribute('fill', 'none');
+          topRibbon.setAttribute('stroke', colors.primary);
+          topRibbon.setAttribute('stroke-width', '4');
+          g.appendChild(topRibbon);
+          
+          const bottomRibbon = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+          bottomRibbon.setAttribute('d', 'M20,140 L20,150 L180,150 L180,140');
+          bottomRibbon.setAttribute('fill', 'none');
+          bottomRibbon.setAttribute('stroke', colors.primary);
+          bottomRibbon.setAttribute('stroke-width', '4');
+          g.appendChild(bottomRibbon);
+          break;
+        case 'gear':
+          const gearPath = 'M100,30 L110,45 L125,40 L130,55 L145,55 L145,70 L160,75 L155,90 L165,100 L155,110 L160,125 L145,130 L145,145 L130,145 L125,160 L110,155 L100,170 L90,155 L75,160 L70,145 L55,145 L55,130 L40,125 L45,110 L35,100 L45,90 L40,75 L55,70 L55,55 L70,55 L75,40 L90,45 Z';
+          const gear = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+          gear.setAttribute('d', gearPath);
+          gear.setAttribute('fill', 'none');
+          gear.setAttribute('stroke', colors.primary);
+          gear.setAttribute('stroke-width', '3');
+          g.appendChild(gear);
+          break;
+        case 'bracket':
+          const leftBracket = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+          leftBracket.setAttribute('d', 'M60,30 L40,30 Q30,30 30,40 L30,160 Q30,170 40,170 L60,170');
+          leftBracket.setAttribute('fill', 'none');
+          leftBracket.setAttribute('stroke', colors.primary);
+          leftBracket.setAttribute('stroke-width', '4');
+          leftBracket.setAttribute('stroke-linecap', 'round');
+          g.appendChild(leftBracket);
+          
+          const rightBracket = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+          rightBracket.setAttribute('d', 'M140,30 L160,30 Q170,30 170,40 L170,160 Q170,170 160,170 L140,170');
+          rightBracket.setAttribute('fill', 'none');
+          rightBracket.setAttribute('stroke', colors.primary);
+          rightBracket.setAttribute('stroke-width', '4');
+          rightBracket.setAttribute('stroke-linecap', 'round');
+          g.appendChild(rightBracket);
+          break;
+      }
+      
+      svg.appendChild(g);
+    }
+
+    function generateThemeIcon(svg, colors, theme) {
+      const g = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+      g.setAttribute('id', 'icon');
+      g.setAttribute('transform', 'translate(100, 100)');
+      
+      const c = state.complexity;
+      
+      const generators = {
+        tech: () => {
+          // Modern chip with circuit lines
+          const chipBase = createRect(g, -28, -28, 56, 56, 6, colors.primary);
+          
+          // Circuit paths (modern style)
+          if (c >= 1) {
+            const circuit1 = createPath(g, 'M-28,0 L-18,0 L-18,-10 L-8,-10', 'none', colors.secondary, 2.5);
+            const circuit2 = createPath(g, 'M28,0 L18,0 L18,10 L8,10', 'none', colors.secondary, 2.5);
+          }
+          
+          if (c >= 2) {
+            // Connection nodes
+            createCircle(g, -18, -10, 3, colors.accent);
+            createCircle(g, 18, 10, 3, colors.accent);
+            
+            // Additional circuits
+            createPath(g, 'M0,-28 L0,-18 L10,-18 L10,-8', 'none', colors.secondary, 2.5);
+          }
+          
+          if (c >= 3) {
+            // Inner chip detail
+            const innerChip = createRect(g, -16, -16, 32, 32, 4, colors.accent);
+            innerChip.setAttribute('opacity', '0.3');
+            
+            // Grid pattern
+            for(let i = -12; i <= 12; i += 8) {
+              createLine(g, i, -12, i, 12, colors.secondary, 1);
+              createLine(g, -12, i, 12, i, colors.secondary, 1);
+            }
+          }
+          
+          if (c >= 4) {
+            // External pins (modern style)
+            const pinPositions = [-20, -10, 0, 10, 20];
+            pinPositions.forEach(pos => {
+              createRect(g, pos - 2, -35, 4, 7, 1, colors.secondary);
+              createRect(g, pos - 2, 28, 4, 7, 1, colors.secondary);
+            });
+          }
+          
+          if (c >= 5) {
+            // Glow effect
+            const glow = createCircle(g, 0, 0, 45, 'none', colors.accent, 2);
+            glow.setAttribute('opacity', '0.2');
+            glow.setAttribute('stroke-dasharray', '5,5');
+          }
+        },
+        
+        finance: () => {
+          // Modern trending arrow
+          const trendPath = 'M-35,20 L-15,5 L5,-5 L25,-20 L35,-30';
+          createPath(g, trendPath, 'none', colors.primary, 4);
+          
+          // Arrow head
+          createPath(g, 'M35,-30 L30,-25 L35,-35 L40,-30 Z', colors.primary);
+          
+          if (c >= 2) {
+            // Data points
+            createCircle(g, -35, 20, 5, colors.secondary);
+            createCircle(g, -15, 5, 5, colors.secondary);
+            createCircle(g, 5, -5, 5, colors.secondary);
+            createCircle(g, 25, -20, 5, colors.secondary);
+          }
+          
+          if (c >= 3) {
+            // Modern bar chart base
+            const barHeights = [15, 25, 20, 35, 30];
+            barHeights.forEach((h, i) => {
+              const x = -30 + i * 15;
+              const bar = createRect(g, x, 40 - h, 10, h, 2, colors.accent);
+              bar.setAttribute('opacity', '0.6');
+            });
+          }
+          
+          if (c >= 4) {
+            // Circular progress indicator
+            const progressCircle = createCircle(g, 0, 0, 50, 'none', colors.secondary, 3);
+            progressCircle.setAttribute('stroke-dasharray', '100 314');
+            progressCircle.setAttribute('opacity', '0.4');
+          } 
+
+          if (c >= 5) {
+            // Decorative corner elements
+            createPath(g, 'M-50,-50 L-40,-50 L-40,-40', 'none', colors.accent, 2);
+            createPath(g, 'M50,-50 L40,-50 L40,-40', 'none', colors.accent, 2);
+          }
+        },
+        
+        nature: () => {
+          // Modern leaf design
+          const leafPath = 'M0,-35 Q15,-20 20,0 Q15,15 0,30 Q-15,15 -20,0 Q-15,-20 0,-35';
+          createPath(g, leafPath, colors.primary, colors.primary, 2);
+          
+          if (c >= 2) {
+            // Leaf vein
+            createPath(g, 'M0,-35 L0,30', 'none', colors.secondary, 2);
+          }
+          
+          if (c >= 3) {
+            // Side veins
+            createPath(g, 'M0,-15 Q10,-10 15,0', 'none', colors.secondary, 1.5);
+            createPath(g, 'M0,-15 Q-10,-10 -15,0', 'none', colors.secondary, 1.5);
+            createPath(g, 'M0,5 Q10,10 15,20', 'none', colors.secondary, 1.5);
+            createPath(g, 'M0,5 Q-10,10 -15,20', 'none', colors.secondary, 1.5);
+          }
+          
+          if (c >= 4) {
+            // Additional leaves
+            const smallLeaf1 = 'M-25,-10 Q-20,-5 -18,5 Q-20,12 -25,18 Q-30,12 -32,5 Q-30,-5 -25,-10';
+            createPath(g, smallLeaf1, colors.accent, colors.accent, 1.5);
+            
+            const smallLeaf2 = 'M25,-10 Q30,-5 32,5 Q30,12 25,18 Q20,12 18,5 Q20,-5 25,-10';
+            createPath(g, smallLeaf2, colors.accent, colors.accent, 1.5);
+          }
+          
+          if (c >= 5) {
+            // Organic background circle
+            const bgCircle = createCircle(g, 0, 0, 55, colors.primary);
+            bgCircle.setAttribute('opacity', '0.08');
+          }
+        },
+        
+        food: () => {
+          // Modern fork and knife
+          // Fork
+          createPath(g, 'M-15,-30 L-15,30', 'none', colors.primary, 3);
+          createPath(g, 'M-20,-30 L-20,-10', 'none', colors.primary, 2);
+          createPath(g, 'M-10,-30 L-10,-10', 'none', colors.primary, 2);
+          
+          // Knife
+          createPath(g, 'M15,-30 L15,30', 'none', colors.primary, 3);
+          const blade = createPath(g, 'M15,-30 L20,-25 L15,-20 Z', colors.secondary);
+          
+          if (c >= 2) {
+            // Plate circle
+            const plate = createCircle(g, 0, 0, 45, 'none', colors.secondary, 2.5);
+            plate.setAttribute('opacity', '0.4');
+          }
+          
+          if (c >= 3) {
+            // Chef hat above
+            const hatPath = 'M-18,-40 Q-18,-50 -10,-50 Q-10,-55 0,-55 Q10,-55 10,-50 Q18,-50 18,-40 L15,-35 L-15,-35 Z';
+            createPath(g, hatPath, colors.accent, colors.accent, 2);
+          }
+          
+          if (c >= 4) {
+            // Decorative steam lines
+            createPath(g, 'M-5,-38 Q-3,-45 -5,-52', 'none', colors.accent, 1.5);
+            createPath(g, 'M0,-40 Q2,-47 0,-54', 'none', colors.accent, 1.5);
+            createPath(g, 'M5,-38 Q7,-45 5,-52', 'none', colors.accent, 1.5);
+          }
+          
+          if (c >= 5) {
+            // Inner plate detail
+            const innerPlate = createCircle(g, 0, 0, 35, 'none', colors.primary, 1.5);
+            innerPlate.setAttribute('opacity', '0.25');
+            innerPlate.setAttribute('stroke-dasharray', '3,3');
+          }
+        },
+        
+        luxury: () => {
+          // Modern crown
+          const crownBase = createPath(g, 'M-30,10 L-30,15 L30,15 L30,10 Z', colors.primary);
+          
+          // Crown peaks
+          createPath(g, 'M-30,10 L-20,-15 L-10,5', colors.primary);
+          createPath(g, 'M-10,5 L0,-25 L10,5', colors.primary);
+          createPath(g, 'M10,5 L20,-15 L30,10', colors.primary);
+          
+          if (c >= 2) {
+            // Jewels on peaks
+            createCircle(g, -20, -15, 4, colors.accent);
+            createCircle(g, 0, -25, 5, colors.accent);
+            createCircle(g, 20, -15, 4, colors.accent);
+          }
+          
+          if (c >= 3) {
+            // Diamond shape center
+            const diamond = 'M0,-25 L5,-20 L0,-15 L-5,-20 Z';
+            createPath(g, diamond, colors.secondary);
+          }
+          
+          if (c >= 4) {
+            // Ornamental bands
+            createPath(g, 'M-30,12 L30,12', 'none', colors.accent, 2);
+            
+            // Small jewels on base
+            for(let x = -25; x <= 25; x += 10) {
+              createCircle(g, x, 12, 2, colors.secondary);
+            }
+          }
+          
+          if (c >= 5) {
+            // Radial glow lines
+            for(let angle = 0; angle < 360; angle += 45) {
+              const rad = (angle * Math.PI) / 180;
+              const x1 = Math.cos(rad) * 35;
+              const y1 = Math.sin(rad) * 35 - 5;
+              const x2 = Math.cos(rad) * 50;
+              const y2 = Math.sin(rad) * 50 - 5;
+              const line = createLine(g, x1, y1, x2, y2, colors.accent, 1.5);
+              line.setAttribute('opacity', '0.3');
+            }
+          }
+        },
+        
+        craft: () => {
+          // Modern hammer and wrench
+          // Hammer
+          createPath(g, 'M-20,-10 L-20,30', 'none', colors.primary, 4);
+          const hammerHead = createRect(g, -30, -18, 20, 8, 1, colors.secondary);
+          
+          // Wrench
+          createPath(g, 'M10,25 L20,-20', 'none', colors.primary, 4);
+          const wrenchHead = createCircle(g, 22, -24, 6, 'none', colors.secondary, 3);
+          
+          if (c >= 2) {
+            // Tool handles detail
+            createPath(g, 'M-20,20 L-16,20', 'none', colors.accent, 2);
+            createPath(g, 'M14,10 L18,8', 'none', colors.accent, 2);
+          }
+          
+          if (c >= 3) {
+            // Gear accent
+            const gearSmall = 'M30,20 L32,22 L35,21 L36,24 L39,25 L38,28 L40,30 L38,32 L39,35 L36,36 L35,39 L32,38 L30,40 L28,38 L25,39 L24,36 L21,35 L22,32 L20,30 L22,28 L21,25 L24,24 L25,21 L28,22 Z';
+            createPath(g, gearSmall, colors.accent, colors.accent, 1.5);
+          }
+          
+          if (c >= 4) {
+            // Screw elements
+            createCircle(g, -25, -14, 2, colors.accent);
+            createCircle(g, -15, -14, 2, colors.accent);
+            
+            // Measurement marks
+            for(let y = 0; y < 20; y += 5) {
+              createPath(g, `M-18,${y} L-16,${y}`, 'none', colors.secondary, 1);
+            }
+          }
+          
+          if (c >= 5) {
+            // Toolbox outline background
+            const toolbox = createRect(g, -40, 35, 80, 12, 2, 'none', colors.primary, 2);
+            toolbox.setAttribute('opacity', '0.3');
+          }
+        },
+        
+        legal: () => {
+          // Modern scales of justice
+          // Central pole
+          createPath(g, 'M0,-30 L0,30', 'none', colors.primary, 3);
+          
+          // Balance beam
+          createPath(g, 'M-35,-15 L35,-15', 'none', colors.primary, 3);
+          
+          // Scale pans
+          const leftPan = 'M-35,-15 L-40,-10 L-30,-10 Z';
+          const rightPan = 'M35,-15 L40,-10 L30,-10 Z';
+          createPath(g, leftPan, colors.secondary);
+          createPath(g, rightPan, colors.secondary);
+          
+          if (c >= 2) {
+            // Pan chains
+            createPath(g, 'M-35,-15 L-35,-20', 'none', colors.accent, 2);
+            createPath(g, 'M35,-15 L35,-20', 'none', colors.accent, 2);
+          }
+          
+          if (c >= 3) {
+            // Base platform
+            const base = createRect(g, -20, 30, 40, 5, 2, colors.primary);
+            
+            // Decorative pillar lines
+            createPath(g, 'M-5,-30 L-5,30', 'none', colors.secondary, 1.5);
+            createPath(g, 'M5,-30 L5,30', 'none', colors.secondary, 1.5);
+          }
+          
+          if (c >= 4) {
+            // Classical column capital
+            const capital = createRect(g, -8, -32, 16, 4, 1, colors.accent);
+            
+            // Weight indicators on pans
+            createCircle(g, -35, -12, 3, colors.accent);
+            createCircle(g, 35, -12, 3, colors.accent);
+          }
+          
+          if (c >= 5) {
+            // Laurel wreath background
+            const laurelLeft = 'M-40,0 Q-45,-15 -35,-25';
+            const laurelRight = 'M40,0 Q45,-15 35,-25';
+            createPath(g, laurelLeft, 'none', colors.accent, 2);
+            createPath(g, laurelRight, 'none', colors.accent, 2);
+            
+            // Shield outline
+            const shield = 'M0,-35 L20,-30 L20,0 Q20,15 0,25 Q-20,15 -20,0 L-20,-30 Z';
+            const shieldEl = createPath(g, shield, 'none', colors.primary, 2);
+            shieldEl.setAttribute('opacity', '0.15');
+          }
+        },
+        
+        medical: () => {
+          // Modern medical cross
+          const crossV = createRect(g, -6, -30, 12, 60, 2, colors.primary);
+          const crossH = createRect(g, -30, -6, 60, 12, 2, colors.primary);
+          
+          if (c >= 2) {
+            // Heartbeat line overlay
+            const heartbeat = 'M-35,0 L-25,0 L-20,-15 L-15,15 L-10,-10 L-5,0 L35,0';
+            createPath(g, heartbeat, 'none', colors.accent, 2.5);
+          }
+          
+          if (c >= 3) {
+            // Circular border (medical symbol style)
+            const outerCircle = createCircle(g, 0, 0, 45, 'none', colors.secondary, 3);
+          }
+          
+          if (c >= 4) {
+            // Caduceus snake element (simplified)
+            const snake1 = 'M-3,-30 Q-10,-15 -3,0 Q4,15 -3,30';
+            const snake2 = 'M3,-30 Q10,-15 3,0 Q-4,15 3,30';
+            createPath(g, snake1, 'none', colors.accent, 2);
+            createPath(g, snake2, 'none', colors.accent, 2);
+          }
+          
+          if (c >= 5) {
+            // Pulse dots
+            for(let i = 0; i < 4; i++) {
+              const angle = (i * 90 * Math.PI) / 180;
+              const x = Math.cos(angle) * 50;
+              const y = Math.sin(angle) * 50;
+              createCircle(g, x, y, 3, colors.secondary);
+            }
+          }
+        },
+        
+        media: () => {
+          // Modern play button
+          const playPath = 'M-15,-25 L-15,25 L25,0 Z';
+          createPath(g, playPath, colors.primary);
+          
+          if (c >= 2) {
+            // Film strip frame
+            const frameOuter = createRect(g, -35, -30, 70, 60, 4, 'none', colors.secondary, 3);
+          }
+          
+          if (c >= 3) {
+            // Film perforations
+            const perfPositions = [-25, -15, -5, 5, 15, 25];
+            perfPositions.forEach(y => {
+              createRect(g, -38, y - 2, 3, 4, 1, colors.accent);
+              createRect(g, 35, y - 2, 3, 4, 1, colors.accent);
+            });
+          }
+          
+          if (c >= 4) {
+            // Camera lens circles
+            const lens1 = createCircle(g, 0, 0, 35, 'none', colors.accent, 2);
+            const lens2 = createCircle(g, 0, 0, 28, 'none', colors.accent, 1.5);
+            lens1.setAttribute('opacity', '0.3');
+            lens2.setAttribute('opacity', '0.3');
+          }
+          
+          if (c >= 5) {
+            // Aperture blades
+            for(let i = 0; i < 6; i++) {
+              const angle = (i * 60 * Math.PI) / 180;
+              const x1 = Math.cos(angle) * 20;
+              const y1 = Math.sin(angle) * 20;
+              const x2 = Math.cos(angle) * 30;
+              const y2 = Math.sin(angle) * 30;
+              const blade = createLine(g, x1, y1, x2, y2, colors.secondary, 2.5);
+              blade.setAttribute('opacity', '0.4');
+            }
+          }
+        },
+        
+        education: () => {
+          // Modern graduation cap
+          const capTop = 'M-40,-10 L0,-25 L40,-10 L0,5 Z';
+          createPath(g, capTop, colors.primary);
+          
+          // Tassel
+          createPath(g, 'M0,-25 L0,-35', 'none', colors.accent, 2);
+          createCircle(g, 0, -37, 3, colors.accent);
+          
+          if (c >= 2) {
+            // Book base
+            const book = createRect(g, -25, 5, 50, 35, 2, colors.secondary);
+            
+            // Book spine
+            createPath(g, 'M-25,5 L-25,40', 'none', colors.primary, 3);
+          }
+          
+          if (c >= 3) {
+            // Book pages
+            for(let y = 10; y < 40; y += 5) {
+              createPath(g, `M-23,${y} L23,${y}`, 'none', colors.accent, 1);
+            }
+          }
+          
+          if (c >= 4) {
+            // Atomic orbit (knowledge symbol)
+            const orbit1 = createEllipse(g, 0, -5, 30, 15, 45, colors.accent, 1.5);
+            const orbit2 = createEllipse(g, 0, -5, 30, 15, -45, colors.accent, 1.5);
+            orbit1.setAttribute('opacity', '0.4');
+            orbit2.setAttribute('opacity', '0.4');
+            
+            // Center nucleus
+            createCircle(g, 0, -5, 4, colors.primary);
+          }
+          
+          if (c >= 5) {
+            // Lightbulb idea symbol
+            const bulb = 'M-8,-45 Q-8,-55 0,-55 Q8,-55 8,-45 L8,-40 Q8,-38 6,-38 L-6,-38 Q-8,-38 -8,-40 Z';
+            const bulbEl = createPath(g, bulb, colors.accent, colors.accent, 1.5);
+            bulbEl.setAttribute('opacity', '0.6');
+          }
+        },
+        
+        ecommerce: () => {
+          // Modern shopping cart
+          const cartBody = 'M-30,-10 L-25,-10 L-10,20 L20,20';
+          createPath(g, cartBody, 'none', colors.primary, 3);
+          
+          // Cart basket
+          const basket = createRect(g, -10, -10, 30, 20, 2, 'none', colors.primary, 3);
+          
+          // Wheels
+          createCircle(g, -5, 25, 4, colors.secondary);
+          createCircle(g, 15, 25, 4, colors.secondary);
+          
+          if (c >= 2) {
+            // Items in cart
+            createRect(g, -5, -8, 8, 8, 1, colors.accent);
+            createRect(g, 5, -5, 8, 8, 1, colors.accent);
+          }
+          
+          if (c >= 3) {
+            // Credit card
+            const card = createRect(g, 22, -15, 20, 12, 2, colors.secondary);
+            createPath(g, 'M24,-10 L40,-10', 'none', colors.accent, 1.5);
+          }
+          
+          if (c >= 4) {
+            // Tag with percentage
+            const tag = 'M-35,-25 L-25,-25 L-20,-30 L-25,-35 L-35,-35 Z';
+            createPath(g, tag, colors.accent);
+            createCircle(g, -30, -30, 2, colors.primary);
+            
+            // Shopping bag outline
+            const bag = 'M25,-35 L25,-20 Q25,-15 30,-15 L40,-15 Q45,-15 45,-20 L45,-35 Z';
+            createPath(g, bag, 'none', colors.secondary, 2);
+          }
+          
+          if (c >= 5) {
+            // Package box
+            const box = createRect(g, -45, 10, 15, 15, 1, 'none', colors.accent, 2);
+            createPath(g, 'M-37.5,10 L-37.5,25', 'none', colors.accent, 1.5);
+            createPath(g, 'M-45,17.5 L-30,17.5', 'none', colors.accent, 1.5);
+          }
+        },
+        
+        realestate: () => {
+          // Modern house
+          const roof = 'M-35,0 L0,-30 L35,0';
+          createPath(g, roof, 'none', colors.primary, 4);
+          
+          const walls = createRect(g, -30, 0, 60, 35, 2, colors.secondary);
+          
+          // Door
+          const door = createRect(g, -8, 15, 16, 20, 2, colors.accent);
+          
+          if (c >= 2) {
+            // Windows
+            const window1 = createRect(g, -22, 8, 10, 10, 1, colors.primary);
+            const window2 = createRect(g, 12, 8, 10, 10, 1, colors.primary);
+            
+            // Window panes
+            createPath(g, 'M-17,8 L-17,18', 'none', colors.secondary, 1);
+            createPath(g, 'M-22,13 L-12,13', 'none', colors.secondary, 1);
+            createPath(g, 'M17,8 L17,18', 'none', colors.secondary, 1);
+            createPath(g, 'M12,13 L22,13', 'none', colors.secondary, 1);
+          }
+          
+          if (c >= 3) {
+            // Chimney
+            const chimney = createRect(g, 15, -25, 8, 15, 1, colors.primary);
+            
+            // Smoke
+            createPath(g, 'M19,-10 Q17,-15 19,-20', 'none', colors.accent, 1.5);
+          }
+          
+          if (c >= 4) {
+            // Key symbol
+            createCircle(g, 0, -5, 5, 'none', colors.accent, 2);
+            createPath(g, 'M5,-5 L15,-5 L15,-3 L12,-3 L12,-7 L15,-7', 'none', colors.accent, 2);
+          }
+          
+          if (c >= 5) {
+            // Property boundary
+            const boundary = createRect(g, -45, -40, 90, 80, 3, 'none', colors.primary, 2);
+            boundary.setAttribute('opacity', '0.2');
+            boundary.setAttribute('stroke-dasharray', '5,5');
+          }
+        },
+        
+        travel: () => {
+          // Modern airplane
+          const fuselage = createPath(g, 'M-30,0 L30,0', 'none', colors.primary, 4);
+          
+          // Wings
+          const wing1 = 'M-10,-5 L-10,-25 L10,-15 L10,-5';
+          const wing2 = 'M-5,0 L-15,20 L5,15 L5,0';
+          createPath(g, wing1, colors.secondary);
+          createPath(g, wing2, colors.secondary);
+          
+          // Tail
+          const tail = 'M20,0 L25,-15 L30,0';
+          createPath(g, tail, colors.accent);
+          
+          if (c >= 2) {
+            // Windows
+            for(let x = -20; x < 20; x += 8) {
+              createCircle(g, x, 0, 2.5, colors.accent);
+            }
+          }
+          
+          if (c >= 3) {
+            // Globe background
+            const globe = createCircle(g, 0, 0, 45, 'none', colors.primary, 2);
+            globe.setAttribute('opacity', '0.3');
+            
+            // Latitude lines
+            createPath(g, 'M-45,0 L45,0', 'none', colors.secondary, 1);
+            createPath(g, 'M-40,-15 L40,-15', 'none', colors.secondary, 1);
+            createPath(g, 'M-40,15 L40,15', 'none', colors.secondary, 1);
+          }
+          
+          if (c >= 4) {
+            // Compass points
+            createPath(g, 'M0,-50 L0,-45 M0,45 L0,50', 'none', colors.accent, 2);
+            createPath(g, 'M-50,0 L-45,0 M45,0 L50,0', 'none', colors.accent, 2);
+          }
+          
+          if (c >= 5) {
+            // Flight path
+            const flightPath = 'M-50,-20 Q-25,-30 0,-15 Q25,-25 50,-10';
+            const pathEl = createPath(g, flightPath, 'none', colors.accent, 2);
+            pathEl.setAttribute('stroke-dasharray', '5,3');
+            pathEl.setAttribute('opacity', '0.5');
+          }
+        },
+        
+        crypto: () => {
+          // Modern blockchain hexagon
+          const hexagon = 'M0,-35 L30,-17.5 L30,17.5 L0,35 L-30,17.5 L-30,-17.5 Z';
+          createPath(g, hexagon, 'none', colors.primary, 3);
+          
+          // Inner hexagon
+          const innerHex = 'M0,-20 L17,-10 L17,10 L0,20 L-17,10 L-17,-10 Z';
+          createPath(g, innerHex, colors.secondary);
+          
+          if (c >= 2) {
+            // Blockchain nodes
+            createCircle(g, 0, -35, 4, colors.accent);
+            createCircle(g, 30, -17.5, 4, colors.accent);
+            createCircle(g, 30, 17.5, 4, colors.accent);
+            createCircle(g, 0, 35, 4, colors.accent);
+            createCircle(g, -30, 17.5, 4, colors.accent);
+            createCircle(g, -30, -17.5, 4, colors.accent);
+          }
+          
+          if (c >= 3) {
+            // Network connections
+            createPath(g, 'M-17,-10 L17,-10', 'none', colors.accent, 1.5);
+            createPath(g, 'M-17,10 L17,10', 'none', colors.accent, 1.5);
+            createPath(g, 'M0,-20 L0,-35', 'none', colors.accent, 1.5);
+            createPath(g, 'M0,20 L0,35', 'none', colors.accent, 1.5);
+          }
+          
+          if (c >= 4) {
+            // Binary code pattern
+            const binary = ['1', '0', '1', '1', '0', '1'];
+            binary.forEach((bit, i) => {
+              const angle = (i * 60 * Math.PI) / 180;
+              const x = Math.cos(angle) * 25;
+              const y = Math.sin(angle) * 25;
+              const text = createText(g, x, y, bit, colors.accent, 8);
+            });
+          }
+          
+          if (c >= 5) {
+            // Outer connection ring
+            const outerRing = createCircle(g, 0, 0, 50, 'none', colors.primary, 2);
+            outerRing.setAttribute('opacity', '0.3');
+            outerRing.setAttribute('stroke-dasharray', '10,5');
+          }
+        },
+        
+        fitness: () => {
+          // Modern dumbbell
+          const bar = createRect(g, -25, -3, 50, 6, 2, colors.primary);
+          
+          // Weights
+          const leftWeight1 = createRect(g, -35, -12, 10, 24, 2, colors.secondary);
+          const leftWeight2 = createRect(g, -40, -10, 5, 20, 1, colors.accent);
+          const rightWeight1 = createRect(g, 25, -12, 10, 24, 2, colors.secondary);
+          const rightWeight2 = createRect(g, 35, -10, 5, 20, 1, colors.accent);
+          
+          if (c >= 2) {
+            // Heartbeat monitor
+            const heartbeat = 'M-15,-25 L-10,-25 L-5,-35 L0,-15 L5,-30 L10,-25 L15,-25';
+            createPath(g, heartbeat, 'none', colors.accent, 2.5);
+          }
+          
+          if (c >= 3) {
+            // Progress rings
+            const ring1 = createCircle(g, 0, 0, 45, 'none', colors.accent, 3);
+            ring1.setAttribute('stroke-dasharray', '100 283');
+            ring1.setAttribute('opacity', '0.4');
+          }
+          
+          if (c >= 4) {
+            // Muscle icon
+            const muscle = 'M-25,15 Q-30,20 -25,30 Q-20,35 -10,30 Q0,25 0,15';
+            createPath(g, muscle, colors.secondary, colors.secondary, 2);
+          }
+          
+          if (c >= 5) {
+            // Target zones
+            for(let r = 55; r > 35; r -= 10) {
+              const zone = createCircle(g, 0, 0, r, 'none', colors.primary, 1);
+              zone.setAttribute('opacity', '0.15');
+            }
+          }
+        },
+        
+        beauty: () => {
+          // Modern lipstick
+          const lipstickBody = createRect(g, -6, -10, 12, 35, 2, colors.primary);
+          const lipstickTip = 'M-6,-10 L-3,-20 L3,-20 L6,-10';
+          createPath(g, lipstickTip, colors.accent);
+          
+          if (c >= 2) {
+            // Mirror circle
+            const mirror = createCircle(g, 20, -15, 18, 'none', colors.secondary, 3);
+            
+            // Mirror handle
+            createPath(g, 'M20,3 L20,20', 'none', colors.secondary, 3);
+          }
+          
+          if (c >= 3) {
+            // Flower petals
+            for(let i = 0; i < 5; i++) {
+              const angle = (i * 72 * Math.PI) / 180;
+              const x = Math.cos(angle) * 35 - 15;
+              const y = Math.sin(angle) * 35;
+              createCircle(g, x, y, 6, colors.accent);
+            }
+            createCircle(g, -15, 0, 5, colors.primary);
+          }
+          
+          if (c >= 4) {
+            // Makeup brush
+            createPath(g, 'M-35,-25 L-25,-15', 'none', colors.primary, 3);
+            const brushTip = 'M-35,-25 Q-38,-28 -35,-31 Q-32,-28 -35,-25';
+            createPath(g, brushTip, colors.accent);
+          }
+          
+          if (c >= 5) {
+            // Sparkle effects
+            const sparklePositions = [[25, -35], [-5, -30], [35, 5], [-30, 20]];
+            sparklePositions.forEach(([x, y]) => {
+              createPath(g, `M${x},${y-4} L${x},${y+4} M${x-4},${y} L${x+4},${y}`, 'none', colors.accent, 1.5);
+            });
+          }
+        },
+        
+        nonprofit: () => {
+          // Modern heart
+          const heart = 'M0,10 L-20,-10 Q-25,-20 -15,-25 Q-5,-25 0,-15 Q5,-25 15,-25 Q25,-20 20,-10 Z';
+          createPath(g, heart, colors.primary);
+          
+          if (c >= 2) {
+            // Helping hands
+            const hand1 = 'M-35,15 L-30,10 L-25,15 L-30,20';
+            const hand2 = 'M35,15 L30,10 L25,15 L30,20';
+            createPath(g, hand1, 'none', colors.secondary, 3);
+            createPath(g, hand2, 'none', colors.secondary, 3);
+          }
+          
+          if (c >= 3) {
+            // Circle of support
+            const supportCircle = createCircle(g, 0, 0, 45, 'none', colors.accent, 2.5);
+            supportCircle.setAttribute('opacity', '0.4');
+          }
+          
+          if (c >= 4) {
+            // People icons (simplified)
+            createCircle(g, -25, -30, 4, colors.accent);
+            createCircle(g, 0, -35, 4, colors.accent);
+            createCircle(g, 25, -30, 4, colors.accent);
+            
+            // Bodies
+            createPath(g, 'M-25,-26 L-25,-15 M-30,-20 L-20,-20', 'none', colors.accent, 2);
+            createPath(g, 'M0,-31 L0,-20 M-5,-25 L5,-25', 'none', colors.accent, 2);
+            createPath(g, 'M25,-26 L25,-15 M20,-20 L30,-20', 'none', colors.accent, 2);
+          }
+          
+          if (c >= 5) {
+            // Ribbon awareness
+            const ribbon = 'M-5,25 L-5,40 Q-5,45 0,45 Q5,45 5,40 L5,25 Q5,20 0,25 Q-5,20 -5,25';
+            createPath(g, ribbon, colors.secondary, colors.secondary, 2);
+          }
+        },
+        
+        startup: () => {
+          // Modern rocket
+          const rocketBody = 'M0,-35 L-12,-5 L-12,20 L12,20 L12,-5 Z';
+          createPath(g, rocketBody, colors.primary);
+          
+          // Rocket nose
+          const nose = 'M0,-35 L-12,-5 L12,-5 Z';
+          createPath(g, nose, colors.secondary);
+          
+          // Fins
+          const fin1 = 'M-12,10 L-25,25 L-12,20';
+          const fin2 = 'M12,10 L25,25 L12,20';
+          createPath(g, fin1, colors.accent);
+          createPath(g, fin2, colors.accent);
+          
+          if (c >= 2) {
+            // Window
+            createCircle(g, 0, 5, 5, colors.accent);
+          }
+          
+          if (c >= 3) {
+            // Exhaust flames
+            const flame1 = 'M-8,20 Q-10,30 -5,35';
+            const flame2 = 'M0,20 Q0,32 0,40';
+            const flame3 = 'M8,20 Q10,30 5,35';
+            createPath(g, flame1, 'none', colors.accent, 3);
+            createPath(g, flame2, 'none', colors.secondary, 3);
+            createPath(g, flame3, 'none', colors.accent, 3);
+          }
+          
+          if (c >= 4) {
+            // Stars
+            const starPositions = [[-30, -25], [30, -20], [-35, 5], [35, 0]];
+            starPositions.forEach(([x, y]) => {
+              createStar(g, x, y, 3, colors.accent);
+            });
+          }
+          
+          if (c >= 5) {
+            // Trajectory path
+            const trajectory = 'M0,40 Q-20,20 -30,0 Q-35,-15 -30,-30';
+            const trajEl = createPath(g, trajectory, 'none', colors.secondary, 2);
+            trajEl.setAttribute('stroke-dasharray', '5,5');
+            trajEl.setAttribute('opacity', '0.4');
+            
+            // Graph lines (growth)
+            createPath(g, 'M15,30 L20,25 L25,20 L30,10', 'none', colors.accent, 2);
+          }
+        }
+      };
+      
+      const generator = generators[theme];
+      if (generator) {
+        generator();
+      }
+      
+      svg.appendChild(g);
+    }
+
+    // Helper functions for SVG creation
+    function createRect(parent, x, y, width, height, rx, fill = null, stroke = null, strokeWidth = 0) {
+      const rect = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+      rect.setAttribute('x', x);
+      rect.setAttribute('y', y);
+      rect.setAttribute('width', width);
+      rect.setAttribute('height', height);
+      if (rx) rect.setAttribute('rx', rx);
+      if (fill) rect.setAttribute('fill', fill);
+      if (stroke) {
+        rect.setAttribute('stroke', stroke);
+        rect.setAttribute('stroke-width', strokeWidth);
+      }
+      if (!fill && !stroke) rect.setAttribute('fill', 'currentColor');
+      parent.appendChild(rect);
+      return rect;
+    }
+
+    function createCircle(parent, cx, cy, r, fill = null, stroke = null, strokeWidth = 0) {
+      const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+      circle.setAttribute('cx', cx);
+      circle.setAttribute('cy', cy);
+      circle.setAttribute('r', r);
+      if (fill) circle.setAttribute('fill', fill);
+      if (stroke) {
+        circle.setAttribute('stroke', stroke);
+        circle.setAttribute('stroke-width', strokeWidth);
+        if (!fill) circle.setAttribute('fill', 'none');
+      }
+      if (!fill && !stroke) circle.setAttribute('fill', 'currentColor');
+      parent.appendChild(circle);
+      return circle;
+    }
+
+    function createPath(parent, d, fill = null, stroke = null, strokeWidth = 2) {
+      const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+      path.setAttribute('d', d);
+      if (fill) path.setAttribute('fill', fill);
+      if (stroke) {
+        path.setAttribute('stroke', stroke);
+        path.setAttribute('stroke-width', strokeWidth);
+        if (!fill) path.setAttribute('fill', 'none');
+      }
+      if (!fill && !stroke) path.setAttribute('fill', 'currentColor');
+      parent.appendChild(path);
+      return path;
+    }
+
+    function createLine(parent, x1, y1, x2, y2, stroke, strokeWidth = 2) {
+      const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+      line.setAttribute('x1', x1);
+      line.setAttribute('y1', y1);
+      line.setAttribute('x2', x2);
+      line.setAttribute('y2', y2);
+      line.setAttribute('stroke', stroke);
+      line.setAttribute('stroke-width', strokeWidth);
+      parent.appendChild(line);
+      return line;
+    }
+
+    function createEllipse(parent, cx, cy, rx, ry, rotation, stroke, strokeWidth) {
+      const ellipse = document.createElementNS('http://www.w3.org/2000/svg', 'ellipse');
+      ellipse.setAttribute('cx', cx);
+      ellipse.setAttribute('cy', cy);
+      ellipse.setAttribute('rx', rx);
+      ellipse.setAttribute('ry', ry);
+      ellipse.setAttribute('transform', `rotate(${rotation} ${cx} ${cy})`);
+      ellipse.setAttribute('fill', 'none');
+      ellipse.setAttribute('stroke', stroke);
+      ellipse.setAttribute('stroke-width', strokeWidth);
+      parent.appendChild(ellipse);
+      return ellipse;
+    }
+
+    function createText(parent, x, y, content, fill, fontSize) {
+      const text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+      text.setAttribute('x', x);
+      text.setAttribute('y', y);
+      text.setAttribute('fill', fill);
+      text.setAttribute('font-size', fontSize);
+      text.setAttribute('text-anchor', 'middle');
+      text.setAttribute('dominant-baseline', 'middle');
+      text.setAttribute('font-weight', 'bold');
+      text.textContent = content;
+      parent.appendChild(text);
+      return text;
+    }
+
+    function createStar(parent, cx, cy, size, fill) {
+      const points = [];
+      for (let i = 0; i < 5; i++) {
+        const angle = (i * 144 - 90) * Math.PI / 180;
+        const x = cx + Math.cos(angle) * size;
+        const y = cy + Math.sin(angle) * size;
+        points.push(`${x},${y}`);
+      }
+      const star = document.createElementNS('http://www.w3.org/2000/svg', 'polygon');
+      star.setAttribute('points', points.join(' '));
+      star.setAttribute('fill', fill);
+      parent.appendChild(star);
+      return star;
+    }
+
+    function updateBrandName() {
+      const display = document.getElementById('brandNameDisplay');
+      let text = state.brandName;
+      
+      switch(state.textCase) {
+        case 'upper':
+          text = text.toUpperCase();
+          break;
+        case 'lower':
+          text = text.toLowerCase();
+          break;
+        case 'title':
+          text = text.charAt(0).toUpperCase() + text.slice(1).toLowerCase();
+          break;
+      }
+      
+      display.textContent = text;
+      
+      // Hide brand name if logo type is icon only
+      if (state.logoType === 'icon') {
+        display.style.display = 'none';
+      } else {
+        display.style.display = 'block';
+      }
+    }
+
+    function updatePreviews() {
+      const svg = document.getElementById('logoPreview');
+      const svgClone = svg.cloneNode(true);
+      
+      // Preview 1: Dark background with light text
+      const preview1 = document.getElementById('preview1');
+      preview1.innerHTML = '';
+      const container1 = createPreviewContainer(svgClone.cloneNode(true), true);
+      preview1.appendChild(container1);
+      
+      // Preview 2: Light background
+      const preview2 = document.getElementById('preview2');
+      preview2.innerHTML = '';
+      const container2 = createPreviewContainer(svgClone.cloneNode(true), false);
+      preview2.appendChild(container2);
+      
+      // Preview 3: Colored background
+      const preview3 = document.getElementById('preview3');
+      preview3.innerHTML = '';
+      const container3 = createPreviewContainer(svgClone.cloneNode(true), true);
+      preview3.appendChild(container3);
+      
+      // Preview 4: Symbol only (smaller)
+      const preview4 = document.getElementById('preview4');
+      preview4.innerHTML = '';
+      const iconOnly = svg.cloneNode(true);
+      iconOnly.setAttribute('width', '100');
+      iconOnly.setAttribute('height', '100');
+      preview4.appendChild(iconOnly);
+      
+      // Preview 5: Small size
+      const preview5 = document.getElementById('preview5');
+      preview5.innerHTML = '';
+      const smallContainer = createPreviewContainer(svgClone.cloneNode(true), false, true);
+      preview5.appendChild(smallContainer);
+      
+      // Preview 6: Stacked layout
+      const preview6 = document.getElementById('preview6');
+      preview6.innerHTML = '';
+      const stackedContainer = createPreviewContainer(svgClone.cloneNode(true), false, false, true);
+      preview6.appendChild(stackedContainer);
+    }
+
+    function createPreviewContainer(svg, isDark, isSmall = false, isStacked = false) {
+      const container = document.createElement('div');
+      container.style.display = 'flex';
+      container.style.alignItems = 'center';
+      container.style.gap = isStacked ? '12px' : '16px';
+      container.style.flexDirection = isStacked ? 'column' : 'row';
+      
+      const size = isSmall ? '60' : '80';
+      svg.setAttribute('width', size);
+      svg.setAttribute('height', size);
+      
+      if (state.logoType === 'combination') {
+        container.appendChild(svg);
+        
+        const brandName = document.createElement('div');
+        brandName.textContent = state.brandName;
+        brandName.style.fontSize = isSmall ? '16px' : '20px';
+        brandName.style.fontWeight = '800';
+        brandName.style.color = isDark ? '#FAFAFA' : '#1A1A1A';
+        container.appendChild(brandName);
+      } else {
+        container.appendChild(svg);
+      }
+      
+      return container;
+    }
+
+    function copySVG() {
+      const svg = document.getElementById('logoPreview');
+      const svgData = new XMLSerializer().serializeToString(svg);
+      
+      navigator.clipboard.writeText(svgData).then(() => {
+        showNotification('SVG code copied to clipboard!');
+      }).catch(() => {
+        showNotification('Failed to copy SVG', 'error');
+      });
+    }
+
+    function downloadLogo() {
+      const svg = document.getElementById('logoPreview');
+      const svgData = new XMLSerializer().serializeToString(svg);
+      const blob = new Blob([svgData], { type: 'image/svg+xml' });
+      const url = URL.createObjectURL(blob);
+      
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = `${state.brandName.toLowerCase()}-logo.svg`;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      URL.revokeObjectURL(url);
+      
+      showNotification('Logo downloaded successfully!');
+    }
+
+    function showNotification(message, type = 'success') {
+      const notification = document.getElementById('notification');
+      notification.textContent = message;
+      notification.style.background = type === 'success' ? '#10b981' : '#ef4444';
+      notification.classList.add('show');
+      
+      setTimeout(() => {
+        notification.classList.remove('show');
+      }, 3000);
+    }
+  </script>
+</body>
+</html>
