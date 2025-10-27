@@ -1,0 +1,9 @@
+<svg width="1000" height="600" viewBox="0 0 1000 600" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1000" height="600" fill="#f0f0f0"/>
+  <circle cx="500" cy="300" r="100" fill="#4F46E5">
+    <animate attributeName="r" from="100" to="120" dur="1.5s" repeatCount="indefinite" values="100;120;100"/>
+  </circle>
+  <text x="50%" y="90%" dominant-baseline="middle" text-anchor="middle" fill="#666" font-size="36" font-family="Arial">
+    Animated 1000×600 SVG
+  </text>
+</svg>
