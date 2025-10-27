@@ -1,9 +1,244 @@
-<svg width="1000" height="600" viewBox="0 0 1000 600" xmlns="http://www.w3.org/2000/svg">
-  <rect width="1000" height="600" fill="#f0f0f0"/>
-  <circle cx="500" cy="300" r="100" fill="#4F46E5">
-    <animate attributeName="r" from="100" to="120" dur="1.5s" repeatCount="indefinite" values="100;120;100"/>
-  </circle>
-  <text x="50%" y="90%" dominant-baseline="middle" text-anchor="middle" fill="#666" font-size="36" font-family="Arial">
-    Animated 1000×600 SVG
-  </text>
+<svg viewBox="0 0 1200 600" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <!-- Gradients -->
+    <linearGradient id="brainGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#ff6b6b;stop-opacity:0.8" />
+      <stop offset="100%" style="stop-color:#ff8e8e;stop-opacity:0.9" />
+    </linearGradient>
+    
+    <linearGradient id="glowGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#ff6b6b;stop-opacity:0.8" />
+      <stop offset="100%" style="stop-color:#ff6b6b;stop-opacity:0" />
+    </linearGradient>
+
+    <radialGradient id="pulseGradient">
+      <stop offset="0%" style="stop-color:#ff6b6b;stop-opacity:0.6" />
+      <stop offset="100%" style="stop-color:#ff6b6b;stop-opacity:0" />
+    </radialGradient>
+
+    <!-- Filters -->
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <filter id="softGlow">
+      <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="600" fill="#1a1d3a"/>
+
+  <!-- Left Circle - Text Input -->
+  <g id="leftCircle">
+    <circle cx="250" cy="300" r="120" fill="none" stroke="#ff6b6b" stroke-width="2.5" opacity="0.6"/>
+    <circle cx="250" cy="300" r="115" fill="none" stroke="#ff6b6b" stroke-width="1.5" opacity="0.3"/>
+    
+    <!-- Text lines (document representation) -->
+    <g id="textLines">
+      <rect x="200" y="260" width="80" height="4" rx="2" fill="#8892b0" opacity="0.5"/>
+      <rect x="200" y="275" width="70" height="4" rx="2" fill="#8892b0" opacity="0.5"/>
+      <rect x="200" y="290" width="85" height="4" rx="2" fill="#8892b0" opacity="0.5"/>
+      <rect x="200" y="305" width="65" height="4" rx="2" fill="#8892b0" opacity="0.5"/>
+      <rect x="200" y="320" width="75" height="4" rx="2" fill="#8892b0" opacity="0.5"/>
+      <rect x="200" y="335" width="80" height="4" rx="2" fill="#8892b0" opacity="0.5"/>
+    </g>
+
+    <!-- Magnifying glass -->
+    <g id="magnifier" filter="url(#softGlow)">
+      <circle cx="220" cy="280" r="25" fill="none" stroke="#ff6b6b" stroke-width="3"/>
+      <line x1="238" y1="298" x2="255" y2="315" stroke="#ff6b6b" stroke-width="3" stroke-linecap="round"/>
+      
+      <!-- Glass shine -->
+      <circle cx="215" cy="275" r="8" fill="#ff6b6b" opacity="0.3"/>
+      
+      <!-- Magnifier animation -->
+      <animateTransform
+        attributeName="transform"
+        type="translate"
+        values="0,0; 20,10; 40,30; 20,50; 0,60; -10,40; 0,0"
+        dur="8s"
+        repeatCount="indefinite"/>
+    </g>
+  </g>
+
+  <!-- Arrow 1: Left to Center -->
+  <g id="arrow1">
+    <path d="M 370 300 Q 450 300 530 300" fill="none" stroke="#ff6b6b" stroke-width="2" opacity="0">
+      <animate attributeName="opacity" values="0;0;0.8;0.8;0.8" keyTimes="0;0.3;0.35;0.9;1" dur="8s" repeatCount="indefinite"/>
+    </path>
+    <polygon points="530,300 520,295 520,305" fill="#ff6b6b" opacity="0">
+      <animate attributeName="opacity" values="0;0;0.8;0.8;0.8" keyTimes="0;0.3;0.35;0.9;1" dur="8s" repeatCount="indefinite"/>
+    </polygon>
+    
+    <!-- Animated dot traveling along arrow -->
+    <circle r="4" fill="#ff6b6b" filter="url(#softGlow)">
+      <animateMotion path="M 370 300 Q 450 300 530 300" dur="1.5s" begin="2.4s" repeatCount="indefinite" repeatDur="8s"/>
+      <animate attributeName="opacity" values="0;1;1;0" dur="1.5s" begin="2.4s" repeatCount="indefinite" repeatDur="8s"/>
+    </circle>
+  </g>
+
+  <!-- Center - Brain -->
+  <g id="brain">
+    <!-- Neural network nodes -->
+    <g id="neuralNet" opacity="0.4">
+      <!-- Left hemisphere -->
+      <ellipse cx="570" cy="280" rx="35" ry="45" fill="none" stroke="#ff6b6b" stroke-width="1.5"/>
+      <ellipse cx="560" cy="300" rx="30" ry="35" fill="none" stroke="#ff6b6b" stroke-width="1.5"/>
+      <ellipse cx="565" cy="320" rx="25" ry="30" fill="none" stroke="#ff6b6b" stroke-width="1.5"/>
+      
+      <!-- Right hemisphere -->
+      <ellipse cx="630" cy="280" rx="35" ry="45" fill="none" stroke="#ff6b6b" stroke-width="1.5"/>
+      <ellipse cx="640" cy="300" rx="30" ry="35" fill="none" stroke="#ff6b6b" stroke-width="1.5"/>
+      <ellipse cx="635" cy="320" rx="25" ry="30" fill="none" stroke="#ff6b6b" stroke-width="1.5"/>
+      
+      <!-- Connection lines -->
+      <line x1="570" y1="280" x2="630" y2="280" stroke="#ff6b6b" stroke-width="1" opacity="0.3"/>
+      <line x1="560" y1="300" x2="640" y2="300" stroke="#ff6b6b" stroke-width="1" opacity="0.3"/>
+      <line x1="565" y1="320" x2="635" y2="320" stroke="#ff6b6b" stroke-width="1" opacity="0.3"/>
+    </g>
+
+    <!-- Neural nodes -->
+    <g id="nodes">
+      <circle cx="570" cy="270" r="3" fill="#ff6b6b" opacity="0.6"/>
+      <circle cx="585" cy="280" r="3" fill="#ff6b6b" opacity="0.6"/>
+      <circle cx="600" cy="275" r="3" fill="#ff6b6b" opacity="0.6"/>
+      <circle cx="615" cy="285" r="3" fill="#ff6b6b" opacity="0.6"/>
+      <circle cx="630" cy="270" r="3" fill="#ff6b6b" opacity="0.6"/>
+      
+      <circle cx="565" cy="295" r="3" fill="#ff6b6b" opacity="0.6"/>
+      <circle cx="580" cy="305" r="3" fill="#ff6b6b" opacity="0.6"/>
+      <circle cx="600" cy="300" r="3" fill="#ff6b6b" opacity="0.6"/>
+      <circle cx="620" cy="305" r="3" fill="#ff6b6b" opacity="0.6"/>
+      <circle cx="635" cy="295" r="3" fill="#ff6b6b" opacity="0.6"/>
+      
+      <circle cx="570" cy="320" r="3" fill="#ff6b6b" opacity="0.6"/>
+      <circle cx="585" cy="325" r="3" fill="#ff6b6b" opacity="0.6"/>
+      <circle cx="600" cy="330" r="3" fill="#ff6b6b" opacity="0.6"/>
+      <circle cx="615" cy="325" r="3" fill="#ff6b6b" opacity="0.6"/>
+      <circle cx="630" cy="320" r="3" fill="#ff6b6b" opacity="0.6"/>
+    </g>
+
+    <!-- Brain pulse effect -->
+    <circle cx="600" cy="300" r="50" fill="url(#pulseGradient)" opacity="0">
+      <animate attributeName="r" values="50;80;50" keyTimes="0;0.5;1" dur="2s" begin="2.8s" repeatCount="indefinite" repeatDur="8s"/>
+      <animate attributeName="opacity" values="0;0;0.6;0;0" keyTimes="0;0.35;0.5;0.65;1" dur="8s" repeatCount="indefinite"/>
+    </circle>
+
+    <!-- Brain glow activation -->
+    <circle cx="600" cy="300" r="60" fill="none" stroke="#ff6b6b" stroke-width="2" opacity="0" filter="url(#glow)">
+      <animate attributeName="opacity" values="0;0;0.8;0.8;0" keyTimes="0;0.3;0.4;0.55;0.6" dur="8s" repeatCount="indefinite"/>
+      <animate attributeName="r" values="60;65;60" dur="1.5s" begin="2.4s" repeatCount="indefinite" repeatDur="8s"/>
+    </circle>
+  </g>
+
+  <!-- Arrow 2: Center to Right -->
+  <g id="arrow2">
+    <path d="M 670 300 Q 750 300 830 300" fill="none" stroke="#ff6b6b" stroke-width="2" opacity="0">
+      <animate attributeName="opacity" values="0;0;0;0;0.8;0.8" keyTimes="0;0.5;0.55;0.6;0.65;1" dur="8s" repeatCount="indefinite"/>
+    </path>
+    <polygon points="830,300 820,295 820,305" fill="#ff6b6b" opacity="0">
+      <animate attributeName="opacity" values="0;0;0;0;0.8;0.8" keyTimes="0;0.5;0.55;0.6;0.65;1" dur="8s" repeatCount="indefinite"/>
+    </polygon>
+    
+    <!-- Animated dot traveling along arrow -->
+    <circle r="4" fill="#ff6b6b" filter="url(#softGlow)">
+      <animateMotion path="M 670 300 Q 750 300 830 300" dur="1.5s" begin="4.8s" repeatCount="indefinite" repeatDur="8s"/>
+      <animate attributeName="opacity" values="0;1;1;0" dur="1.5s" begin="4.8s" repeatCount="indefinite" repeatDur="8s"/>
+    </circle>
+  </g>
+
+  <!-- Right Circle - Emotion Output -->
+  <g id="rightCircle">
+    <circle cx="950" cy="300" r="120" fill="none" stroke="#ff6b6b" stroke-width="2.5" opacity="0.6"/>
+    <circle cx="950" cy="300" r="115" fill="none" stroke="#ff6b6b" stroke-width="1.5" opacity="0.3"/>
+    
+    <!-- Emotion Icons -->
+    <g id="emotions">
+      <!-- Happy Face -->
+      <g id="happy" opacity="0.5">
+        <circle cx="900" cy="280" r="22" fill="none" stroke="#4ecdc4" stroke-width="2.5"/>
+        <circle cx="893" cy="273" r="2.5" fill="#4ecdc4"/>
+        <circle cx="907" cy="273" r="2.5" fill="#4ecdc4"/>
+        <path d="M 892 285 Q 900 292 908 285" fill="none" stroke="#4ecdc4" stroke-width="2.5" stroke-linecap="round"/>
+        
+        <!-- Highlight animation -->
+        <circle cx="900" cy="280" r="22" fill="none" stroke="#ff6b6b" stroke-width="3" opacity="0">
+          <animate attributeName="opacity" values="0;0;0;0;0;0;0.8;0.8;0.8" keyTimes="0;0.6;0.65;0.7;0.75;0.78;0.8;0.95;1" dur="8s" repeatCount="indefinite"/>
+        </circle>
+        <circle cx="900" cy="280" r="28" fill="url(#pulseGradient)" opacity="0">
+          <animate attributeName="opacity" values="0;0;0;0;0;0;0.4;0;0" keyTimes="0;0.6;0.65;0.7;0.75;0.78;0.82;0.88;1" dur="8s" repeatCount="indefinite"/>
+        </circle>
+      </g>
+
+      <!-- Neutral Face -->
+      <g id="neutral" opacity="0.5">
+        <circle cx="950" cy="280" r="22" fill="none" stroke="#95a5a6" stroke-width="2.5"/>
+        <circle cx="943" cy="273" r="2.5" fill="#95a5a6"/>
+        <circle cx="957" cy="273" r="2.5" fill="#95a5a6"/>
+        <line x1="942" y1="287" x2="958" y2="287" stroke="#95a5a6" stroke-width="2.5" stroke-linecap="round"/>
+        
+        <!-- Highlight animation -->
+        <circle cx="950" cy="280" r="22" fill="none" stroke="#ff6b6b" stroke-width="3" opacity="0">
+          <animate attributeName="opacity" values="0;0;0;0;0;0;0;0.8;0.8;0.8" keyTimes="0;0.6;0.65;0.7;0.75;0.78;0.82;0.84;0.95;1" dur="8s" repeatCount="indefinite"/>
+        </circle>
+        <circle cx="950" cy="280" r="28" fill="url(#pulseGradient)" opacity="0">
+          <animate attributeName="opacity" values="0;0;0;0;0;0;0;0.4;0;0" keyTimes="0;0.6;0.65;0.7;0.75;0.78;0.82;0.86;0.92;1" dur="8s" repeatCount="indefinite"/>
+        </circle>
+      </g>
+
+      <!-- Sad Face -->
+      <g id="sad" opacity="0.5">
+        <circle cx="1000" cy="280" r="22" fill="none" stroke="#e74c3c" stroke-width="2.5"/>
+        <circle cx="993" cy="273" r="2.5" fill="#e74c3c"/>
+        <circle cx="1007" cy="273" r="2.5" fill="#e74c3c"/>
+        <path d="M 992 290 Q 1000 283 1008 290" fill="none" stroke="#e74c3c" stroke-width="2.5" stroke-linecap="round"/>
+        
+        <!-- Highlight animation -->
+        <circle cx="1000" cy="280" r="22" fill="none" stroke="#ff6b6b" stroke-width="3" opacity="0">
+          <animate attributeName="opacity" values="0;0;0;0;0;0;0;0;0.8;0.8" keyTimes="0;0.6;0.65;0.7;0.75;0.78;0.82;0.86;0.88;1" dur="8s" repeatCount="indefinite"/>
+        </circle>
+        <circle cx="1000" cy="280" r="28" fill="url(#pulseGradient)" opacity="0">
+          <animate attributeName="opacity" values="0;0;0;0;0;0;0;0;0.4;0" keyTimes="0;0.6;0.65;0.7;0.75;0.78;0.82;0.86;0.9;1" dur="8s" repeatCount="indefinite"/>
+        </circle>
+      </g>
+
+      <!-- Bar Chart visualization -->
+      <g id="bars" transform="translate(890, 315)">
+        <rect x="0" y="20" width="25" height="25" rx="2" fill="#4ecdc4" opacity="0.4">
+          <animate attributeName="opacity" values="0.4;0.4;0.4;0.4;0.4;0.4;0.4;0.8;0.8" keyTimes="0;0.6;0.65;0.7;0.75;0.78;0.8;0.82;1" dur="8s" repeatCount="indefinite"/>
+        </rect>
+        <rect x="35" y="30" width="25" height="15" rx="2" fill="#95a5a6" opacity="0.4">
+          <animate attributeName="opacity" values="0.4;0.4;0.4;0.4;0.4;0.4;0.4;0.4;0.8;0.8" keyTimes="0;0.6;0.65;0.7;0.75;0.78;0.82;0.84;0.86;1" dur="8s" repeatCount="indefinite"/>
+        </rect>
+        <rect x="70" y="35" width="25" height="10" rx="2" fill="#e74c3c" opacity="0.4">
+          <animate attributeName="opacity" values="0.4;0.4;0.4;0.4;0.4;0.4;0.4;0.4;0.4;0.8" keyTimes="0;0.6;0.65;0.7;0.75;0.78;0.82;0.86;0.88;1" dur="8s" repeatCount="indefinite"/>
+        </rect>
+      </g>
+    </g>
+  </g>
+
+  <!-- Subtle particles for atmosphere -->
+  <g id="particles" opacity="0.3">
+    <circle cx="150" cy="150" r="1.5" fill="#ff6b6b">
+      <animate attributeName="opacity" values="0.3;0.8;0.3" dur="3s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="1050" cy="450" r="1.5" fill="#ff6b6b">
+      <animate attributeName="opacity" values="0.5;1;0.5" dur="4s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="600" cy="100" r="1" fill="#ff6b6b">
+      <animate attributeName="opacity" values="0.4;0.9;0.4" dur="3.5s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="300" cy="500" r="1" fill="#ff6b6b">
+      <animate attributeName="opacity" values="0.3;0.7;0.3" dur="4.5s" repeatCount="indefinite"/>
+    </circle>
+  </g>
 </svg>
