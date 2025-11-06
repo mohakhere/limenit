@@ -1,0 +1,42 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Interactive Demo — Static HTML</title>
+<link rel="stylesheet" href="css/demo.css">
+</head>
+<body>
+<div class="demo-shell">
+  <div class="header">
+    <h1>Interactive Demo — Static HTML</h1>
+    <div class="controls"><div id="cur-step">Step</div><button class="btn" onclick="goPrev()">Prev</button><button class="btn" onclick="goNext()">Next</button></div>
+  </div>
+  <div class="layout">
+    <div class="left">
+      <div class="canvas-wrap">
+        <div id="canvas" class="canvas"></div>
+      </div>
+      <div id="timeline" class="timeline"></div>
+    </div>
+    <div id="sidebar" class="sidebar info-box">
+      <h3>Demo Info</h3>
+      <p class="small-muted">This static demo renders assets & interactive elements declared in manifest.json</p>
+      <p><strong>Elements included:</strong></p>
+      <ul>
+        <li>Hotspot (next)</li>
+        <li>Tooltip (with Next)</li>
+        <li>Media modal (placeholder)</li>
+        <li>Lead form (POST to webhook)</li>
+        <li>Blur region with info (hover / i)</li>
+      </ul>
+      <p><strong>Embed snippet</strong></p>
+      <pre style="font-size:12px">&lt;iframe src="https://yourdomain/demo-name/index.html" width="100%" height="700"&gt;&lt;/iframe&gt;</pre>
+    </div>
+  </div>
+  <div id="modal-backdrop" class="modal-backdrop"><div id="modal-content" class="modal"></div></div>
+  <div class="footer">Open README.md for local run instructions.</div>
+</div>
+<script src="js/demo.js"></script>
+</body>
+</html>
