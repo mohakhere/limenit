@@ -1,0 +1,834 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Airmeet Interactive Demo</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      background: #000;
+      overflow: hidden;
+      width: 100vw;
+      height: 100vh;
+    }
+
+    #demo-container {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      background: #000;
+    }
+
+    #canvas {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+    }
+
+    #canvas img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+      transition: opacity 200ms cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    #canvas.fade-out img {
+      opacity: 0;
+    }
+
+    /* Overlay layer for interactive elements */
+    #overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+    }
+
+    #overlay > * {
+      pointer-events: auto;
+    }
+
+    /* Backdrop for tooltips and modals */
+    .backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.75);
+      backdrop-filter: blur(8px);
+      z-index: 999;
+      animation: fadeIn 250ms ease-out;
+      pointer-events: auto;
+    }
+
+    /* Tooltip styles */
+    .tooltip {
+      position: absolute;
+      background: linear-gradient(135deg, rgba(138, 100, 237, 0.98) 0%, rgba(106, 76, 186, 0.98) 100%);
+      border-radius: 16px;
+      padding: 24px;
+      color: #fff;
+      box-shadow: 0 20px 60px rgba(138, 100, 237, 0.4), 0 0 0 1px rgba(255, 255, 255, 0.1);
+      z-index: 1000;
+      max-width: 380px;
+      animation: tooltipSlide 350ms cubic-bezier(0.34, 1.56, 0.64, 1);
+      transform-origin: center;
+    }
+
+    .tooltip::before {
+      content: '';
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background: inherit;
+      transform: rotate(45deg);
+      z-index: -1;
+    }
+
+    .tooltip.top::before {
+      bottom: -8px;
+      left: 50%;
+      margin-left: -10px;
+    }
+
+    .tooltip.bottom::before {
+      top: -8px;
+      left: 50%;
+      margin-left: -10px;
+    }
+
+    .tooltip-title {
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 8px;
+      letter-spacing: -0.3px;
+    }
+
+    .tooltip-text {
+      font-size: 14px;
+      line-height: 1.6;
+      opacity: 0.95;
+      margin-bottom: 16px;
+    }
+
+    .tooltip-button {
+      background: rgba(255, 255, 255, 0.95);
+      color: #6A4CBA;
+      border: none;
+      border-radius: 10px;
+      padding: 12px 28px;
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+      width: 100%;
+      transition: all 200ms cubic-bezier(0.4, 0, 0.2, 1);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+
+    .tooltip-button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+      background: #fff;
+    }
+
+    .tooltip-button:active {
+      transform: translateY(0);
+    }
+
+    /* Hotspot pulse animation */
+    .hotspot {
+      position: absolute;
+      background: rgba(138, 100, 237, 0.25);
+      border: 3px solid rgba(138, 100, 237, 0.9);
+      border-radius: 12px;
+      cursor: pointer;
+      transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1);
+      animation: hotspotPulse 2s infinite;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      backdrop-filter: blur(8px);
+    }
+
+    .hotspot:hover {
+      background: rgba(138, 100, 237, 0.4);
+      border-color: rgba(138, 100, 237, 1);
+      transform: scale(1.05);
+      box-shadow: 0 8px 32px rgba(138, 100, 237, 0.4);
+      animation: none;
+    }
+
+    .hotspot-label {
+      font-size: 13px;
+      font-weight: 700;
+      color: #fff;
+      text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+      pointer-events: none;
+    }
+
+    /* Modal styles */
+    .modal {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: #fff;
+      border-radius: 24px;
+      padding: 48px;
+      max-width: 600px;
+      width: 90%;
+      box-shadow: 0 40px 120px rgba(0, 0, 0, 0.5);
+      z-index: 1001;
+      animation: modalSlide 350ms cubic-bezier(0.34, 1.56, 0.64, 1);
+      text-align: center;
+    }
+
+    .modal-image {
+      width: 100%;
+      max-width: 500px;
+      height: auto;
+      border-radius: 16px;
+      margin-bottom: 28px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+    }
+
+    .modal-title {
+      font-size: 28px;
+      font-weight: 800;
+      color: #1a1a2e;
+      margin-bottom: 16px;
+      letter-spacing: -0.5px;
+    }
+
+    .modal-text {
+      font-size: 16px;
+      line-height: 1.7;
+      color: #4a4a5e;
+      margin-bottom: 32px;
+    }
+
+    .modal-button {
+      background: linear-gradient(135deg, #8A64ED 0%, #6A4CBA 100%);
+      color: #fff;
+      border: none;
+      border-radius: 12px;
+      padding: 16px 48px;
+      font-size: 16px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 200ms cubic-bezier(0.4, 0, 0.2, 1);
+      box-shadow: 0 8px 24px rgba(138, 100, 237, 0.3);
+    }
+
+    .modal-button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 32px rgba(138, 100, 237, 0.4);
+    }
+
+    .modal-button:active {
+      transform: translateY(-1px);
+    }
+
+    /* Blur overlay */
+    .blur-region {
+      position: absolute;
+      backdrop-filter: blur(12px) brightness(0.3);
+      background: rgba(0, 0, 0, 0.6);
+      border-radius: 8px;
+      border: 2px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .blur-info {
+      position: absolute;
+      width: 36px;
+      height: 36px;
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1);
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+      font-weight: 700;
+      font-size: 18px;
+      color: #6A4CBA;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    .blur-info:hover {
+      transform: translate(-50%, -50%) scale(1.15);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+      background: #fff;
+    }
+
+    .blur-tooltip {
+      position: absolute;
+      background: #fff;
+      border-radius: 12px;
+      padding: 16px 20px;
+      color: #1a1a2e;
+      font-size: 13px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+      white-space: nowrap;
+      pointer-events: none;
+      opacity: 0;
+      transform: translateY(8px);
+      transition: all 200ms cubic-bezier(0.4, 0, 0.2, 1);
+      z-index: 1002;
+      font-weight: 600;
+    }
+
+    .blur-info:hover + .blur-tooltip,
+    .blur-info:focus + .blur-tooltip {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Navigation controls */
+    .nav-controls {
+      position: fixed;
+      bottom: 32px;
+      right: 32px;
+      display: flex;
+      gap: 12px;
+      z-index: 998;
+      animation: fadeIn 400ms ease-out 300ms both;
+    }
+
+    .nav-button {
+      width: 56px;
+      height: 56px;
+      background: rgba(255, 255, 255, 0.95);
+      border: none;
+      border-radius: 16px;
+      cursor: pointer;
+      transition: all 200ms cubic-bezier(0.4, 0, 0.2, 1);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #6A4CBA;
+      font-size: 24px;
+      font-weight: 300;
+    }
+
+    .nav-button:hover:not(:disabled) {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.25);
+      background: #fff;
+    }
+
+    .nav-button:disabled {
+      opacity: 0.3;
+      cursor: not-allowed;
+    }
+
+    .step-indicator {
+      position: fixed;
+      top: 32px;
+      right: 32px;
+      background: rgba(255, 255, 255, 0.95);
+      padding: 12px 24px;
+      border-radius: 100px;
+      font-size: 14px;
+      font-weight: 700;
+      color: #6A4CBA;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+      z-index: 998;
+      animation: fadeIn 400ms ease-out 300ms both;
+    }
+
+    /* Animations */
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+
+    @keyframes tooltipSlide {
+      from {
+        opacity: 0;
+        transform: scale(0.9);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    @keyframes modalSlide {
+      from {
+        opacity: 0;
+        transform: translate(-50%, -48%) scale(0.95);
+      }
+      to {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+      }
+    }
+
+    @keyframes hotspotPulse {
+      0%, 100% {
+        box-shadow: 0 0 0 0 rgba(138, 100, 237, 0.5);
+      }
+      50% {
+        box-shadow: 0 0 0 16px rgba(138, 100, 237, 0);
+      }
+    }
+
+    /* Loading state */
+    .loading {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 60px;
+      height: 60px;
+      border: 4px solid rgba(138, 100, 237, 0.2);
+      border-top-color: #8A64ED;
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
+
+    @keyframes spin {
+      to {
+        transform: translate(-50%, -50%) rotate(360deg);
+      }
+    }
+
+    /* Accessibility focus styles */
+    *:focus-visible {
+      outline: 3px solid #8A64ED;
+      outline-offset: 3px;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      .tooltip {
+        max-width: 280px;
+        padding: 20px;
+      }
+
+      .modal {
+        padding: 32px 24px;
+      }
+
+      .nav-controls {
+        bottom: 20px;
+        right: 20px;
+      }
+
+      .step-indicator {
+        top: 20px;
+        right: 20px;
+        font-size: 12px;
+        padding: 10px 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div id="demo-container">
+    <div id="canvas">
+      <div class="loading"></div>
+      <img id="step-image" alt="Demo step" style="opacity: 0;">
+    </div>
+    <div id="overlay"></div>
+  </div>
+
+  <div class="step-indicator">
+    <span id="step-counter">1 / 4</span>
+  </div>
+
+  <div class="nav-controls">
+    <button id="prev-btn" class="nav-button" aria-label="Previous step" disabled>←</button>
+    <button id="next-btn" class="nav-button" aria-label="Next step">→</button>
+  </div>
+
+  <script>
+    // Configuration
+    const CONFIG = {
+      defaultWidth: 1600,
+      defaultHeight: 900,
+      formEndpoint: 'https://your-webhook-url.com/submit'
+    };
+
+    // Demo manifest
+    const manifest = {
+      demoName: "Airmeet Events Dashboard",
+      steps: [
+        {
+          id: "s1",
+          asset: "assets/step-01.png",
+          elements: [
+            {
+              type: "tooltip",
+              x: 1065,
+              y: 155,
+              text: "Start your journey by creating your first event",
+              title: "START BY CREATING YOUR FIRST EVENT",
+              position: "bottom",
+              next: true
+            }
+          ]
+        },
+        {
+          id: "s2",
+          asset: "assets/step-02.png",
+          elements: [
+            {
+              type: "modal",
+              trigger: "auto",
+              title: "Discover Content Hub",
+              text: "Find best content for your events",
+              image: null,
+              buttonText: "Continue"
+            }
+          ]
+        },
+        {
+          id: "s3",
+          asset: "assets/step-03.png",
+          elements: [
+            {
+              type: "hotspot",
+              x: 285,
+              y: 350,
+              w: 220,
+              h: 200,
+              label: "Webinar",
+              action: { type: "next" }
+            },
+            {
+              type: "hotspot",
+              x: 540,
+              y: 350,
+              w: 220,
+              h: 200,
+              label: "Virtual Event",
+              action: { type: "next" }
+            },
+            {
+              type: "hotspot",
+              x: 795,
+              y: 350,
+              w: 220,
+              h: 200,
+              label: "Hybrid Event",
+              action: { type: "next" }
+            },
+            {
+              type: "hotspot",
+              x: 1050,
+              y: 350,
+              w: 220,
+              h: 200,
+              label: "In-Person Event",
+              action: { type: "next" }
+            }
+          ]
+        },
+        {
+          id: "s4",
+          asset: "assets/step-04.png",
+          elements: [
+            {
+              type: "modal",
+              trigger: "auto",
+              title: "Virtual Events",
+              text: "Explain the benefit here and how it relates to your demo...",
+              image: "assets/modal-screenshot.png",
+              buttonText: "Done"
+            }
+          ]
+        }
+      ]
+    };
+
+    // State
+    let currentStep = 0;
+    let activeModal = null;
+    let scaleX = 1;
+    let scaleY = 1;
+
+    // DOM elements
+    const canvas = document.getElementById('canvas');
+    const overlay = document.getElementById('overlay');
+    const stepImage = document.getElementById('step-image');
+    const stepCounter = document.getElementById('step-counter');
+    const prevBtn = document.getElementById('prev-btn');
+    const nextBtn = document.getElementById('next-btn');
+
+    // Calculate scale based on container size
+    function calculateScale() {
+      const rect = canvas.getBoundingClientRect();
+      scaleX = rect.width / CONFIG.defaultWidth;
+      scaleY = rect.height / CONFIG.defaultHeight;
+    }
+
+    // Preload image
+    function preloadImage(src) {
+      return new Promise((resolve, reject) => {
+        const img = new Image();
+        img.crossOrigin = 'anonymous';
+        img.onload = () => {
+          img.decode().then(() => resolve(img)).catch(reject);
+        };
+        img.onerror = reject;
+        img.src = src;
+      });
+    }
+
+    // Clear overlay
+    function clearOverlay() {
+      overlay.innerHTML = '';
+      if (activeModal) {
+        document.body.removeChild(activeModal);
+        activeModal = null;
+      }
+    }
+
+    // Create tooltip
+    function createTooltip(element) {
+      const tooltip = document.createElement('div');
+      tooltip.className = `tooltip ${element.position || 'bottom'}`;
+      tooltip.style.left = `${element.x * scaleX}px`;
+      tooltip.style.top = `${element.y * scaleY}px`;
+      tooltip.style.transform = 'translate(-50%, 20px)';
+
+      const title = element.title ? `<div class="tooltip-title">${element.title}</div>` : '';
+      const button = element.next ? '<button class="tooltip-button" onclick="goNext()">Next</button>' : '';
+
+      tooltip.innerHTML = `
+        ${title}
+        <div class="tooltip-text">${element.text}</div>
+        ${button}
+      `;
+
+      overlay.appendChild(tooltip);
+    }
+
+    // Create hotspot
+    function createHotspot(element) {
+      const hotspot = document.createElement('button');
+      hotspot.className = 'hotspot';
+      hotspot.style.left = `${element.x * scaleX}px`;
+      hotspot.style.top = `${element.y * scaleY}px`;
+      hotspot.style.width = `${element.w * scaleX}px`;
+      hotspot.style.height = `${element.h * scaleY}px`;
+      hotspot.setAttribute('aria-label', element.label);
+
+      if (element.label) {
+        const label = document.createElement('span');
+        label.className = 'hotspot-label';
+        label.textContent = element.label;
+        hotspot.appendChild(label);
+      }
+
+      hotspot.onclick = () => handleAction(element.action);
+      overlay.appendChild(hotspot);
+    }
+
+    // Create modal
+    function createModal(element) {
+      const backdrop = document.createElement('div');
+      backdrop.className = 'backdrop';
+      backdrop.onclick = () => {
+        if (element.buttonText === 'Done') {
+          // Last step - do nothing or restart
+        } else {
+          closeModal();
+          goNext();
+        }
+      };
+
+      const modal = document.createElement('div');
+      modal.className = 'modal';
+      modal.onclick = (e) => e.stopPropagation();
+
+      const imageHtml = element.image ? `<img src="${element.image}" alt="Modal content" class="modal-image">` : '';
+
+      modal.innerHTML = `
+        ${imageHtml}
+        <h2 class="modal-title">${element.title}</h2>
+        <p class="modal-text">${element.text}</p>
+        <button class="modal-button" onclick="handleModalButton('${element.buttonText}')">
+          ${element.buttonText}
+        </button>
+      `;
+
+      backdrop.appendChild(modal);
+      document.body.appendChild(backdrop);
+      activeModal = backdrop;
+
+      // Focus trap
+      modal.querySelector('button').focus();
+    }
+
+    // Create blur region
+    function createBlurRegion(element) {
+      const blurDiv = document.createElement('div');
+      blurDiv.className = 'blur-region';
+      blurDiv.style.left = `${element.x * scaleX}px`;
+      blurDiv.style.top = `${element.y * scaleY}px`;
+      blurDiv.style.width = `${element.w * scaleX}px`;
+      blurDiv.style.height = `${element.h * scaleY}px`;
+
+      const infoBtn = document.createElement('button');
+      infoBtn.className = 'blur-info';
+      infoBtn.textContent = 'i';
+      infoBtn.setAttribute('aria-label', element.info);
+
+      const tooltip = document.createElement('div');
+      tooltip.className = 'blur-tooltip';
+      tooltip.textContent = element.info;
+      tooltip.style.bottom = '-48px';
+      tooltip.style.left = '50%';
+      tooltip.style.transform = 'translateX(-50%) translateY(8px)';
+
+      blurDiv.appendChild(infoBtn);
+      blurDiv.appendChild(tooltip);
+      overlay.appendChild(blurDiv);
+    }
+
+    // Handle action
+    function handleAction(action) {
+      if (action.type === 'next') {
+        goNext();
+      } else if (action.type === 'url') {
+        window.open(action.url, '_blank');
+      }
+    }
+
+    // Close modal
+    function closeModal() {
+      if (activeModal) {
+        document.body.removeChild(activeModal);
+        activeModal = null;
+      }
+    }
+
+    // Handle modal button
+    window.handleModalButton = function(buttonText) {
+      closeModal();
+      if (buttonText === 'Done') {
+        // Demo complete - could restart or show completion message
+        alert('Demo completed! Thank you for exploring Airmeet.');
+        currentStep = 0;
+        renderStep();
+      } else {
+        goNext();
+      }
+    };
+
+    // Render step
+    async function renderStep() {
+      const step = manifest.steps[currentStep];
+      
+      // Fade out
+      canvas.classList.add('fade-out');
+      clearOverlay();
+
+      await new Promise(resolve => setTimeout(resolve, 200));
+
+      // Load image
+      try {
+        const img = await preloadImage(step.asset);
+        stepImage.src = img.src;
+        stepImage.style.opacity = '1';
+        canvas.classList.remove('fade-out');
+      } catch (error) {
+        console.error('Failed to load image:', error);
+        // Show placeholder
+        stepImage.style.opacity = '1';
+        canvas.classList.remove('fade-out');
+      }
+
+      // Update UI
+      stepCounter.textContent = `${currentStep + 1} / ${manifest.steps.length}`;
+      prevBtn.disabled = currentStep === 0;
+      nextBtn.disabled = currentStep === manifest.steps.length - 1;
+
+      // Calculate scale
+      calculateScale();
+
+      // Render elements
+      await new Promise(resolve => setTimeout(resolve, 250));
+      
+      step.elements.forEach(element => {
+        if (element.type === 'tooltip') {
+          createTooltip(element);
+        } else if (element.type === 'hotspot') {
+          createHotspot(element);
+        } else if (element.type === 'modal' && element.trigger === 'auto') {
+          setTimeout(() => createModal(element), 400);
+        } else if (element.type === 'blur') {
+          createBlurRegion(element);
+        }
+      });
+    }
+
+    // Navigation
+    window.goNext = function() {
+      if (currentStep < manifest.steps.length - 1) {
+        currentStep++;
+        renderStep();
+      }
+    };
+
+    window.goPrev = function() {
+      if (currentStep > 0) {
+        currentStep--;
+        renderStep();
+      }
+    };
+
+    // Event listeners
+    prevBtn.onclick = goPrev;
+    nextBtn.onclick = goNext;
+
+    // Keyboard navigation
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight') goNext();
+      if (e.key === 'ArrowLeft') goPrev();
+      if (e.key === 'Escape') closeModal();
+    });
+
+    // Resize handler
+    let resizeTimeout;
+    window.addEventListener('resize', () => {
+      clearTimeout(resizeTimeout);
+      resizeTimeout = setTimeout(() => {
+        calculateScale();
+        clearOverlay();
+        const step = manifest.steps[currentStep];
+        step.elements.forEach(element => {
+          if (element.type === 'tooltip') createTooltip(element);
+          else if (element.type === 'hotspot') createHotspot(element);
+          else if (element.type === 'blur') createBlurRegion(element);
+        });
+      }, 100);
+    });
+
+    // Initialize
+    calculateScale();
+    renderStep();
+  </script>
+</body>
+</html>
