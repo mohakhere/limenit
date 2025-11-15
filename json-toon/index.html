@@ -1,0 +1,1503 @@
+
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Primary Meta Tags -->
+    <title>JSON to TOON Converter - Free Online Tool | 30-60% Token Reduction</title>
+    <meta name="title" content="JSON to TOON Converter - Free Online Tool | 30-60% Token Reduction">
+    <meta name="description" content="Convert JSON into TOON (Token-Oriented Object Notation) format instantly. Reduce LLM tokens by 30-60%, save API costs. Free online converter with real-time token analysis, schema support, and cost calculator.">
+    <meta name="keywords" content="JSON to TOON, TOON converter, TOON format, JSON vs TOON, TOON token calculator, LLM optimization, API cost savings, Claude token optimization">
+    <meta name="author" content="B2B Tools">
+    <meta name="robots" content="index, follow">
+    <meta name="language" content="English">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://limenit.com/json-toon">
+    <meta property="og:title" content="JSON to TOON Converter - Reduce LLM Tokens by 30-60%">
+    <meta property="og:description" content="Free online tool to convert JSON into TOON format. Optimize your LLM prompts, reduce token usage, and save on API costs instantly.">
+    <meta property="og:image" content="https://www.limenit.com/assets/toon.png">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://limenit.com/json-toon">
+    <meta property="twitter:title" content="JSON to TOON Converter - Reduce LLM Tokens by 30-60%">
+    <meta property="twitter:description" content="Free online tool to convert JSON into TOON format. Optimize your LLM prompts, reduce token usage, and save on API costs instantly.">
+    <meta property="twitter:image" content="https://www.limenit.com/assets/toon.png">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://limenit.com/json-toon">
+    
+    <!-- Additional SEO -->
+    <meta name="generator" content="TOON Converter v1.0">
+    <meta name="application-name" content="JSON to TOON Converter">
+    <meta name="apple-mobile-web-app-title" content="TOON Converter">
+    <meta name="theme-color" content="#ff6b6b">
+    
+    <!-- Structured Data for AI Crawlers -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "JSON to TOON Converter",
+      "description": "Free online converter for JSON to TOON (Token-Oriented Object Notation) format, reducing LLM token usage by 30-60% and optimizing API costs.",
+      "url": "https://limenit.com/json-toon",
+      "applicationCategory": "SoftwareApplication",
+      "operatingSystem": "Any",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "featureList": [
+        "JSON format to TOON conversion",
+        "Real-time token estimation",
+        "Cost savings calculator",
+        "Schema support",
+        "Conversion history",
+        "Custom delimiter options",
+        "Dark/Light theme toggle"
+      ],
+      "browserRequirements": "Requires JavaScript. Works with Chrome, Firefox, Safari, Edge.",
+      "softwareHelp": {
+        "@type": "CreativeWork",
+        "about": "Convert JSON data to token-efficient TOON format for use with Large Language Models like GPT, Claude, and Gemini. Paste JSON, configure options, and get optimized TOON output instantly."
+      }
+    }
+    </script>
+    
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What is TOON format?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "TOON (Token-Oriented Object Notation) is a compact, human-readable format for serializing JSON data that minimizes tokens when working with Large Language Models. It achieves 30-60% token savings compared to JSON."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How does TOON reduce tokens?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "TOON eliminates redundant syntax like curly braces, quotes around keys, and repeated field names. It uses YAML-style indentation for nested objects and CSV-style tabular layout for uniform arrays."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "When should I use TOON instead of JSON?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Use TOON for uniform arrays of objects with consistent structure, especially large datasets. JSON is better for non-uniform data and deeply nested structures with varying field sets."
+          }
+        }
+      ]
+    }
+    </script>
+
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  "name": "How to Use This JSON to TOON Converter",
+  "description": "Step-by-step guide to convert JSON data into TOON format using this converter.",
+  "step": [
+    {
+      "@type": "HowToStep",
+      "name": "Paste or Upload JSON Data",
+      "text": "Copy your JSON and paste it into the input field, or drag and drop a .json file directly into the converter."
+    },
+    {
+      "@type": "HowToStep",
+      "name": "Configure Conversion Options",
+      "text": "Choose your delimiter (comma, tab, or pipe), indentation style, and toggle length markers to customize the output format inside JSON to TOON converter canvas."
+    },
+    {
+      "@type": "HowToStep",
+      "name": "Convert and Analyze",
+      "text": "Click the Convert button to transform your JSON into TOON format. View real-time token analysis and cost savings."
+    },
+    {
+      "@type": "HowToStep",
+      "name": "Copy or Download",
+      "text": "Use the Copy button to paste the TOON output directly into your LLM prompts, or download as a .toon file for later use."
+    }
+  ]
+}
+</script>
+
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        accent: {
+                            50: '#fff5f5',
+                            100: '#ffe3e3',
+                            200: '#ffcccc',
+                            300: '#ffa3a3',
+                            400: '#ff7a7a',
+                            500: '#ff6b6b',
+                            600: '#ff5252',
+                            700: '#f03e3e',
+                            800: '#d62828',
+                            900: '#a61e1e'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        body { font-family: 'Inter', system-ui, sans-serif; }
+        
+        /* Custom scrollbar */
+        ::-webkit-scrollbar { width: 10px; height: 10px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { 
+            background: #4b5563; 
+            border-radius: 5px;
+            border: 2px solid transparent;
+            background-clip: padding-box;
+        }
+        ::-webkit-scrollbar-thumb:hover { background: #6b7280; background-clip: padding-box; }
+        
+        .dark ::-webkit-scrollbar-thumb { background: #374151; background-clip: padding-box; }
+        .dark ::-webkit-scrollbar-thumb:hover { background: #4b5563; background-clip: padding-box; }
+        
+        /* Smooth transitions */
+        * { transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease; }
+        
+        /* Glass effect */
+        .glass {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+        .dark .glass {
+            background: rgba(17, 24, 39, 0.95);
+        }
+        
+        /* Gradient border animation */
+        @keyframes borderGlow {
+            0%, 100% { border-color: #ff6b6b; }
+            50% { border-color: #ff8787; }
+        }
+        .glow-border {
+            animation: borderGlow 3s ease-in-out infinite;
+        }
+        
+        /* Focus styles */
+        textarea:focus, select:focus, input:focus {
+            outline: none;
+            ring: 2px;
+            ring-color: #ff6b6b;
+        }
+        
+        /* Loading animation */
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        .animate-spin { animation: spin 1s linear infinite; }
+        
+        /* Fade in animation */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .fade-in { animation: fadeIn 0.5s ease-out; }
+        
+        /* Tooltip */
+        [data-tooltip]:hover::after {
+            content: attr(data-tooltip);
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 0.5rem 0.75rem;
+            background: #1f2937;
+            color: white;
+            border-radius: 0.5rem;
+            font-size: 0.875rem;
+            white-space: nowrap;
+            z-index: 1000;
+            margin-bottom: 0.5rem;
+        }
+    </style>
+    <!-- BreadcrumbList Schema -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [{
+    "@type": "ListItem",
+    "position": 1,
+    "name": "Home",
+    "item": "https://limenit.com/"
+  },{
+    "@type": "ListItem",
+    "position": 2,
+    "name": "JSON to TOON Converter",
+    "item": "https://limenit.com/json-toon"
+  }]
+}
+</script>
+
+<!-- SoftwareApplication Schema (more detailed) -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "JSON to TOON Converter",
+  "alternateName": ["TOON Converter", "JSON TOON Format Converter", "LLM Token Optimizer"],
+  "description": "Free online tool to convert JSON into TOON (Token-Oriented Object Notation) format. Reduce LLM token usage by 30-60%, optimize API costs for GPT-4, Claude, and Gemini. Real-time token estimation and cost analysis.",
+  "url": "https://limenit.com/json-toon",
+  "applicationCategory": "DeveloperApplication",
+  "operatingSystem": "Web Browser, Windows, macOS, Linux, iOS, Android",
+  "browserRequirements": "Requires JavaScript. Compatible with Chrome, Firefox, Safari, Edge.",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD",
+    "availability": "https://schema.org/InStock"
+  },
+  
+  "featureList": [
+    "Real-time TOON conversion",
+    "Token usage estimation for GPT-4, Claude, Gemini",
+    "API cost savings calculator",
+    "Conversion history tracking",
+    "Drag and drop file upload",
+    "Custom delimiter configuration",
+    "Dark and light theme support",
+    "No data upload - 100% client-side processing",
+    "Schema support for field ordering",
+    "Downloadable .toon files",
+    "Copy to clipboard functionality"
+  ],
+  "provider": {
+    "@type": "Organization",
+    "name": "Limenit"
+  }
+}
+</script>
+</head>
+<body class="bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-950 text-gray-900 dark:text-gray-100 min-h-screen transition-colors duration-300">
+    
+    <!-- Header -->
+    <header class="sticky top-0 z-50 glass border-b border-gray-200 dark:border-gray-800">
+        <nav class="container mx-auto px-4 py-4 flex items-center justify-between max-w-7xl">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-accent-500 to-accent-600 flex items-center justify-center shadow-lg">
+                    <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"/>
+                    </svg>
+                </div>
+                <div>
+                    <h1 class="text-xl font-bold bg-gradient-to-r from-accent-600 to-accent-500 bg-clip-text text-transparent">JSON → TOON</h1>
+                    <p class="text-xs text-gray-500 dark:text-gray-400">Token Optimizer</p>
+                </div>
+            </div>
+            
+            <div class="flex items-center gap-2">
+                <button id="historyBtn" class="p-2.5 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-800 transition-all relative" data-tooltip="History">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                    </svg>
+                    <span id="historyCount" class="absolute -top-1 -right-1 bg-accent-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center font-semibold hidden">0</span>
+                </button>
+                
+                <button id="themeToggle" class="p-2.5 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-800 transition-all" data-tooltip="Toggle Theme">
+                    <svg id="sunIcon" class="w-5 h-5 hidden dark:block" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/>
+                    </svg>
+                    <svg id="moonIcon" class="w-5 h-5 block dark:hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/>
+                    </svg>
+                </button>
+                <div class="flex items-center gap-2">
+    <!-- HOME BUTTON - ADD THIS FIRST -->
+    <a href="/" class="p-2.5 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-800 transition-all relative" data-tooltip="Home" aria-label="Go to home page">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
+        </svg>
+    </a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="relative z-10 container mx-auto p-4 md:p-8 max-w-7xl" role="main" aria-label="JSON to TOON Converter Tool">
+        
+        <!-- Hero Section -->
+        <section class="text-center mb-12 fade-in">
+            <h2 class="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-gray-900 via-accent-600 to-accent-500 dark:from-gray-100 dark:via-accent-400 dark:to-accent-300 bg-clip-text text-transparent">
+                Convert JSON to TOON Format
+            </h2>
+            <p class="text-lg text-gray-600 dark:text-gray-400 max-w-3xl mx-auto mb-6">
+                Optimize your LLM prompts with <strong>30-60% token reduction</strong>. Free, instant, client-side conversion with real-time cost analysis.
+            </p>
+            <div class="flex flex-wrap gap-3 justify-center text-sm">
+                <span class="px-4 py-2 rounded-full bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400 font-medium">✓ No Server Upload</span>
+                <span class="px-4 py-2 rounded-full bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-400 font-medium">✓ Real-time Token Analysis</span>
+                <span class="px-4 py-2 rounded-full bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-400 font-medium">✓ Cost Calculator</span>
+            </div>
+        </section>
+
+        <!-- Converter Interface -->
+        <div class="grid lg:grid-cols-2 gap-6 mb-8">
+            
+            <!-- Input Panel -->
+            <div class="glass rounded-2xl shadow-2xl border border-gray-200 dark:border-gray-800 overflow-hidden fade-in">
+                <div class="p-6 border-b border-gray-200 dark:border-gray-800">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="text-lg font-semibold flex items-center gap-2">
+                            <span class="w-2 h-2 rounded-full bg-accent-500 animate-pulse"></span>
+                            JSON Input
+                        </h3>
+                        <div class="flex gap-2">
+                            <button id="loadExampleBtn" class="px-3 py-1.5 text-sm rounded-lg bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-all">
+                                📝 Example
+                            </button>
+                            <button id="clearBtn" class="px-3 py-1.5 text-sm rounded-lg bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-all">
+                                🗑️ Clear
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="relative" id="dropZone">
+                        <textarea 
+                            id="jsonInput" 
+                            class="w-full h-96 p-4 rounded-xl bg-white dark:bg-gray-900 border-2 border-gray-300 dark:border-gray-700 focus:border-accent-500 dark:focus:border-accent-500 font-mono text-sm resize-none"
+                            placeholder='Paste your JSON here or drag & drop a .json file...
+
+Example:
+[
+  {"id": 1, "name": "Alice", "role": "Developer"},
+  {"id": 2, "name": "Bob", "role": "Designer"}
+]'
+                        ></textarea>
+                        <div id="dropOverlay" class="hidden absolute inset-0 bg-accent-500/90 backdrop-blur-sm rounded-xl flex flex-col items-center justify-center border-4 border-dashed border-white">
+                            <svg class="w-16 h-16 text-white mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"/>
+                            </svg>
+                            <p class="text-white text-xl font-semibold">Drop your JSON file here</p>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-4 text-xs text-gray-500 dark:text-gray-400">
+                        <span id="exampleLabel"></span>
+                    </div>
+                </div>
+                
+                <!-- Configuration -->
+                <div class="p-6 bg-gray-50 dark:bg-gray-900/50">
+                    <h4 class="text-sm font-semibold mb-4 text-gray-700 dark:text-gray-300">⚙️ Configuration</h4>
+                    <div class="grid grid-cols-2 gap-4 mb-4">
+                        <div>
+                            <label class="block text-xs font-medium mb-2 text-gray-600 dark:text-gray-400">Delimiter</label>
+                            <select id="delimiterSelect" class="w-full p-2 rounded-lg bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 text-sm">
+                                <option value=",">Comma (,)</option>
+                                <option value="\t">Tab (\t)</option>
+                                <option value="|">Pipe (|)</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-medium mb-2 text-gray-600 dark:text-gray-400">Indent</label>
+                            <select id="indentSelect" class="w-full p-2 rounded-lg bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 text-sm">
+                                <option value="2">2 spaces</option>
+                                <option value="4" selected>4 spaces</option>
+                                <option value="\t">Tab</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-2 mb-4">
+                        <input type="checkbox" id="lengthMarkers" class="w-4 h-4 rounded accent-accent-500" checked>
+                        <label for="lengthMarkers" class="text-sm text-gray-700 dark:text-gray-300">Show length markers [N]</label>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-medium mb-2 text-gray-600 dark:text-gray-400">Token Price ($/1K tokens)</label>
+                        <input type="number" id="tokenPrice" value="0.0025" step="0.0001" class="w-full p-2 rounded-lg bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 text-sm">
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Output Panel -->
+            <div class="glass rounded-2xl shadow-2xl border border-gray-200 dark:border-gray-800 overflow-hidden fade-in">
+                <div class="p-6 border-b border-gray-200 dark:border-gray-800">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="text-lg font-semibold flex items-center gap-2">
+                            <span class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
+                            TOON Output
+                        </h3>
+                        <div class="flex gap-2">
+                            <button id="copyBtn" class="px-3 py-1.5 text-sm rounded-lg bg-accent-500 hover:bg-accent-600 text-white transition-all">
+                                📋 Copy
+                            </button>
+                            <button id="downloadBtn" class="px-3 py-1.5 text-sm rounded-lg bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-all">
+                                💾 Download
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <pre id="toonOutput" class="w-full h-96 p-4 rounded-xl bg-white dark:bg-gray-900 border-2 border-gray-300 dark:border-gray-700 font-mono text-sm overflow-auto"><code class="text-gray-600 dark:text-gray-400"># Your TOON output will appear here...
+# Click "Convert" or type to see real-time conversion</code></pre>
+                </div>
+                
+                <!-- Token Analysis -->
+                <div class="p-6 bg-gray-50 dark:bg-gray-900/50">
+                    <h4 class="text-sm font-semibold mb-4 text-gray-700 dark:text-gray-300">📊 Token Analysis</h4>
+                    <div class="grid grid-cols-2 gap-3 mb-4">
+                        <div class="p-3 rounded-lg bg-blue-100 dark:bg-blue-900/30 border border-blue-200 dark:border-blue-800">
+                            <div class="text-xs text-blue-600 dark:text-blue-400 mb-1">JSON Tokens</div>
+                            <div class="text-2xl font-bold text-blue-700 dark:text-blue-300" id="jsonTokens">0</div>
+                        </div>
+                        <div class="p-3 rounded-lg bg-purple-100 dark:bg-purple-900/30 border border-purple-200 dark:border-purple-800">
+                            <div class="text-xs text-purple-600 dark:text-purple-400 mb-1">TOON Tokens</div>
+                            <div class="text-2xl font-bold text-purple-700 dark:text-purple-300" id="toonTokens">0</div>
+                        </div>
+                    </div>
+                    <div class="p-4 rounded-lg bg-gradient-to-r from-green-100 to-emerald-100 dark:from-green-900/30 dark:to-emerald-900/30 border border-green-200 dark:border-green-800">
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="text-sm font-medium text-green-700 dark:text-green-300">Tokens Saved</span>
+                            <span class="text-2xl font-bold text-green-700 dark:text-green-300" id="tokensSaved">0</span>
+                        </div>
+                        <div class="flex items-center justify-between text-xs">
+                            <span class="text-green-600 dark:text-green-400">Reduction</span>
+                            <span class="font-semibold text-green-700 dark:text-green-300" id="reductionPercent">0%</span>
+                        </div>
+                        <div class="flex items-center justify-between text-xs mt-1">
+                            <span class="text-green-600 dark:text-green-400">Cost Saved</span>
+                            <span class="font-semibold text-green-700 dark:text-green-300" id="costSaved">$0.000</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Convert Button -->
+        <div class="text-center mb-8">
+            <button id="convertBtn" class="group px-8 py-4 rounded-full bg-gradient-to-r from-accent-500 to-accent-600 hover:from-accent-600 hover:to-accent-700 text-white font-semibold text-lg shadow-lg hover:shadow-xl transform hover:scale-105 transition-all inline-flex items-center gap-3">
+                <svg class="w-6 h-6 group-hover:rotate-90 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                </svg>
+                Convert to TOON
+                <svg class="w-6 h-6 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
+                </svg>
+            </button>
+        </div>
+        
+        <!-- Info Section -->
+        <section class="glass rounded-2xl p-8 border border-gray-200 dark:border-gray-800 mb-8">
+            <h3 class="text-2xl font-bold mb-6 bg-gradient-to-r from-accent-600 to-accent-500 bg-clip-text text-transparent">What is TOON?</h3>
+            <div class="grid md:grid-cols-3 gap-6 text-sm">
+                <div class="p-4 rounded-xl bg-gradient-to-br from-blue-50 to-blue-100 dark:from-blue-900/20 dark:to-blue-800/20 border border-blue-200 dark:border-blue-800">
+                    <div class="text-3xl mb-3">🚀</div>
+                    <h4 class="font-semibold mb-2 text-blue-900 dark:text-blue-300">30-60% Token Reduction</h4>
+                    <p class="text-gray-600 dark:text-gray-400">TOON eliminates redundant syntax like braces and quotes, achieving significant token savings for LLM prompts.</p>
+                </div>
+                <div class="p-4 rounded-xl bg-gradient-to-br from-purple-50 to-purple-100 dark:from-purple-900/20 dark:to-purple-800/20 border border-purple-200 dark:border-purple-800">
+                    <div class="text-3xl mb-3">💡</div>
+                    <h4 class="font-semibold mb-2 text-purple-900 dark:text-purple-300">Perfect for APIs</h4>
+                    <p class="text-gray-600 dark:text-gray-400">Optimized for uniform arrays of objects. Ideal for GPT, Claude, Gemini, and other LLM APIs with token pricing.</p>
+                </div>
+                <div class="p-4 rounded-xl bg-gradient-to-br from-green-50 to-green-100 dark:from-green-900/20 dark:to-green-800/20 border border-green-200 dark:border-green-800">
+                    <div class="text-3xl mb-3">📊</div>
+                    <h4 class="font-semibold mb-2 text-green-900 dark:text-green-300">Human-Readable</h4>
+                    <p class="text-gray-600 dark:text-gray-400">Combines YAML-style indentation with CSV-style tables, making it easy for both humans and LLMs to parse.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- TOON vs JSON Comparison -->
+<section class="glass rounded-2xl p-8 border border-gray-200 dark:border-gray-800 mb-8">
+    <h3 class="text-2xl font-bold mb-2 bg-gradient-to-r from-accent-600 to-accent-500 bg-clip-text text-transparent">TOON vs JSON: Feature Comparison</h3>
+    <p class="text-sm text-gray-600 dark:text-gray-400 mb-8">Understanding the differences and when to use each format</p>
+    
+    <div class="overflow-x-auto">
+        <table class="w-full text-sm">
+            <thead>
+                <tr class="border-b-2 border-gray-300 dark:border-gray-700">
+                    <th class="text-left py-4 px-4 font-semibold text-gray-900 dark:text-gray-100">Feature</th>
+                    <th class="text-center py-4 px-4 font-semibold text-purple-700 dark:text-purple-400">TOON</th>
+                    <th class="text-center py-4 px-4 font-semibold text-blue-700 dark:text-blue-400">JSON</th>
+                </tr>
+            </thead>
+            <tbody class="divide-y divide-gray-200 dark:divide-gray-700">
+                <tr class="hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors">
+                    <td class="py-4 px-4 font-medium text-gray-900 dark:text-gray-100">Token Efficiency</td>
+                    <td class="text-center py-4 px-4">
+                        <div class="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400 font-semibold">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                            High (30-60% savings)
+                        </div>
+                    </td>
+                    <td class="text-center py-4 px-4">
+                        <div class="inline-flex items-center px-3 py-1 rounded-full bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-400">
+                            Baseline
+                        </div>
+                    </td>
+                </tr>
+                <tr class="hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors">
+                    <td class="py-4 px-4 font-medium text-gray-900 dark:text-gray-100">Human Readability</td>
+                    <td class="text-center py-4 px-4">
+                        <div class="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400 font-semibold">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                            Excellent
+                        </div>
+                    </td>
+                    <td class="text-center py-4 px-4">
+                        <div class="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400 font-semibold">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                            Excellent
+                        </div>
+                    </td>
+                </tr>
+                <tr class="hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors">
+                    <td class="py-4 px-4 font-medium text-gray-900 dark:text-gray-100">Uniform Arrays</td>
+                    <td class="text-center py-4 px-4">
+                        <div class="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400 font-semibold">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                            Optimized
+                        </div>
+                    </td>
+                    <td class="text-center py-4 px-4">
+                        <div class="inline-flex items-center px-3 py-1 rounded-full bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-400">
+                            Verbose
+                        </div>
+                    </td>
+                </tr>
+                <tr class="hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors">
+                    <td class="py-4 px-4 font-medium text-gray-900 dark:text-gray-100">Deep Nesting</td>
+                    <td class="text-center py-4 px-4">
+                        <div class="inline-flex items-center px-3 py-1 rounded-full bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-400">
+                            Moderate
+                        </div>
+                    </td>
+                    <td class="text-center py-4 px-4">
+                        <div class="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400 font-semibold">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                            Better
+                        </div>
+                    </td>
+                </tr>
+                <tr class="hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors">
+                    <td class="py-4 px-4 font-medium text-gray-900 dark:text-gray-100">Non-Uniform Data</td>
+                    <td class="text-center py-4 px-4">
+                        <div class="inline-flex items-center px-3 py-1 rounded-full bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-400">
+                            Not Ideal
+                        </div>
+                    </td>
+                    <td class="text-center py-4 px-4">
+                        <div class="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400 font-semibold">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                            Perfect
+                        </div>
+                    </td>
+                </tr>
+                <tr class="hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors">
+                    <td class="py-4 px-4 font-medium text-gray-900 dark:text-gray-100">API Support</td>
+                    <td class="text-center py-4 px-4">
+                        <div class="inline-flex items-center px-3 py-1 rounded-full bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-400">
+                            LLM-Specific
+                        </div>
+                    </td>
+                    <td class="text-center py-4 px-4">
+                        <div class="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400 font-semibold">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                            Universal
+                        </div>
+                    </td>
+                </tr>
+                <tr class="hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors">
+                    <td class="py-4 px-4 font-medium text-gray-900 dark:text-gray-100">Learning Curve</td>
+                    <td class="text-center py-4 px-4">
+                        <div class="inline-flex items-center px-3 py-1 rounded-full bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400">
+                            5 minutes
+                        </div>
+                    </td>
+                    <td class="text-center py-4 px-4">
+                        <div class="inline-flex items-center px-3 py-1 rounded-full bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400">
+                            Already known
+                        </div>
+                    </td>
+                </tr>
+                <tr class="hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors">
+                    <td class="py-4 px-4 font-medium text-gray-900 dark:text-gray-100">Use Case</td>
+                    <td class="text-center py-4 px-4">
+                        <div class="px-3 py-1 text-purple-700 dark:text-purple-400 text-xs">
+                            LLM prompts & responses
+                        </div>
+                    </td>
+                    <td class="text-center py-4 px-4">
+                        <div class="px-3 py-1 text-blue-700 dark:text-blue-400 text-xs">
+                            Web APIs & storage
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="mt-6 p-4 rounded-lg bg-gradient-to-r from-blue-50 to-purple-50 dark:from-blue-900/20 dark:to-purple-900/20 border border-blue-200 dark:border-blue-800">
+        <p class="text-sm text-gray-700 dark:text-gray-300">
+            <strong>💡 Key Takeaway:</strong> TOON and JSON are complementary. Use JSON for application logic and APIs, then convert to TOON specifically for LLM interactions to save tokens and costs.
+        </p>
+    </div>
+</section>
+        
+        <!-- SEO-friendly Usage Guide -->
+        <section class="glass rounded-2xl p-8 border border-gray-200 dark:border-gray-800">
+            <h3 class="text-2xl font-bold mb-6">How to Use This JSON to TOON Converter</h3>
+            <div class="space-y-4">
+                <div class="flex gap-4 items-start">
+                    <div class="w-10 h-10 rounded-full bg-accent-500 text-white flex items-center justify-center font-bold flex-shrink-0">1</div>
+                    <div>
+                        <h4 class="font-semibold mb-1">Paste or Upload JSON Data</h4>
+                        <p class="text-sm text-gray-600 dark:text-gray-400">Copy your JSON and paste it into the input field, or drag and drop a .json file directly into the converter.</p>
+                    </div>
+                </div>
+                <div class="flex gap-4 items-start">
+                    <div class="w-10 h-10 rounded-full bg-accent-500 text-white flex items-center justify-center font-bold flex-shrink-0">2</div>
+                    <div>
+                        <h4 class="font-semibold mb-1">Configure Conversion Options</h4>
+                        <p class="text-sm text-gray-600 dark:text-gray-400">Choose your delimiter (comma, tab, or pipe), indentation style, and toggle length markers to customize the output format inside JSON to TOON converter canvas.</p>
+                    </div>
+                </div>
+                <div class="flex gap-4 items-start">
+                    <div class="w-10 h-10 rounded-full bg-accent-500 text-white flex items-center justify-center font-bold flex-shrink-0">3</div>
+                    <div>
+                        <h4 class="font-semibold mb-1">Convert and Analyze</h4>
+                        <p class="text-sm text-gray-600 dark:text-gray-400">Click the Convert button to transform your JSON into TOON format. View real-time token analysis and cost savings.</p>
+                    </div>
+                </div>
+                <div class="flex gap-4 items-start">
+                    <div class="w-10 h-10 rounded-full bg-accent-500 text-white flex items-center justify-center font-bold flex-shrink-0">4</div>
+                    <div>
+                        <h4 class="font-semibold mb-1">Copy or Download</h4>
+                        <p class="text-sm text-gray-600 dark:text-gray-400">Use the Copy button to paste the TOON output directly into your LLM prompts, or download as a .toon file for later use.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <!-- History Modal -->
+    <div id="historyModal" class="hidden fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+        <div class="glass rounded-2xl max-w-4xl w-full max-h-[80vh] overflow-hidden border border-gray-200 dark:border-gray-800 shadow-2xl">
+            <div class="p-6 border-b border-gray-200 dark:border-gray-800 flex items-center justify-between">
+                <h3 class="text-xl font-bold">Conversion History</h3>
+                <button id="closeHistoryBtn" class="p-2 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-800 transition-all">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                    </svg>
+                </button>
+            </div>
+            <div id="historyContent" class="p-6 overflow-y-auto max-h-[60vh]">
+                <p class="text-center text-gray-500 dark:text-gray-400">No conversion history yet. Start converting JSON to see your history here.</p>
+            </div>
+            <div class="p-6 border-t border-gray-200 dark:border-gray-800 flex gap-3">
+                <button id="clearHistoryBtn" class="px-4 py-2 rounded-lg bg-red-500 hover:bg-red-600 text-white transition-all">
+                    Clear History
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Toast Notification -->
+    <div id="toast" class="hidden fixed bottom-6 right-6 glass rounded-xl p-4 shadow-2xl border border-gray-200 dark:border-gray-800 max-w-sm animate-slide-up">
+        <div class="flex items-center gap-3">
+            <div id="toastIcon" class="flex-shrink-0"></div>
+            <p id="toastMessage" class="text-sm font-medium"></p>
+        </div>
+    </div>
+
+    <!-- FAQ Section (Visual Only, No Schema) -->
+<section class="glass rounded-2xl p-8 border border-gray-200 dark:border-gray-800 mb-8">
+    <h2 class="text-2xl font-bold mb-2 bg-gradient-to-r from-accent-600 to-accent-500 bg-clip-text text-transparent">
+        Frequently Asked Questions About JSON to TOON Conversion
+    </h2>
+    <p class="text-sm text-gray-600 dark:text-gray-400 mb-8">
+        Everything you need to know about TOON format and this converter
+    </p>
+
+    <div class="space-y-4">
+
+        <!-- FAQ Item 1 -->
+        <div class="group rounded-xl bg-white dark:bg-gray-800/50 border border-gray-200 dark:border-gray-700 overflow-hidden transition-all">
+            <details>
+                <summary class="flex items-center justify-between p-5 cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-800 transition-all">
+                    <h3 class="font-semibold text-gray-900 dark:text-gray-100 pr-4">
+                        What is TOON and why should I use it for LLM optimization?
+                    </h3>
+                    <svg class="w-5 h-5 text-gray-500 transition-transform group-open:rotate-180 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                    </svg>
+                </summary>
+                <div class="p-5 pt-0 text-sm text-gray-600 dark:text-gray-400 leading-relaxed">
+                    <!-- CONTENT UNCHANGED -->
+                    <div>
+                        <p class="mb-3">TOON (Token-Oriented Object Notation) is a data serialization format specifically designed to reduce token usage when working with Large Language Models like GPT-4, Claude, and Gemini. It achieves <strong class="text-accent-600 dark:text-accent-400">30-60% reduction in token usage</strong> compared to standard JSON by eliminating redundant syntax.</p>
+                        <p class="mb-2">You should use TOON when:</p>
+                        <ul class="list-disc ml-5 mt-2 space-y-1">
+                            <li>Sending large datasets to LLM APIs where you pay per token (OpenAI, Anthropic, Google)</li>
+                            <li>Working with uniform arrays of objects like user lists, product catalogs, or analytics data</li>
+                            <li>Building AI applications where context window limits are a constraint</li>
+                            <li>Optimizing prompt engineering workflows for cost efficiency and performance</li>
+                            <li>Processing tabular data with consistent field structures</li>
+                        </ul>
+                    </div>
+                </div>
+            </details>
+        </div>
+
+        <!-- FAQ Item 2 -->
+        <div class="group rounded-xl bg-white dark:bg-gray-800/50 border border-gray-200 dark:border-gray-700 overflow-hidden transition-all">
+            <details>
+                <summary class="flex items-center justify-between p-5 cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-800 transition-all">
+                    <h3 class="font-semibold text-gray-900 dark:text-gray-100 pr-4">
+                        How does TOON reduce tokens compared to JSON?
+                    </h3>
+                    <svg class="w-5 h-5 text-gray-500 transition-transform group-open:rotate-180 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                    </svg>
+                </summary>
+                <div class="p-5 pt-0 text-sm text-gray-600 dark:text-gray-400 leading-relaxed">
+                    <!-- CONTENT UNCHANGED -->
+                    <div>
+                        <p class="mb-3">TOON eliminates redundant syntax that inflates token counts in JSON through several optimization techniques:</p>
+                        <ul class="list-disc ml-5 space-y-2">
+                            <li><strong>Removes curly braces</strong> - Eliminates <code class="px-1.5 py-0.5 rounded bg-gray-200 dark:bg-gray-700 font-mono text-xs">{}</code> around objects, saving 2 tokens per object</li>
+                            <li><strong>Eliminates quotes around keys</strong> - Keys appear as <code class="px-1.5 py-0.5 rounded bg-gray-200 dark:bg-gray-700 font-mono text-xs">name</code> instead of <code class="px-1.5 py-0.5 rounded bg-gray-200 dark:bg-gray-700 font-mono text-xs">"name"</code></li>
+                            <li><strong>Declares field names once</strong> - For arrays, fields are listed once in the header: <code class="px-1.5 py-0.5 rounded bg-gray-200 dark:bg-gray-700 font-mono text-xs">users[100]{id,name,role}:</code></li>
+                            <li><strong>Uses CSV-style rows</strong> - Data flows in comma-separated values without repeating keys for each record</li>
+                            <li><strong>Indentation for nesting</strong> - YAML-style indentation replaces nested braces and brackets</li>
+                        </ul>
+                        <p class="mt-3">Benchmarks show TOON achieves <strong class="text-green-600 dark:text-green-400">73.9% model accuracy</strong> vs JSON's 69.7% while using <strong class="text-green-600 dark:text-green-400">39.6% fewer tokens</strong>, resulting in significant API cost savings.</p>
+                    </div>
+                </div>
+            </details>
+        </div>
+
+        <!-- FAQ Item 3 -->
+        <div class="group rounded-xl bg-white dark:bg-gray-800/50 border border-gray-200 dark:border-gray-700 overflow-hidden transition-all">
+            <details>
+                <summary class="flex items-center justify-between p-5 cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-800 transition-all">
+                    <h3 class="font-semibold text-gray-900 dark:text-gray-100 pr-4">
+                        Does TOON work with GPT-4, Claude, Gemini, and other LLMs?
+                    </h3>
+                    <svg class="w-5 h-5 text-gray-500 transition-transform group-open:rotate-180 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                    </svg>
+                </summary>
+                <div class="p-5 pt-0 text-sm text-gray-600 dark:text-gray-400 leading-relaxed">
+                    <!-- CONTENT UNCHANGED -->
+                    <div>
+                        <p class="mb-3">Yes! TOON is <strong>model-agnostic</strong> and works with any Large Language Model that processes text-based structured data, including:</p>
+
+                        <!-- Keeping your entire content as-is -->
+                        <div class="grid md:grid-cols-2 gap-3 my-3">
+                            <div class="p-3 rounded-lg bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800">
+                                <strong class="text-blue-700 dark:text-blue-300">✓ OpenAI Models</strong> - GPT-3.5, GPT-4, GPT-4 Turbo, GPT-4o
+                            </div>
+                            <div class="p-3 rounded-lg bg-purple-50 dark:bg-purple-900/20 border border-purple-200 dark:border-purple-800">
+                                <strong class="text-purple-700 dark:text-purple-300">✓ Anthropic Claude</strong> - Claude 3 Opus, Sonnet, Haiku
+                            </div>
+                            <div class="p-3 rounded-lg bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800">
+                                <strong class="text-green-700 dark:text-green-300">✓ Google Gemini</strong> - Gemini Pro, Gemini Ultra
+                            </div>
+                            <div class="p-3 rounded-lg bg-orange-50 dark:bg-orange-900/20 border border-orange-200 dark:border-orange-800">
+                                <strong class="text-orange-700 dark:text-orange-300">✓ Open-source LLMs</strong> - Llama 2, Llama 3, Mistral, Mixtral
+                            </div>
+                        </div>
+
+                        <p>Since TOON is a structured text format, any model capable of understanding structured data can parse it. Some developers report even <em>better accuracy</em> with TOON because it reduces syntactic noise that can confuse token-based models.</p>
+                    </div>
+                </div>
+            </details>
+        </div>
+
+        <!-- FAQ Item 4 -->
+        <div class="group rounded-xl bg-white dark:bg-gray-800/50 border border-gray-200 dark:border-gray-700 overflow-hidden transition-all">
+            <details>
+                <summary class="flex items-center justify-between p-5 cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-800 transition-all">
+                    <h3 class="font-semibold text-gray-900 dark:text-gray-100 pr-4">
+                        When should I NOT use TOON format?
+                    </h3>
+                    <svg class="w-5 h-5 text-gray-500 transition-transform group-open:rotate-180 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                    </svg>
+                </summary>
+                <div class="p-5 pt-0 text-sm text-gray-600 dark:text-gray-400 leading-relaxed">
+                    <!-- CONTENT UNCHANGED -->
+                    <div>
+                        <p class="mb-3">TOON is optimized for specific use cases. Stick with standard JSON when you have:</p>
+                        <ul class="list-disc ml-5 space-y-2">
+                            <li><strong>Deeply nested structures (5+ levels)</strong> - JSON handles complex hierarchies more efficiently than TOON's indentation-based approach</li>
+                            <li><strong>Non-uniform arrays</strong> - Objects with varying fields don't benefit from TOON's tabular CSV-style format</li>
+                            <li><strong>Very small datasets</strong> - For single objects or small arrays (1-5 items), the token savings are negligible</li>
+                            <li><strong>Machine-to-machine REST APIs</strong> - TOON is designed for LLM inputs, not traditional web service APIs</li>
+                            <li><strong>Mixed data types in arrays</strong> - Arrays containing both objects and primitives lose TOON's structural advantages</li>
+                            <li><strong>Dynamic schema requirements</strong> - When field structures change frequently between requests</li>
+                        </ul>
+                        <p class="mt-3 p-3 rounded-lg bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800 text-amber-800 dark:text-amber-300">
+                            <strong>💡 Pro tip:</strong> Use our free converter to test your actual production data. The real-time token analysis will show if TOON provides meaningful savings for your specific use case.
+                        </p>
+                    </div>
+                </div>
+            </details>
+        </div>
+
+        <!-- FAQ Item 5 -->
+        <div class="group rounded-xl bg-white dark:bg-gray-800/50 border border-gray-200 dark:border-gray-700 overflow-hidden transition-all">
+            <details>
+                <summary class="flex items-center justify-between p-5 cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-800 transition-all">
+                    <h3 class="font-semibold text-gray-900 dark:text-gray-100 pr-4">
+                        How much money can I save using TOON with LLM APIs?
+                    </h3>
+                    <svg class="w-5 h-5 text-gray-500 transition-transform group-open:rotate-180 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                    </svg>
+                </summary>
+                <div class="p-5 pt-0 text-sm text-gray-600 dark:text-gray-400 leading-relaxed">
+                    <!-- CONTENT UNCHANGED -->
+                    <div>
+                        <p class="mb-3">Cost savings depend on your API usage volume and data structure. Here are real-world examples based on current LLM API pricing:</p>
+                        <div class="space-y-3 my-4">
+                            <div class="p-4 rounded-lg bg-gradient-to-r from-green-50 to-emerald-50 dark:from-green-900/20 dark:to-emerald-900/20 border border-green-200 dark:border-green-800">
+                                <div class="flex items-center justify-between mb-2">
+                                    <strong class="text-green-800 dark:text-green-300">Small Application (Startup)</strong>
+                                    <span class="text-2xl font-bold text-green-700 dark:text-green-400">~$50/month*</span>
+                                </div>
+                                <p class="text-xs text-green-700 dark:text-green-400">1,000 API calls/month with 100 records each. At $0.03/1K tokens (GPT-4 pricing), save approximately $50/month with TOON.</p>
+                            </div>
+                            <div class="p-4 rounded-lg bg-gradient-to-r from-blue-50 to-cyan-50 dark:from-blue-900/20 dark:to-cyan-900/20 border border-blue-200 dark:border-blue-800">
+                                <div class="flex items-center justify-between mb-2">
+                                    <strong class="text-blue-800 dark:text-blue-300">Medium Application (Growing SaaS)</strong>
+                                    <span class="text-2xl font-bold text-blue-700 dark:text-blue-400">~$300/month*</span>
+                                </div>
+                                <p class="text-xs text-blue-700 dark:text-blue-400">10,000 API calls/month with analytics data. At GPT-4 Turbo pricing, save approximately $300/month.</p>
+                            </div>
+                            <div class="p-4 rounded-lg bg-gradient-to-r from-purple-50 to-pink-50 dark:from-purple-900/20 dark:to-pink-900/20 border border-purple-200 dark:border-purple-800">
+                                <div class="flex items-center justify-between mb-2">
+                                    <strong class="text-purple-800 dark:text-purple-300">Enterprise Application</strong>
+                                    <span class="text-2xl font-bold text-purple-700 dark:text-purple-400">$1,000+/month*</span>
+                                </div>
+                                <p class="text-xs text-purple-700 dark:text-purple-400">High-volume data processing with large datasets. Savings scale linearly with usage across OpenAI, Anthropic, and Google APIs.</p>
+                            </div>
+                        </div>
+                        <p class="mt-3">With around 50%* reduction in token usage, if you're spending $1,000/month on LLM API calls, <strong class="text-accent-600 dark:text-accent-400">you could save $300-600 monthly</strong> just by converting JSON to TOON format for your prompts.</p>
+                    </div>
+                </div>
+            </details>
+        </div>
+
+        <!-- FAQ Item 6 -->
+        <div class="group rounded-xl bg-white dark:bg-gray-800/50 border border-gray-200 dark:border-gray-700 overflow-hidden transition-all">
+            <details>
+                <summary class="flex items-center justify-between p-5 cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-800 transition-all">
+                    <h3 class="font-semibold text-gray-900 dark:text-gray-100 pr-4">
+                        Is this JSON to TOON converter safe and private?
+                    </h3>
+                    <svg class="w-5 h-5 text-gray-500 transition-transform group-open:rotate-180 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                    </svg>
+                </summary>
+                <div class="p-5 pt-0 text-sm text-gray-600 dark:text-gray-400 leading-relaxed">
+                    <!-- CONTENT UNCHANGED -->
+                    <div>
+                        <p class="mb-3"><strong>100% safe and private.</strong> This converter runs entirely in your browser using client-side JavaScript. We never:</p>
+                        <ul class="list-none space-y-2">
+                            <li class="flex items-start gap-2">
+                                <svg class="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                                </svg>
+                                <span>Send your JSON or TOON data to any server or third party</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <svg class="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                                </svg>
+                                <span>Store, log, track, or analyze your conversion data</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <svg class="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                                </svg>
+                                <span>Use analytics, cookies, or third-party tracking scripts</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <svg class="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                                </svg>
+                                <span>Require account creation, login, or email addresses</span>
+                            </li>
+                        </ul>
+                        <p class="mt-3 p-3 rounded-lg bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800">
+                            <strong class="text-blue-800 dark:text-blue-300">🔒 Privacy First:</strong> Your conversion history is stored only in your browser's localStorage. You can clear it anytime from the History modal, and it never leaves your device.
+                        </p>
+                    </div>
+                </div>
+            </details>
+        </div>
+
+    </div>
+</section>
+
+<!-- Best Practices Section -->
+<section class="glass rounded-2xl p-8 border border-gray-200 dark:border-gray-800 mb-8">
+    <h3 class="text-2xl font-bold mb-2 bg-gradient-to-r from-accent-600 to-accent-500 bg-clip-text text-transparent">Best Practices & Tips</h3>
+    <p class="text-sm text-gray-600 dark:text-gray-400 mb-8">Get the most out of TOON format</p>
+    
+    <div class="grid md:grid-cols-2 gap-6">
+        <!-- Tip 1 -->
+        <div class="p-5 rounded-xl bg-gradient-to-br from-green-50 to-emerald-50 dark:from-green-900/20 dark:to-emerald-900/20 border-l-4 border-green-500">
+            <div class="flex items-start gap-3">
+                <div class="text-2xl flex-shrink-0">✅</div>
+                <div>
+                    <h4 class="font-semibold text-green-900 dark:text-green-300 mb-2">Do: Normalize Your Data First</h4>
+                    <p class="text-sm text-gray-700 dark:text-gray-400">Ensure all objects in an array have the same keys. TOON works best with uniform data structures. Add missing fields with null/empty values if needed.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tip 2 -->
+        <div class="p-5 rounded-xl bg-gradient-to-br from-blue-50 to-cyan-50 dark:from-blue-900/20 dark:to-cyan-900/20 border-l-4 border-blue-500">
+            <div class="flex items-start gap-3">
+                <div class="text-2xl flex-shrink-0">✅</div>
+                <div>
+                    <h4 class="font-semibold text-blue-900 dark:text-blue-300 mb-2">Do: Test with Real Data</h4>
+                    <p class="text-sm text-gray-700 dark:text-gray-400">Use this converter to analyze your actual production data. The token analysis will show if TOON provides meaningful savings for your specific use case.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tip 3 -->
+        <div class="p-5 rounded-xl bg-gradient-to-br from-purple-50 to-pink-50 dark:from-purple-900/20 dark:to-pink-900/20 border-l-4 border-purple-500">
+            <div class="flex items-start gap-3">
+                <div class="text-2xl flex-shrink-0">✅</div>
+                <div>
+                    <h4 class="font-semibold text-purple-900 dark:text-purple-300 mb-2">Do: Include Field Context</h4>
+                    <p class="text-sm text-gray-700 dark:text-gray-400">Add a brief description before your TOON data in prompts: "Here's user data in TOON format:" This helps LLMs parse it correctly.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tip 4 -->
+        <div class="p-5 rounded-xl bg-gradient-to-br from-orange-50 to-amber-50 dark:from-orange-900/20 dark:to-amber-900/20 border-l-4 border-orange-500">
+            <div class="flex items-start gap-3">
+                <div class="text-2xl flex-shrink-0">✅</div>
+                <div>
+                    <h4 class="font-semibold text-orange-900 dark:text-orange-300 mb-2">Do: Use Consistent Delimiters</h4>
+                    <p class="text-sm text-gray-700 dark:text-gray-400">Stick with comma delimiters unless your data contains many commas. Tab and pipe delimiters work well for CSV-heavy datasets.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Don't 1 -->
+        <div class="p-5 rounded-xl bg-gradient-to-br from-red-50 to-pink-50 dark:from-red-900/20 dark:to-pink-900/20 border-l-4 border-red-500">
+            <div class="flex items-start gap-3">
+                <div class="text-2xl flex-shrink-0">❌</div>
+                <div>
+                    <h4 class="font-semibold text-red-900 dark:text-red-300 mb-2">Don't: Force Non-Uniform Data</h4>
+                    <p class="text-sm text-gray-700 dark:text-gray-400">If your array objects have wildly different structures, TOON won't help. Keep using JSON for heterogeneous data.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Don't 2 -->
+        <div class="p-5 rounded-xl bg-gradient-to-br from-red-50 to-orange-50 dark:from-red-900/20 dark:to-orange-900/20 border-l-4 border-red-500">
+            <div class="flex items-start gap-3">
+                <div class="text-2xl flex-shrink-0">❌</div>
+                <div>
+                    <h4 class="font-semibold text-red-900 dark:text-red-300 mb-2">Don't: Use for Tiny Datasets</h4>
+                    <p class="text-sm text-gray-700 dark:text-gray-400">For single objects or arrays with 1-3 items, the conversion overhead isn't worth it. TOON shines with datasets of 10+ items.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Pro Tips Callout -->
+    <div class="mt-8 p-6 rounded-xl bg-gradient-to-r from-indigo-500 to-purple-600 text-white">
+        <h4 class="text-lg font-bold mb-3 flex items-center gap-2">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+            </svg>
+            Pro Tips for Maximum Savings
+        </h4>
+        <ul class="space-y-2 text-sm text-indigo-100">
+            <li class="flex items-start gap-2">
+                <span class="flex-shrink-0 mt-0.5">•</span>
+                <span><strong>Batch similar operations:</strong> Convert multiple related JSON objects together for consistent formatting</span>
+            </li>
+            <li class="flex items-start gap-2">
+                <span class="flex-shrink-0 mt-0.5">•</span>
+                <span><strong>Monitor your savings:</strong> Use the history feature to track cumulative token reductions over time</span>
+            </li>
+            <li class="flex items-start gap-2">
+                <span class="flex-shrink-0 mt-0.5">•</span>
+                <span><strong>Educate your team:</strong> Share this converter with developers working on LLM integrations</span>
+            </li>
+        </ul>
+    </div>
+</section>
+    
+    <footer class="mt-16 py-8 text-center text-sm text-gray-500 dark:text-gray-400 border-t border-gray-200 dark:border-gray-800">
+        <p>© 2025 JSON to TOON Converter. Free online tool for LLM optimization. No data stored on servers.</p>
+        <p class="mt-2">Built for developers, prompt engineers, and AI enthusiasts.</p>
+    </footer>
+
+    <script>
+        // State management
+        const state = {
+            history: JSON.parse(localStorage.getItem('toon_history') || '[]'),
+            currentExample: 0
+        };
+        
+        const examples = [
+            {
+                name: 'User Records',
+                data: [
+                    {id: 1, name: 'Alice Johnson', age: 30, city: 'New York', role: 'Developer'},
+                    {id: 2, name: 'Bob Smith', age: 25, city: 'San Francisco', role: 'Designer'},
+                    {id: 3, name: 'Charlie Brown', age: 35, city: 'Chicago', role: 'Manager'}
+                ]
+            },
+            {
+                name: 'Product Catalog',
+                data: [
+                    {sku: 'PROD-001', product: 'Laptop', price: 1299.99, stock: 45, category: 'Electronics'},
+                    {sku: 'PROD-002', product: 'Mouse', price: 29.99, stock: 150, category: 'Accessories'},
+                    {sku: 'PROD-003', product: 'Keyboard', price: 89.99, stock: 78, category: 'Accessories'}
+                ]
+            },
+            {
+                name: 'API Response',
+                data: [
+                    {id: 12345, name: 'awesome-project', stars: 2451, forks: 389, language: 'JavaScript'},
+                    {id: 67890, name: 'cool-library', stars: 891, forks: 145, language: 'Python'}
+                ]
+            }
+        ];
+        
+        // Theme management
+        const themeToggle = document.getElementById('themeToggle');
+        const html = document.documentElement;
+        
+        function setTheme(theme) {
+            if (theme === 'dark') {
+                html.classList.add('dark');
+            } else {
+                html.classList.remove('dark');
+            }
+            localStorage.setItem('theme', theme);
+        }
+        
+        const savedTheme = localStorage.getItem('theme') || 
+            (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+        setTheme(savedTheme);
+        
+        themeToggle.addEventListener('click', () => {
+            const newTheme = html.classList.contains('dark') ? 'light' : 'dark';
+            setTheme(newTheme);
+        });
+        
+        // Token estimation (simplified heuristic)
+        function estimateTokens(text) {
+            if (!text) return 0;
+            // Rough estimation: ~4 chars per token
+            const byChars = Math.round(text.length / 4);
+            // Also estimate by words
+            const words = text.trim().split(/\s+/).length;
+            const byWords = Math.round(words * 1.3);
+            return Math.round((byChars + byWords) / 2);
+        }
+        
+        // TOON conversion logic
+        function isPlainObject(x) {
+            return Object.prototype.toString.call(x) === '[object Object]';
+        }
+        
+        function uniformObjectArray(arr) {
+            if (!Array.isArray(arr) || arr.length === 0) return null;
+            for (const item of arr) {
+                if (!isPlainObject(item)) return null;
+            }
+            const keys = Object.keys(arr[0]);
+            for (const item of arr) {
+                const itemKeys = Object.keys(item);
+                if (itemKeys.length !== keys.length) return null;
+                for (const key of keys) {
+                    if (!item.hasOwnProperty(key)) return null;
+                }
+            }
+            return keys;
+        }
+        
+        function safeStringForRow(v, delim) {
+            if (v === null || v === undefined) return '';
+            if (typeof v === 'boolean') return v ? 'true' : 'false';
+            if (typeof v === 'number') return String(v);
+            if (typeof v === 'string') {
+                const containsDelimiter = delim !== '\t' ? v.includes(delim) : false;
+                const needsQuote = /[\n\r]/.test(v) || /^\s|\s$/.test(v) || containsDelimiter || v.includes(':');
+                if (needsQuote) {
+                    const esc = v.replace(/"/g, '""');
+                    return '"' + esc + '"';
+                }
+                return v;
+            }
+            return JSON.stringify(v);
+        }
+        
+        function convertToToon(data, opts) {
+            const delim = opts.delimiter === '\\t' ? '\t' : opts.delimiter;
+            const indentUnit = opts.indent === '\\t' ? '\t' : ' '.repeat(Number(opts.indent) || 4);
+            
+            function writeObject(obj, level) {
+                let out = '';
+                const prefix = level > 0 ? indentUnit.repeat(level) : '';
+                const keys = Object.keys(obj);
+                
+                for (const key of keys) {
+                    const val = obj[key];
+                    if (Array.isArray(val)) {
+                        const ua = uniformObjectArray(val);
+                        const lenMarker = opts.showLengths ? `[${val.length}]` : '';
+                        if (ua) {
+                            out += `${prefix}${key}${lenMarker}{${ua.join(',')}}:\n`;
+                            for (const row of val) {
+                                const rowVals = ua.map(k => safeStringForRow(row[k] === undefined ? '' : row[k], delim));
+                                out += prefix + indentUnit + rowVals.join(delim) + '\n';
+                            }
+                        } else {
+                            out += `${prefix}${key}${lenMarker}:\n`;
+                            for (const item of val) {
+                                if (isPlainObject(item)) {
+                                    out += prefix + indentUnit + '-\n' + writeObject(item, level + 2);
+                                } else {
+                                    out += prefix + indentUnit + '- ' + safeStringForRow(item, delim) + '\n';
+                                }
+                            }
+                        }
+                    } else if (isPlainObject(val)) {
+                        out += `${prefix}${key}:\n` + writeObject(val, level + 1);
+                    } else {
+                        out += `${prefix}${key}: ${val === null || val === undefined ? '' : safeStringForRow(val, delim)}\n`;
+                    }
+                }
+                return out;
+            }
+            
+            if (isPlainObject(data)) {
+                return writeObject(data, 0);
+            } else if (Array.isArray(data)) {
+                if (data.length === 0) return 'root[]:';
+                const ua = uniformObjectArray(data);
+                const lenMarker = opts.showLengths ? `[${data.length}]` : '';
+                if (ua) {
+                    let out = `root${lenMarker}{${ua.join(',')}}:\n`;
+                    for (const row of data) {
+                        const rowVals = ua.map(k => safeStringForRow(row[k] === undefined ? '' : row[k], delim));
+                        out += indentUnit + rowVals.join(delim) + '\n';
+                    }
+                    return out;
+                }
+                let out = `root${lenMarker}:\n`;
+                for (const item of data) {
+                    if (isPlainObject(item)) {
+                        out += '-\n' + writeObject(item, 1);
+                    } else {
+                        out += '- ' + safeStringForRow(item, delim) + '\n';
+                    }
+                }
+                return out;
+            }
+            return String(data);
+        }
+        
+        // UI Elements
+        const jsonInput = document.getElementById('jsonInput');
+        const toonOutput = document.getElementById('toonOutput');
+        const convertBtn = document.getElementById('convertBtn');
+        const copyBtn = document.getElementById('copyBtn');
+        const downloadBtn = document.getElementById('downloadBtn');
+        const clearBtn = document.getElementById('clearBtn');
+        const loadExampleBtn = document.getElementById('loadExampleBtn');
+        const delimiterSelect = document.getElementById('delimiterSelect');
+        const indentSelect = document.getElementById('indentSelect');
+        const lengthMarkers = document.getElementById('lengthMarkers');
+        const tokenPrice = document.getElementById('tokenPrice');
+        const jsonTokensEl = document.getElementById('jsonTokens');
+        const toonTokensEl = document.getElementById('toonTokens');
+        const tokensSavedEl = document.getElementById('tokensSaved');
+        const reductionPercentEl = document.getElementById('reductionPercent');
+        const costSavedEl = document.getElementById('costSaved');
+        const exampleLabel = document.getElementById('exampleLabel');
+        const historyBtn = document.getElementById('historyBtn');
+        const historyModal = document.getElementById('historyModal');
+        const closeHistoryBtn = document.getElementById('closeHistoryBtn');
+        const historyContent = document.getElementById('historyContent');
+        const clearHistoryBtn = document.getElementById('clearHistoryBtn');
+        const historyCount = document.getElementById('historyCount');
+        const dropZone = document.getElementById('dropZone');
+        const dropOverlay = document.getElementById('dropOverlay');
+        
+        // Toast notification
+        function showToast(message, type = 'success') {
+            const toast = document.getElementById('toast');
+            const toastMessage = document.getElementById('toastMessage');
+            const toastIcon = document.getElementById('toastIcon');
+            
+            const icons = {
+                success: '<svg class="w-6 h-6 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>',
+                error: '<svg class="w-6 h-6 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>',
+                info: '<svg class="w-6 h-6 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>'
+            };
+            
+            toastIcon.innerHTML = icons[type] || icons.info;
+            toastMessage.textContent = message;
+            toast.classList.remove('hidden');
+            
+            setTimeout(() => {
+                toast.classList.add('hidden');
+            }, 3000);
+        }
+        
+        // Convert function
+        function convert() {
+            const jsonText = jsonInput.value.trim();
+            if (!jsonText) {
+                showToast('Please enter JSON data', 'error');
+                return;
+            }
+            
+            try {
+                const data = JSON.parse(jsonText);
+                const opts = {
+                    delimiter: delimiterSelect.value,
+                    indent: indentSelect.value,
+                    showLengths: lengthMarkers.checked
+                };
+                
+                const toonText = convertToToon(data, opts);
+                toonOutput.textContent = toonText;
+                
+                // Calculate tokens
+                const jsonTokens = estimateTokens(jsonText);
+                const toonTokens = estimateTokens(toonText);
+                const saved = Math.max(0, jsonTokens - toonTokens);
+                const percent = jsonTokens > 0 ? Math.round((saved / jsonTokens) * 100) : 0;
+                const price = parseFloat(tokenPrice.value) || 0.0025;
+                const cost = (saved / 1000) * price;
+                
+                jsonTokensEl.textContent = jsonTokens.toLocaleString();
+                toonTokensEl.textContent = toonTokens.toLocaleString();
+                tokensSavedEl.textContent = saved.toLocaleString();
+                reductionPercentEl.textContent = percent + '%';
+                costSavedEl.textContent = '$' + cost.toFixed(6);
+                
+                // Save to history
+                const historyItem = {
+                    id: Date.now(),
+                    timestamp: new Date().toISOString(),
+                    jsonPreview: jsonText.substring(0, 100) + (jsonText.length > 100 ? '...' : ''),
+                    jsonTokens,
+                    toonTokens,
+                    saved,
+                    percent,
+                    json: jsonText,
+                    toon: toonText
+                };
+                
+                state.history.unshift(historyItem);
+                if (state.history.length > 50) state.history = state.history.slice(0, 50);
+                localStorage.setItem('toon_history', JSON.stringify(state.history));
+                updateHistoryCount();
+                
+                showToast(`Converted! Saved ${saved} tokens (${percent}%)`, 'success');
+            } catch (err) {
+                showToast('Invalid JSON: ' + err.message, 'error');
+                toonOutput.textContent = '# Error: Invalid JSON\n# ' + err.message;
+            }
+        }
+        
+        // Event listeners
+        convertBtn.addEventListener('click', convert);
+        
+        copyBtn.addEventListener('click', () => {
+            const text = toonOutput.textContent;
+            navigator.clipboard.writeText(text).then(() => {
+                showToast('Copied to clipboard!', 'success');
+            }).catch(() => {
+                showToast('Failed to copy', 'error');
+            });
+        });
+        
+        downloadBtn.addEventListener('click', () => {
+            const text = toonOutput.textContent;
+            const blob = new Blob([text], { type: 'text/plain' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'output.toon';
+            a.click();
+            URL.revokeObjectURL(url);
+            showToast('Downloaded output.toon', 'success');
+        });
+        
+        clearBtn.addEventListener('click', () => {
+            jsonInput.value = '';
+            toonOutput.textContent = '# Your TOON output will appear here...\n# Click "Convert" or type to see real-time conversion';
+            exampleLabel.textContent = '';
+            jsonTokensEl.textContent = '0';
+            toonTokensEl.textContent = '0';
+            tokensSavedEl.textContent = '0';
+            reductionPercentEl.textContent = '0%';
+            costSavedEl.textContent = '$0.000';
+            showToast('Cleared', 'info');
+        });
+        
+        loadExampleBtn.addEventListener('click', () => {
+            const example = examples[state.currentExample];
+            jsonInput.value = JSON.stringify(example.data, null, 2);
+            exampleLabel.textContent = `Example: ${example.name}`;
+            state.currentExample = (state.currentExample + 1) % examples.length;
+            convert();
+        });
+        
+        // Auto-convert on input (debounced)
+        let debounceTimer;
+        jsonInput.addEventListener('input', () => {
+            clearTimeout(debounceTimer);
+            debounceTimer = setTimeout(() => {
+                if (jsonInput.value.trim()) {
+                    convert();
+                }
+            }, 500);
+        });
+        
+        // Drag and drop
+        dropZone.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            dropOverlay.classList.remove('hidden');
+        });
+        
+        dropZone.addEventListener('dragleave', () => {
+            dropOverlay.classList.add('hidden');
+        });
+        
+        dropZone.addEventListener('drop', (e) => {
+            e.preventDefault();
+            dropOverlay.classList.add('hidden');
+            
+            const file = e.dataTransfer.files[0];
+            if (file && file.name.endsWith('.json')) {
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    jsonInput.value = e.target.result;
+                    exampleLabel.textContent = `Loaded: ${file.name}`;
+                    convert();
+                };
+                reader.readAsText(file);
+            } else {
+                showToast('Please drop a .json file', 'error');
+            }
+        });
+        
+        // History modal
+        function updateHistoryCount() {
+            if (state.history.length > 0) {
+                historyCount.textContent = state.history.length;
+                historyCount.classList.remove('hidden');
+            } else {
+                historyCount.classList.add('hidden');
+            }
+        }
+        
+        function renderHistory() {
+            if (state.history.length === 0) {
+                historyContent.innerHTML = '<p class="text-center text-gray-500 dark:text-gray-400">No conversion history yet. Start converting JSON to see your history here.</p>';
+                return;
+            }
+            
+            historyContent.innerHTML = state.history.map(item => `
+                <div class="mb-4 p-4 rounded-xl bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700">
+                    <div class="flex items-start justify-between mb-2">
+                        <div class="text-xs text-gray-500 dark:text-gray-400">${new Date(item.timestamp).toLocaleString()}</div>
+                        <button onclick="loadFromHistory(${item.id})" class="text-xs px-3 py-1 rounded-lg bg-accent-500 hover:bg-accent-600 text-white transition-all">
+                            Load
+                        </button>
+                    </div>
+                    <div class="text-sm font-mono text-gray-700 dark:text-gray-300 mb-2 truncate">${item.jsonPreview}</div>
+                    <div class="flex gap-3 text-xs">
+                        <span class="px-2 py-1 rounded bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300">JSON: ${item.jsonTokens}</span>
+                        <span class="px-2 py-1 rounded bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300">TOON: ${item.toonTokens}</span>
+                        <span class="px-2 py-1 rounded bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300">Saved: ${item.saved} (${item.percent}%)</span>
+                    </div>
+                </div>
+            `).join('');
+        }
+        
+        window.loadFromHistory = function(id) {
+            const item = state.history.find(h => h.id === id);
+            if (item) {
+                jsonInput.value = item.json;
+                toonOutput.textContent = item.toon;
+                jsonTokensEl.textContent = item.jsonTokens.toLocaleString();
+                toonTokensEl.textContent = item.toonTokens.toLocaleString();
+                tokensSavedEl.textContent = item.saved.toLocaleString();
+                reductionPercentEl.textContent = item.percent + '%';
+                const price = parseFloat(tokenPrice.value) || 0.0025;
+                const cost = (item.saved / 1000) * price;
+                costSavedEl.textContent = '$' + cost.toFixed(6);
+                historyModal.classList.add('hidden');
+                showToast('Loaded from history', 'info');
+            }
+        };
+        
+        historyBtn.addEventListener('click', () => {
+            renderHistory();
+            historyModal.classList.remove('hidden');
+        });
+        
+        closeHistoryBtn.addEventListener('click', () => {
+            historyModal.classList.add('hidden');
+        });
+        
+        clearHistoryBtn.addEventListener('click', () => {
+            if (confirm('Clear all conversion history?')) {
+                state.history = [];
+                localStorage.removeItem('toon_history');
+                renderHistory();
+                updateHistoryCount();
+                showToast('History cleared', 'info');
+            }
+        });
+        
+        historyModal.addEventListener('click', (e) => {
+            if (e.target === historyModal) {
+                historyModal.classList.add('hidden');
+            }
+        });
+        
+        // Initialize
+        updateHistoryCount();
+    </script>
+</body>
+</html>
