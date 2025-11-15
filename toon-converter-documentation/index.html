@@ -1,0 +1,1031 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Primary Meta Tags -->
+    <title>JSON to TOON Converter Documentation - User Guide & Features</title>
+    <meta name="title" content="JSON to TOON Converter Documentation - User Guide & Features">
+    <meta name="description" content="Complete user guide for the JSON to TOON converter tool. Learn how to convert JSON data, configure settings, analyze token savings, and optimize LLM prompts with our free online converter.">
+    <meta name="keywords" content="JSON to TOON converter guide, TOON converter documentation, how to convert JSON to TOON, LLM token optimizer guide, converter features, token analysis tool">
+    
+    <!-- Open Graph -->
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://limenit.com/toon-converter-documentation">
+    <meta property="og:title" content="JSON to TOON Converter Documentation">
+    <meta property="og:description" content="Complete guide to using the JSON to TOON converter tool. Features, settings, and optimization tips.">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://limenit.com/toon-converter-documentation">
+    
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "TechArticle",
+      "headline": "JSON to TOON Converter Tool Documentation",
+      "description": "Complete user guide for using the JSON to TOON converter tool including features, settings, and best practices.",
+      "author": {
+        "@type": "Organization",
+        "name": "TOON Tools"
+      },
+      "datePublished": "2025-01-15",
+      "dateModified": "2025-01-15"
+    }
+    </script>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        accent: {
+                            50: '#fff5f5',
+                            500: '#ff6b6b',
+                            600: '#ff5252',
+                            700: '#f03e3e'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    
+    <style>
+        body { font-family: 'Inter', system-ui, sans-serif; }
+        code, pre { font-family: 'JetBrains Mono', monospace; }
+        
+        article h2 { scroll-margin-top: 100px; }
+        article h3 { scroll-margin-top: 100px; }
+        
+        pre {
+            background: #1e293b;
+            color: #e2e8f0;
+            padding: 1.5rem;
+            border-radius: 0.75rem;
+            overflow-x: auto;
+            line-height: 1.6;
+        }
+        .dark pre { background: #0f172a; }
+        
+        code {
+            background: #f1f5f9;
+            color: #be123c;
+            padding: 0.2em 0.4em;
+            border-radius: 0.25rem;
+            font-size: 0.9em;
+        }
+        .dark code {
+            background: #1e293b;
+            color: #fda4af;
+        }
+        
+        .toc-sticky {
+            position: sticky;
+            top: 100px;
+            max-height: calc(100vh - 120px);
+            overflow-y: auto;
+        }
+        
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { 
+            background: #94a3b8; 
+            border-radius: 4px;
+        }
+        .dark ::-webkit-scrollbar-thumb { background: #475569; }
+
+        /* Screenshot styling */
+        .screenshot {
+            border: 1px solid #e5e7eb;
+            border-radius: 0.75rem;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        .dark .screenshot {
+            border-color: #374151;
+        }
+    </style>
+</head>
+<body class="bg-white dark:bg-gray-950 text-gray-900 dark:text-gray-100 transition-colors duration-300">
+    
+    <!-- Header -->
+    <header class="sticky top-0 z-50 bg-white/95 dark:bg-gray-900/95 backdrop-blur-sm border-b border-gray-200 dark:border-gray-800">
+        <nav class="container mx-auto px-4 py-4 flex items-center justify-between max-w-7xl">
+            <div class="flex items-center gap-3">
+                <a href="/" class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-accent-500 to-accent-600 flex items-center justify-center shadow-lg">
+                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"/>
+                        </svg>
+                    </div>
+                    <div>
+                        <h1 class="text-xl font-bold">TOON Converter Documentation</h1>
+                        <p class="text-xs text-gray-500 dark:text-gray-400">Tool User Guide</p>
+                    </div>
+                </a>
+            </div>
+            
+            <div class="flex items-center gap-2">
+                <a href="https://limenit.com/json-toon" target="_blank"
+   rel="noopener noreferrer" class="px-4 py-2 text-sm rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-all">
+                    Converter
+                </a>
+                <button id="themeToggle" class="p-2.5 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-all">
+                    <svg id="sunIcon" class="w-5 h-5 hidden dark:block" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/>
+                    </svg>
+                    <svg id="moonIcon" class="w-5 h-5 block dark:hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/>
+                    </svg>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-12 max-w-7xl">
+        <div class="grid lg:grid-cols-[280px_1fr] gap-12">
+            
+            <!-- Table of Contents -->
+            <aside class="hidden lg:block">
+                <div class="toc-sticky">
+                    <h3 class="text-sm font-semibold text-gray-900 dark:text-gray-100 mb-4 uppercase tracking-wider">On This Page</h3>
+                    <nav class="space-y-1 text-sm">
+                        <a href="#overview" class="block py-2 px-3 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-600 dark:text-gray-400 hover:text-accent-600 dark:hover:text-accent-400 transition-colors">Overview</a>
+                        <a href="#getting-started" class="block py-2 px-3 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-600 dark:text-gray-400 hover:text-accent-600 dark:hover:text-accent-400 transition-colors">Getting Started</a>
+                        <a href="#features" class="block py-2 px-3 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-600 dark:text-gray-400 hover:text-accent-600 dark:hover:text-accent-400 transition-colors">Features</a>
+                        <a href="#input-methods" class="block py-2 px-3 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-600 dark:text-gray-400 hover:text-accent-600 dark:hover:text-accent-400 transition-colors">Input Methods</a>
+                        <a href="#configuration" class="block py-2 px-3 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-600 dark:text-gray-400 hover:text-accent-600 dark:hover:text-accent-400 transition-colors">Configuration</a>
+                        <a href="#token-analysis" class="block py-2 px-3 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-600 dark:text-gray-400 hover:text-accent-600 dark:hover:text-accent-400 transition-colors">Token Analysis</a>
+                        <a href="#history" class="block py-2 px-3 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-600 dark:text-gray-400 hover:text-accent-600 dark:hover:text-accent-400 transition-colors">History Feature</a>
+                        <a href="#export" class="block py-2 px-3 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-600 dark:text-gray-400 hover:text-accent-600 dark:hover:text-accent-400 transition-colors">Export Options</a>
+                        <a href="#troubleshooting" class="block py-2 px-3 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-600 dark:text-gray-400 hover:text-accent-600 dark:hover:text-accent-400 transition-colors">Troubleshooting</a>
+                        <a href="#privacy" class="block py-2 px-3 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-600 dark:text-gray-400 hover:text-accent-600 dark:hover:text-accent-400 transition-colors">Privacy & Security</a>
+                    </nav>
+                </div>
+            </aside>
+
+            <!-- Article Content -->
+            <article class="prose prose-gray dark:prose-invert max-w-none">
+                
+                <!-- Breadcrumb -->
+                <nav class="flex items-center gap-2 text-sm text-gray-500 dark:text-gray-400 mb-8" aria-label="Breadcrumb">
+                    <a href="/" class="hover:text-accent-600 dark:hover:text-accent-400">Home</a>
+                    <span>/</span>
+                    <span class="text-gray-900 dark:text-gray-100">Tool Documentation</span>
+                </nav>
+
+                <!-- Hero Section -->
+                <header class="mb-12">
+                    <h1 class="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-gray-900 via-accent-600 to-accent-500 dark:from-gray-100 dark:via-accent-400 dark:to-accent-300 bg-clip-text text-transparent">
+                        JSON to TOON Converter
+                    </h1>
+                    <p class="text-xl text-gray-600 dark:text-gray-400 leading-relaxed">
+                        Complete user guide for the free online JSON to TOON converter. Learn how to optimize your LLM prompts, analyze token savings, and export results.
+                    </p>
+                </header>
+
+                <!-- Overview -->
+                <section id="overview" class="mb-16">
+                    <h2 class="text-3xl font-bold mb-6 text-gray-900 dark:text-gray-100">Tool Overview</h2>
+                    <div class="bg-gradient-to-r from-blue-50 to-cyan-50 dark:from-blue-900/20 dark:to-cyan-900/20 border-l-4 border-blue-500 p-6 rounded-r-lg mb-6">
+                        <p class="text-gray-700 dark:text-gray-300 leading-relaxed">
+                            The JSON to TOON Converter is a <strong>100% client-side web application</strong> that transforms standard JSON data into token-optimized TOON format. It provides real-time token analysis, cost calculations, and conversion history tracking—all without sending your data to any server.
+                        </p>
+                    </div>
+                    
+                    <h3 class="text-2xl font-semibold mb-4 text-gray-900 dark:text-gray-100">Key Capabilities</h3>
+                    <div class="grid md:grid-cols-2 gap-4 mb-6">
+                        <div class="p-4 rounded-lg border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800/50">
+                            <h4 class="font-semibold mb-2 flex items-center gap-2">
+                                <svg class="w-5 h-5 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                                </svg>
+                                Instant Conversion
+                            </h4>
+                            <p class="text-sm text-gray-600 dark:text-gray-400">Real-time JSON to TOON transformation with auto-convert on input</p>
+                        </div>
+                        <div class="p-4 rounded-lg border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800/50">
+                            <h4 class="font-semibold mb-2 flex items-center gap-2">
+                                <svg class="w-5 h-5 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+                                </svg>
+                                Token Analysis
+                            </h4>
+                            <p class="text-sm text-gray-600 dark:text-gray-400">Estimate token counts and calculate cost savings for LLM APIs</p>
+                        </div>
+                        <div class="p-4 rounded-lg border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800/50">
+                            <h4 class="font-semibold mb-2 flex items-center gap-2">
+                                <svg class="w-5 h-5 text-purple-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                                </svg>
+                                History Tracking
+                            </h4>
+                            <p class="text-sm text-gray-600 dark:text-gray-400">Save and review up to 50 recent conversions locally</p>
+                        </div>
+                        <div class="p-4 rounded-lg border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800/50">
+                            <h4 class="font-semibold mb-2 flex items-center gap-2">
+                                <svg class="w-5 h-5 text-orange-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/>
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                                </svg>
+                                Customizable
+                            </h4>
+                            <p class="text-sm text-gray-600 dark:text-gray-400">Configure delimiters, indentation, and formatting options</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Getting Started -->
+                <section id="getting-started" class="mb-16">
+                    <h2 class="text-3xl font-bold mb-6 text-gray-900 dark:text-gray-100">Getting Started</h2>
+                    
+                    <h3 class="text-2xl font-semibold mb-4 text-gray-900 dark:text-gray-100">Quick Start (30 seconds)</h3>
+                    <ol class="space-y-4 mb-8">
+                        <li class="flex gap-4">
+                            <span class="flex-shrink-0 w-8 h-8 rounded-full bg-accent-500 text-white flex items-center justify-center font-bold">1</span>
+                            <div>
+                                <p class="font-semibold mb-1">Open the converter</p>
+                                <p class="text-sm text-gray-600 dark:text-gray-400">Navigate to the <a href="https://limenit.com/json-toon" target="_blank" rel="noopener noreferrer" class="text-accent-600 dark:text-accent-400 hover:underline">JSON to TOON Converter</a> homepage</p>
+                            </div>
+                        </li>
+                        <li class="flex gap-4">
+                            <span class="flex-shrink-0 w-8 h-8 rounded-full bg-accent-500 text-white flex items-center justify-center font-bold">2</span>
+                            <div>
+                                <p class="font-semibold mb-1">Paste your JSON</p>
+                                <p class="text-sm text-gray-600 dark:text-gray-400">Copy your JSON data and paste it into the left input panel, or drag & drop a <code>.json</code> file</p>
+                            </div>
+                        </li>
+                        <li class="flex gap-4">
+                            <span class="flex-shrink-0 w-8 h-8 rounded-full bg-accent-500 text-white flex items-center justify-center font-bold">3</span>
+                            <div>
+                                <p class="font-semibold mb-1">Convert</p>
+                                <p class="text-sm text-gray-600 dark:text-gray-400">Click the "Convert to TOON" button or wait for auto-convert (triggers after 500ms of inactivity)</p>
+                            </div>
+                        </li>
+                        <li class="flex gap-4">
+                            <span class="flex-shrink-0 w-8 h-8 rounded-full bg-accent-500 text-white flex items-center justify-center font-bold">4</span>
+                            <div>
+                                <p class="font-semibold mb-1">Copy or download</p>
+                                <p class="text-sm text-gray-600 dark:text-gray-400">Use the Copy button to paste into your LLM prompt, or download as a <code>.toon</code> file</p>
+                            </div>
+                        </li>
+                    </ol>
+
+                    <div class="bg-green-50 dark:bg-green-900/20 border-l-4 border-green-500 p-6 rounded-r-lg">
+                        <p class="text-sm font-semibold text-green-800 dark:text-green-300 mb-2">✓ That's it!</p>
+                        <p class="text-green-700 dark:text-green-400 text-sm">Your TOON output appears on the right with token analysis showing exactly how many tokens you saved.</p>
+                    </div>
+                </section>
+
+                <!-- Features -->
+                <section id="features" class="mb-16">
+                    <h2 class="text-3xl font-bold mb-6 text-gray-900 dark:text-gray-100">Features in Detail</h2>
+                    
+                    <div class="space-y-8">
+                        <div>
+                            <h3 class="text-2xl font-semibold mb-4 text-gray-900 dark:text-gray-100">🔄 Real-Time Auto-Convert</h3>
+                            <p class="text-gray-700 dark:text-gray-300 mb-4">The converter automatically processes your JSON as you type, with a 500ms debounce delay to avoid excessive processing:</p>
+                            <ul class="list-disc ml-6 space-y-2 text-gray-700 dark:text-gray-300">
+                                <li>Type or paste JSON in the input field</li>
+                                <li>Wait 500ms (half a second)</li>
+                                <li>Conversion happens automatically</li>
+                                <li>No need to click "Convert" unless you prefer manual control</li>
+                            </ul>
+                        </div>
+
+                        <div>
+                            <h3 class="text-2xl font-semibold mb-4 text-gray-900 dark:text-gray-100">📝 Example Data Loader</h3>
+                            <p class="text-gray-700 dark:text-gray-300 mb-4">Click the "Example" button to cycle through pre-loaded sample datasets:</p>
+                            <div class="p-4 rounded-lg bg-gray-50 dark:bg-gray-800/50 border border-gray-200 dark:border-gray-700">
+                                <ul class="space-y-1 text-sm text-gray-700 dark:text-gray-300">
+                                    <li>• User Records (3 entries)</li>
+                                    <li>• Product Catalog (4 items)</li>
+                                    <li>• API Response (GitHub-style)</li>
+                                </ul>
+                            </div>
+                            <p class="text-sm text-gray-600 dark:text-gray-400 mt-3">Perfect for testing the converter or learning TOON format with realistic data.</p>
+                        </div>
+
+                        <div>
+                            <h3 class="text-2xl font-semibold mb-4 text-gray-900 dark:text-gray-100">🌓 Dark/Light Mode</h3>
+                            <p class="text-gray-700 dark:text-gray-300 mb-4">Toggle between dark and light themes using the moon/sun icon in the header. The converter remembers your preference using browser localStorage.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Input Methods -->
+                <section id="input-methods" class="mb-16">
+                    <h2 class="text-3xl font-bold mb-6 text-gray-900 dark:text-gray-100">Input Methods</h2>
+                    
+                    <div class="space-y-6">
+                        <div class="p-6 rounded-xl border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800/50">
+                            <h4 class="font-semibold mb-3 flex items-center gap-2 text-lg">
+                                <svg class="w-6 h-6 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                                </svg>
+                                Method 1: Copy & Paste
+                            </h4>
+                            <p class="text-sm text-gray-700 dark:text-gray-300 mb-3">The simplest method:</p>
+                            <ol class="text-sm space-y-2 text-gray-600 dark:text-gray-400 ml-4">
+                                <li>1. Copy JSON from your source (API response, file, etc.)</li>
+                                <li>2. Click in the input textarea</li>
+                                <li>3. Paste (Ctrl+V / Cmd+V)</li>
+                                <li>4. Conversion happens automatically</li>
+                            </ol>
+                        </div>
+
+                        <div class="p-6 rounded-xl border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800/50">
+                            <h4 class="font-semibold mb-3 flex items-center gap-2 text-lg">
+                                <svg class="w-6 h-6 text-purple-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"/>
+                                </svg>
+                                Method 2: Drag & Drop Files
+                            </h4>
+                            <p class="text-sm text-gray-700 dark:text-gray-300 mb-3">Fastest for local <code>.json</code> files:</p>
+                            <ol class="text-sm space-y-2 text-gray-600 dark:text-gray-400 ml-4">
+                                <li>1. Open your file explorer/finder</li>
+                                <li>2. Drag a <code>.json</code> file over the input area</li>
+                                <li>3. Drop when you see the blue overlay</li>
+                                <li>4. File contents are loaded and converted automatically</li>
+                            </ol>
+                            <div class="mt-3 p-3 bg-amber-50 dark:bg-amber-900/20 rounded-lg border border-amber-200 dark:border-amber-800">
+                                <p class="text-xs text-amber-800 dark:text-amber-300"><strong>Note:</strong> Only <code>.json</code> files are accepted. Other file types will show an error message.</p>
+                            </div>
+                        </div>
+
+                        <div class="p-6 rounded-xl border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800/50">
+                            <h4 class="font-semibold mb-3 flex items-center gap-2 text-lg">
+                                <svg class="w-6 h-6 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 10l-2 1m0 0l-2-1m2 1v2.5M20 7l-2 1m2-1l-2-1m2 1v2.5M14 4l-2-1-2 1M4 7l2-1M4 7l2 1M4 7v2.5M12 21l-2-1m2 1l2-1m-2 1v-2.5M6 18l-2-1v-2.5M18 18l2-1v-2.5"/>
+</svg>
+Method 3: Load Examples
+</h4>
+<p class="text-sm text-gray-700 dark:text-gray-300 mb-3">Perfect for learning and testing:</p>
+<ol class="text-sm space-y-2 text-gray-600 dark:text-gray-400 ml-4">
+<li>1. Click the "📝 Example" button in the input panel header</li>
+<li>2. Cycles through pre-loaded sample datasets</li>
+<li>3. Each click loads the next example</li>
+<li>4. Great for understanding TOON format with real data</li>
+</ol>
+</div>
+</div>
+</section><!-- Configuration -->
+            <section id="configuration" class="mb-16">
+                <h2 class="text-3xl font-bold mb-6 text-gray-900 dark:text-gray-100">Configuration Options</h2>
+                
+                <div class="space-y-8">
+                    <div>
+                        <h3 class="text-2xl font-semibold mb-4 text-gray-900 dark:text-gray-100">Delimiter Selection</h3>
+                        <p class="text-gray-700 dark:text-gray-300 mb-4">Choose the separator for tabular data rows:</p>
+                        <div class="overflow-x-auto">
+                            <table class="w-full text-sm border-collapse mb-4">
+                                <thead>
+                                    <tr class="border-b-2 border-gray-300 dark:border-gray-700">
+                                        <th class="text-left py-3 px-4 font-semibold">Delimiter</th>
+                                        <th class="text-left py-3 px-4 font-semibold">Character</th>
+                                        <th class="text-left py-3 px-4 font-semibold">Best For</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-gray-200 dark:divide-gray-700">
+                                    <tr class="hover:bg-gray-50 dark:hover:bg-gray-800/50">
+                                        <td class="py-3 px-4 font-medium">Comma (default)</td>
+                                        <td class="py-3 px-4"><code>,</code></td>
+                                        <td class="py-3 px-4">Most use cases, standard CSV format</td>
+                                    </tr>
+                                    <tr class="hover:bg-gray-50 dark:hover:bg-gray-800/50">
+                                        <td class="py-3 px-4 font-medium">Tab</td>
+                                        <td class="py-3 px-4"><code>\t</code></td>
+                                        <td class="py-3 px-4">Data with many commas in values</td>
+                                    </tr>
+                                    <tr class="hover:bg-gray-50 dark:hover:bg-gray-800/50">
+                                        <td class="py-3 px-4 font-medium">Pipe</td>
+                                        <td class="py-3 px-4"><code>|</code></td>
+                                        <td class="py-3 px-4">Data with commas and tabs</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="bg-blue-50 dark:bg-blue-900/20 border-l-4 border-blue-500 p-4 rounded-r-lg">
+                            <p class="text-sm text-blue-700 dark:text-blue-400"><strong>💡 Tip:</strong> Comma is recommended for most scenarios. Change only if your data values contain many commas.</p>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h3 class="text-2xl font-semibold mb-4 text-gray-900 dark:text-gray-100">Indentation Style</h3>
+                        <p class="text-gray-700 dark:text-gray-300 mb-4">Controls how nested objects are indented:</p>
+                        <div class="grid md:grid-cols-3 gap-4 mb-4">
+                            <div class="p-4 rounded-lg border border-gray-200 dark:border-gray-700">
+                                <h4 class="font-semibold mb-2">2 Spaces</h4>
+                                <p class="text-xs text-gray-600 dark:text-gray-400 mb-2">Compact, saves more tokens</p>
+                                <pre class="text-xs"><code>parent:child: value</code></pre>
+</div>
+<div class="p-4 rounded-lg border border-gray-200 dark:border-gray-700 bg-accent-50 dark:bg-accent-900/20">
+<h4 class="font-semibold mb-2">4 Spaces (default)</h4>
+<p class="text-xs text-gray-600 dark:text-gray-400 mb-2">Balance of readability & efficiency</p>
+<pre class="text-xs"><code>parent:
+child: value</code></pre>
+</div>
+<div class="p-4 rounded-lg border border-gray-200 dark:border-gray-700">
+<h4 class="font-semibold mb-2">Tab</h4>
+<p class="text-xs text-gray-600 dark:text-gray-400 mb-2">Traditional, uses single character</p>
+<pre class="text-xs"><code>parent:
+child: value</code></pre>
+</div>
+</div>
+</div><div>
+                        <h3 class="text-2xl font-semibold mb-4 text-gray-900 dark:text-gray-100">Length Markers</h3>
+                        <p class="text-gray-700 dark:text-gray-300 mb-4">Toggle to show/hide array lengths like <code>[100]</code>:</p>
+                        <div class="grid md:grid-cols-2 gap-4 mb-4">
+                            <div class="p-4 rounded-lg bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800">
+                                <h4 class="font-semibold mb-2 text-green-900 dark:text-green-300">✓ Enabled (default)</h4>
+                                <pre class="text-xs mb-2"><code>users[3]{id,name}:
+1,Alice
+2,Bob
+3,Charlie</code></pre>
+                                <p class="text-xs text-green-700 dark:text-green-400">Helps LLMs validate data completeness</p>
+                            </div>
+                            <div class="p-4 rounded-lg bg-gray-50 dark:bg-gray-800/50 border border-gray-200 dark:border-gray-700">
+                                <h4 class="font-semibold mb-2">Disabled</h4>
+                                <pre class="text-xs mb-2"><code>users{id,name}:
+1,Alice
+2,Bob
+3,Charlie</code></pre>
+                                <p class="text-xs text-gray-600 dark:text-gray-400">Saves 1-3 tokens per array</p>
+                            </div>
+                        </div>
+                        <p class="text-sm text-gray-600 dark:text-gray-400"><strong>Recommendation:</strong> Keep enabled. The validation benefits outweigh the minimal token cost.</p>
+                    </div>
+
+                    <div>
+                        <h3 class="text-2xl font-semibold mb-4 text-gray-900 dark:text-gray-100">Token Price Configuration</h3>
+                        <p class="text-gray-700 dark:text-gray-300 mb-4">Set your LLM API's token price ($ per 1,000 tokens) for accurate cost calculations:</p>
+                        <div class="p-4 rounded-lg bg-purple-50 dark:bg-purple-900/20 border border-purple-200 dark:border-purple-800">
+                            <p class="text-sm text-purple-700 dark:text-purple-400 mb-3"><strong>Common Pricing (as of 2025):</strong></p>
+                            <ul class="space-y-1 text-sm text-purple-600 dark:text-purple-300">
+                                <li>• GPT-4 Turbo: $0.01 per 1K tokens (input)</li>
+                                <li>• GPT-3.5 Turbo: $0.0005 per 1K tokens</li>
+                                <li>• Claude 3 Opus: $0.015 per 1K tokens</li>
+                                <li>• Claude 3 Sonnet: $0.003 per 1K tokens</li>
+                                <li>• Gemini Pro: $0.00025 per 1K tokens</li>
+                            </ul>
+                        </div>
+                        <p class="text-sm text-gray-600 dark:text-gray-400 mt-4">Default is <code>0.0025</code> - adjust based on your provider and model.</p>
+                    </div>
+
+                    <div>
+                        <h3 class="text-2xl font-semibold mb-4 text-gray-900 dark:text-gray-100">Save/Load Configuration</h3>
+                        <p class="text-gray-700 dark:text-gray-300 mb-4">Persist your settings across sessions:</p>
+                        <div class="space-y-3">
+                            <div class="flex items-start gap-3">
+                                <div class="w-8 h-8 rounded-lg bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center flex-shrink-0">
+                                    <svg class="w-5 h-5 text-blue-600 dark:text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4"/>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <p class="font-semibold mb-1">Save Config</p>
+                                    <p class="text-sm text-gray-600 dark:text-gray-400">Stores delimiter, indent, length markers, and token price to browser localStorage</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <div class="w-8 h-8 rounded-lg bg-green-100 dark:bg-green-900/30 flex items-center justify-center flex-shrink-0">
+                                    <svg class="w-5 h-5 text-green-600 dark:text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"/>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <p class="font-semibold mb-1">Load Config</p>
+                                    <p class="text-sm text-gray-600 dark:text-gray-400">Restores your saved settings - auto-loads on page refresh</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Token Analysis -->
+            <section id="token-analysis" class="mb-16">
+                <h2 class="text-3xl font-bold mb-6 text-gray-900 dark:text-gray-100">Understanding Token Analysis</h2>
+                
+                <p class="text-gray-700 dark:text-gray-300 mb-6">After conversion, the tool displays detailed token metrics to help you understand the optimization impact:</p>
+
+                <div class="space-y-6">
+                    <div class="p-6 rounded-xl bg-gradient-to-br from-blue-50 to-cyan-50 dark:from-blue-900/20 dark:to-cyan-900/20 border border-blue-200 dark:border-blue-800">
+                        <h4 class="font-semibold mb-3 text-blue-900 dark:text-blue-300 text-lg">📊 Metrics Explained</h4>
+                        <div class="space-y-3 text-sm">
+                            <div class="flex items-start gap-3">
+                                <span class="px-2 py-1 rounded bg-blue-200 dark:bg-blue-800 text-blue-900 dark:text-blue-100 font-mono text-xs">JSON Tokens</span>
+                                <p class="text-blue-800 dark:text-blue-300">Estimated token count for your original JSON input</p>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <span class="px-2 py-1 rounded bg-purple-200 dark:bg-purple-800 text-purple-900 dark:text-purple-100 font-mono text-xs">TOON Tokens</span>
+                                <p class="text-blue-800 dark:text-blue-300">Estimated token count for the converted TOON output</p>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <span class="px-2 py-1 rounded bg-green-200 dark:bg-green-800 text-green-900 dark:text-green-100 font-mono text-xs">Tokens Saved</span>
+                                <p class="text-blue-800 dark:text-blue-300">Difference between JSON and TOON (higher is better)</p>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <span class="px-2 py-1 rounded bg-green-200 dark:bg-green-800 text-green-900 dark:text-green-100 font-mono text-xs">Reduction %</span>
+                                <p class="text-blue-800 dark:text-blue-300">Percentage of tokens saved (typically 30-60%)</p>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <span class="px-2 py-1 rounded bg-green-200 dark:bg-green-800 text-green-900 dark:text-green-100 font-mono text-xs">Cost Saved</span>
+                                <p class="text-blue-800 dark:text-blue-300">Estimated API cost savings based on your configured token price</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h4 class="font-semibold mb-3 text-lg">Token Estimation Method</h4>
+                        <p class="text-gray-700 dark:text-gray-300 mb-4">The converter uses a heuristic-based estimation combining:</p>
+                        <ul class="space-y-2 text-gray-700 dark:text-gray-300 ml-6">
+                            <li class="flex items-start gap-2">
+                                <span class="text-accent-500 font-bold">•</span>
+                                <span><strong>Character count method:</strong> Approximately 4 characters per token</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span class="text-accent-500 font-bold">•</span>
+                                <span><strong>Word count method:</strong> Words × 1.3 token multiplier</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span class="text-accent-500 font-bold">•</span>
+                                <span><strong>Averaged result:</strong> Mean of both methods for accuracy</span>
+                            </li>
+                        </ul>
+                        <div class="mt-4 p-4 bg-amber-50 dark:bg-amber-900/20 border-l-4 border-amber-500 rounded-r-lg">
+                            <p class="text-sm text-amber-800 dark:text-amber-300"><strong>Accuracy Note:</strong> Token estimation is approximately 85-95% accurate. Different LLM providers use different tokenizers (OpenAI's tiktoken, Claude's tokenizer, etc.). However, the <strong>relative savings (JSON vs TOON) remain consistent</strong> across all tokenizers.</p>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h4 class="font-semibold mb-3 text-lg">Real-World Example</h4>
+                        <div class="p-6 rounded-xl bg-gray-50 dark:bg-gray-800/50 border border-gray-200 dark:border-gray-700">
+                            <p class="text-sm font-mono text-gray-600 dark:text-gray-400 mb-4">Conversion Result:</p>
+                            <div class="grid md:grid-cols-2 gap-4">
+                                <div>
+                                    <div class="text-xs text-gray-500 dark:text-gray-400 mb-1">JSON Input</div>
+                                    <div class="text-2xl font-bold text-blue-600 dark:text-blue-400">342 tokens</div>
+                                </div>
+                                <div>
+                                    <div class="text-xs text-gray-500 dark:text-gray-400 mb-1">TOON Output</div>
+                                    <div class="text-2xl font-bold text-purple-600 dark:text-purple-400">156 tokens</div>
+                                </div>
+                            </div>
+                            <div class="mt-4 pt-4 border-t border-gray-300 dark:border-gray-600">
+                                <div class="grid md:grid-cols-2 gap-4">
+                                    <div>
+                                        <div class="text-xs text-gray-500 dark:text-gray-400 mb-1">Saved</div>
+                                        <div class="text-xl font-bold text-green-600 dark:text-green-400">186 tokens (54%)</div>
+                                    </div>
+                                    <div>
+                                        <div class="text-xs text-gray-500 dark:text-gray-400 mb-1">Cost Saved (@ $0.01/1K)</div>
+                                        <div class="text-xl font-bold text-green-600 dark:text-green-400">$0.00186</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <p class="text-xs text-gray-600 dark:text-gray-400 mt-4">For 1,000 similar API calls per day, you'd save <strong>$1.86/day</strong> or <strong>~$56/month</strong>!</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- History Feature -->
+            <section id="history" class="mb-16">
+                <h2 class="text-3xl font-bold mb-6 text-gray-900 dark:text-gray-100">Conversion History</h2>
+                
+                <p class="text-gray-700 dark:text-gray-300 mb-6">The converter automatically saves your last 50 conversions to browser localStorage, allowing you to review and reload previous conversions.</p>
+
+                <h3 class="text-2xl font-semibold mb-4 text-gray-900 dark:text-gray-100">Accessing History</h3>
+                <ol class="space-y-3 mb-6 text-gray-700 dark:text-gray-300">
+                    <li class="flex items-start gap-3">
+                        <span class="flex-shrink-0 w-6 h-6 rounded-full bg-accent-500 text-white flex items-center justify-center text-sm font-bold">1</span>
+                        <span>Click the clock icon (🕒) in the top-right header</span>
+                    </li>
+                    <li class="flex items-start gap-3">
+                        <span class="flex-shrink-0 w-6 h-6 rounded-full bg-accent-500 text-white flex items-center justify-center text-sm font-bold">2</span>
+                        <span>History modal opens showing all saved conversions</span>
+                    </li>
+                    <li class="flex items-start gap-3">
+                        <span class="flex-shrink-0 w-6 h-6 rounded-full bg-accent-500 text-white flex items-center justify-center text-sm font-bold">3</span>
+                        <span>Click "Load" on any entry to restore that conversion</span>
+                    </li>
+                </ol>
+
+                <h3 class="text-2xl font-semibold mb-4 text-gray-900 dark:text-gray-100">What's Saved</h3>
+                <div class="grid md:grid-cols-2 gap-4 mb-6">
+                    <div class="p-4 rounded-lg border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800/50">
+                        <h4 class="font-semibold mb-2">📋 Conversion Data</h4>
+                        <ul class="text-sm space-y-1 text-gray-600 dark:text-gray-400">
+                            <li>• Original JSON input</li>
+                            <li>• Converted TOON output</li>
+                            <li>• Timestamp of conversion</li>
+                        </ul>
+                    </div>
+                    <div class="p-4 rounded-lg border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800/50">
+                        <h4 class="font-semibold mb-2">📊 Metrics</h4>
+                        <ul class="text-sm space-y-1 text-gray-600 dark:text-gray-400">
+                            <li>• JSON token count</li>
+                            <li>• TOON token count</li>
+                            <li>• Tokens saved & percentage</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <h3 class="text-2xl font-semibold mb-4 text-gray-900 dark:text-gray-100">Managing History</h3>
+                <div class="space-y-3 text-gray-700 dark:text-gray-300">
+                    <div class="flex items-start gap-3">
+                        <svg class="w-6 h-6 text-blue-500 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                        </svg>
+                        <div>
+                            <p class="font-semibold mb-1">Automatic Limit</p>
+                            <p class="text-sm text-gray-600 dark:text-gray-400">History is capped at 50 entries. Oldest conversions are automatically removed when the limit is reached.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-3">
+                        <svg class="w-6 h-6 text-red-500 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
+                        </svg>
+                        <div>
+                            <p class="font-semibold mb-1">Clear History</p>
+                            <p class="text-sm text-gray-600 dark:text-gray-400">Click "Clear History" button in the history modal to delete all saved conversions.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-3">
+                        <svg class="w-6 h-6 text-green-500 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                        </svg>
+                        <div>
+                            <p class="font-semibold mb-1">Badge Counter</p>
+                            <p class="text-sm text-gray-600 dark:text-gray-400">The history icon shows a badge with the number of saved conversions.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-6 p-4 bg-blue-50 dark:bg-blue-900/20 border-l-4 border-blue-500 rounded-r-lg">
+                    <p class="text-sm text-blue-800 dark:text-blue-300"><strong>🔒 Privacy:</strong> All history data is stored locally in your browser. It never leaves your device and is automatically deleted if you clear browser data.</p>
+                </div>
+            </section>
+
+            <!-- Export Options -->
+            <section id="export" class="mb-16">
+                <h2 class="text-3xl font-bold mb-6 text-gray-900 dark:text-gray-100">Export & Usage</h2>
+                
+                <div class="space-y-8">
+                    <div>
+                        <h3 class="text-2xl font-semibold mb-4 text-gray-900 dark:text-gray-100">📋 Copy to Clipboard</h3>
+                        <p class="text-gray-700 dark:text-gray-300 mb-4">The fastest way to use your TOON output in LLM prompts:</p>
+                        <ol class="space-y-2 text-gray-700 dark:text-gray-300 ml-6">
+                            <li>1. Click the "📋 Copy" button in the output panel</li>
+                            <li>2. TOON text is copied to your clipboard</li>
+                            <li>3. Paste directly into ChatGPT, Claude, or any LLM interface</li>
+                            <li>4. Success notification confirms the copy</li>
+                        </ol>
+                        <div class="mt-4 p-4 bg-green-50 dark:bg-green-900/20 rounded-lg border border-green-200 dark:border-green-800">
+                            <p class="text-sm text-green-800 dark:text-green-300"><strong>✓ Recommended:</strong> Add context in your prompt like "Here's user data in TOON format:" to help the LLM parse correctly.</p>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h3 class="text-2xl font-semibold mb-4 text-gray-900 dark:text-gray-100">💾 Download as File</h3>
+                        <p class="text-gray-700 dark:text-gray-300 mb-4">Save TOON output as a <code>.toon</code> file for later use:</p>
+                        <ol class="space-y-2 text-gray-700 dark:text-gray-300 ml-6">
+                            <li>1. Click the "💾 Download" button</li>
+                            <li>2. File downloads as <code>output.toon</code></li>
+                            <li>3. Store for documentation or batch processing</li>
+                            <li>4. Can be opened in any text editor</li>
+                        </ol>
+                        <p class="text-sm text-gray-600 dark:text-gray-400 mt-4"><strong>Use cases:</strong> Archiving conversions, sharing with team members, version control, or integrating into automated workflows.</p>
+                    </div>
+
+                    <div>
+                        <h3 class="text-2xl font-semibold mb-4 text-gray-900 dark:text-gray-100">🚀 Integration Example</h3>
+                        <p class="text-gray-700 dark:text-gray-300 mb-4">How to use TOON in an actual LLM prompt:</p>
+                        <pre class="text-sm"><code>You are analyzing user activity data. Here's the data in TOON format:activity[5]{user_id,action,timestamp,duration}:
+101,login,2025-01-15T09:00:00,2
+101,view_dashboard,2025-01-15T09:02:00,45
+102,login,2025-01-15T09:05:00,3
+102,search,2025-01-15T09:08:00,12
+101,logout,2025-01-15T09:47:00,1
+Please summarize user behavior patterns and identify the most active user.</code></pre>
+<p class="text-sm text-gray-600 dark:text-gray-400 mt-4">This saves ~40% tokens compared to sending the same data as JSON!</p>
+</div>
+</div>
+</section><!-- Troubleshooting -->
+            <section id="troubleshooting" class="mb-16">
+                <h2 class="text-3xl font-bold mb-6 text-gray-900 dark:text-gray-100">Troubleshooting</h2>
+                
+                <div class="space-y-6">
+                    <div class="p-6 rounded-xl border-l-4 border-red-500 bg-red-50 dark:bg-red-900/20">
+<h4 class="font-semibold text-red-900 dark:text-red-300 mb-3">❌ "Invalid JSON" Error</h4>
+<p class="text-sm text-red-800 dark:text-red-400 mb-3"><strong>Problem:</strong> You see an error message when pasting or typing JSON.</p>
+<p class="text-sm text-red-800 dark:text-red-400 mb-3"><strong>Common Causes:</strong></p>
+<ul class="text-sm space-y-1 text-red-700 dark:text-red-300 ml-5">
+<li>• Trailing commas: <code>{"name": "Alice",}</code></li>
+<li>• Single quotes instead of double: <code>{'name': 'Alice'}</code></li>
+<li>• Comments in JSON: <code>// This is not allowed</code></li>
+<li>• Missing quotes around keys: <code>{name: "Alice"}</code></li>
+<li>• Unescaped special characters in strings</li>
+</ul>
+<p class="text-sm text-red-800 dark:text-red-400 mt-3"><strong>Solution:</strong> Use a JSON validator (like <a href="https://jsonlint.com" class="underline" target="_blank">jsonlint.com</a>) to fix your JSON before pasting.</p>
+</div><div class="p-6 rounded-xl border-l-4 border-amber-500 bg-amber-50 dark:bg-amber-900/20">
+                        <h4 class="font-semibold text-amber-900 dark:text-amber-300 mb-3">⚠️ Auto-Convert Not Working</h4>
+                        <p class="text-sm text-amber-800 dark:text-amber-400 mb-3"><strong>Problem:</strong> Nothing happens after pasting JSON.</p>
+                        <p class="text-sm text-amber-800 dark:text-amber-400 mb-3"><strong>Solution:</strong></p>
+                        <ul class="text-sm space-y-1 text-amber-700 dark:text-amber-300 ml-5">
+                            <li>• Wait 500ms (half a second) for debounce delay</li>
+                            <li>• Manually click the "Convert to TOON" button</li>
+                            <li>• Check browser console for JavaScript errors (F12)</li>
+                            <li>• Refresh the page if the tool is unresponsive</li>
+                        </ul>
+                    </div>
+
+                    <div class="p-6 rounded-xl border-l-4 border-blue-500 bg-blue-50 dark:bg-blue-900/20">
+                        <h4 class="font-semibold text-blue-900 dark:text-blue-300 mb-3">ℹ️ Token Savings Lower Than Expected</h4>
+                        <p class="text-sm text-blue-800 dark:text-blue-400 mb-3"><strong>Problem:</strong> Showing only 10-20% savings instead of 30-60%.</p>
+                        <p class="text-sm text-blue-800 dark:text-blue-400 mb-3"><strong>Possible Reasons:</strong></p>
+                        <ul class="text-sm space-y-1 text-blue-700 dark:text-blue-300 ml-5">
+                            <li>• <strong>Non-uniform data:</strong> Objects in arrays have different keys</li>
+                            <li>• <strong>Deeply nested structure:</strong> 5+ levels of nesting</li>
+                            <li>• <strong>Small dataset:</strong> Only 1-5 items in array</li>
+                            <li>• <strong>Mixed types:</strong> Array contains both objects and primitives</li>
+                        </ul>
+                        <p class="text-sm text-blue-800 dark:text-blue-400 mt-3"><strong>Solution:</strong> TOON works best with uniform arrays of 10+ objects. Consider normalizing your data or sticking with JSON for this use case.</p>
+                    </div>
+
+                    <div class="p-6 rounded-xl border-l-4 border-purple-500 bg-purple-50 dark:bg-purple-900/20">
+                        <h4 class="font-semibold text-purple-900 dark:text-purple-300 mb-3">🗑️ History Not Saving</h4>
+                        <p class="text-sm text-purple-800 dark:text-purple-400 mb-3"><strong>Problem:</strong> Conversions don't appear in history.</p>
+                        <p class="text-sm text-purple-800 dark:text-purple-400 mb-3"><strong>Causes & Solutions:</strong></p>
+                        <ul class="text-sm space-y-2 text-purple-700 dark:text-purple-300 ml-5">
+                            <li>• <strong>Private/Incognito mode:</strong> localStorage doesn't persist. Use normal browsing mode.</li>
+                            <li>• <strong>Browser storage disabled:</strong> Check browser settings to enable cookies/storage.</li>
+                            <li>• <strong>Storage quota exceeded:</strong> Clear browser data or delete old history entries.</li>
+                            <li>• <strong>Invalid conversion:</strong> History only saves successful conversions, not errors.</li>
+                        </ul>
+                    </div>
+
+                    <div class="p-6 rounded-xl border-l-4 border-green-500 bg-green-50 dark:bg-green-900/20">
+                        <h4 class="font-semibold text-green-900 dark:text-green-300 mb-3">📁 Drag & Drop Not Working</h4>
+                        <p class="text-sm text-green-800 dark:text-green-400 mb-3"><strong>Problem:</strong> File drop doesn't load JSON.</p>
+                        <p class="text-sm text-green-800 dark:text-green-400 mb-3"><strong>Checklist:</strong></p>
+                        <ul class="text-sm space-y-1 text-green-700 dark:text-green-300 ml-5">
+                            <li>• ✓ File has <code>.json</code> extension</li>
+                            <li>• ✓ File contains valid JSON</li>
+                            <li>• ✓ File size is reasonable (&lt;10MB recommended)</li>
+                            <li>• ✓ Dragging directly over the input textarea area</li>
+                            <li>• ✓ Browser supports drag & drop (not IE11)</li>
+                        </ul>
+                    </div>
+
+                    <div class="p-6 rounded-xl border-l-4 border-gray-500 bg-gray-50 dark:bg-gray-800/50">
+                        <h4 class="font-semibold text-gray-900 dark:text-gray-300 mb-3">🐛 Still Having Issues?</h4>
+                        <p class="text-sm text-gray-700 dark:text-gray-400 mb-3">If problems persist:</p>
+                        <ol class="text-sm space-y-2 text-gray-600 dark:text-gray-300 ml-5">
+                            <li>1. <strong>Clear browser cache:</strong> Ctrl+Shift+Delete (Windows) or Cmd+Shift+Delete (Mac)</li>
+                            <li>2. <strong>Try a different browser:</strong> Chrome, Firefox, Safari, or Edge</li>
+                            <li>3. <strong>Check browser console:</strong> Press F12 and look for error messages</li>
+                            <li>4. <strong>Disable extensions:</strong> Ad blockers or privacy tools may interfere</li>
+                            <li>5. <strong>Hard refresh:</strong> Ctrl+F5 (Windows) or Cmd+Shift+R (Mac)</li>
+                        </ol>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Privacy & Security -->
+            <section id="privacy" class="mb-16">
+                <h2 class="text-3xl font-bold mb-6 text-gray-900 dark:text-gray-100">Privacy & Security</h2>
+                
+                <div class="bg-gradient-to-r from-green-50 to-emerald-50 dark:from-green-900/20 dark:to-emerald-900/20 border-l-4 border-green-500 p-6 rounded-r-lg mb-8">
+                    <h3 class="text-xl font-semibold text-green-900 dark:text-green-300 mb-3">🔒 100% Client-Side Processing</h3>
+                    <p class="text-green-800 dark:text-green-400 mb-4">The JSON to TOON converter operates entirely in your browser. Your data never leaves your device.</p>
+                </div>
+
+                <div class="space-y-6">
+                    <div>
+                        <h3 class="text-2xl font-semibold mb-4 text-gray-900 dark:text-gray-100">What We DON'T Do</h3>
+                        <ul class="space-y-3">
+                            <li class="flex items-start gap-3">
+                                <svg class="w-6 h-6 text-green-500 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                                </svg>
+                                <div>
+                                    <p class="font-semibold text-gray-900 dark:text-gray-100">No Server Upload</p>
+                                    <p class="text-sm text-gray-600 dark:text-gray-400">Your JSON and TOON data is never transmitted to any server or third party</p>
+                                </div>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <svg class="w-6 h-6 text-green-500 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                                </svg>
+                                <div>
+                                    <p class="font-semibold text-gray-900 dark:text-gray-100">No Analytics Tracking</p>
+                                    <p class="text-sm text-gray-600 dark:text-gray-400">We don't use Google Analytics, Facebook Pixel, or any tracking scripts</p>
+                                </div>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <svg class="w-6 h-6 text-green-500 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                                </svg>
+                                <div>
+                                    <p class="font-semibold text-gray-900 dark:text-gray-100">No Cookies</p>
+                                    <p class="text-sm text-gray-600 dark:text-gray-400">No tracking cookies, session cookies, or third-party cookies are set</p>
+                                </div>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <svg class="w-6 h-6 text-green-500 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                                </svg>
+                                <div>
+                                    <p class="font-semibold text-gray-900 dark:text-gray-100">No Account Required</p>
+                                    <p class="text-sm text-gray-600 dark:text-gray-400">No login, no email collection, no personal information stored</p>
+                                </div>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <svg class="w-6 h-6 text-green-500 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                                </svg>
+                                <div>
+                                    <p class="font-semibold text-gray-900 dark:text-gray-100">No Logs</p>
+                                    <p class="text-sm text-gray-600 dark:text-gray-400">We don't log conversions, errors, or any user activity</p>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div>
+                        <h3 class="text-2xl font-semibold mb-4 text-gray-900 dark:text-gray-100">What We DO Store (Locally)</h3>
+                        <p class="text-gray-700 dark:text-gray-300 mb-4">The following data is stored in your browser's localStorage and never leaves your device:</p>
+                        <div class="overflow-x-auto">
+                            <table class="w-full text-sm border-collapse">
+                                <thead>
+                                    <tr class="border-b-2 border-gray-300 dark:border-gray-700">
+                                        <th class="text-left py-3 px-4 font-semibold">Data</th>
+                                        <th class="text-left py-3 px-4 font-semibold">Purpose</th>
+                                        <th class="text-left py-3 px-4 font-semibold">Can Delete?</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-gray-200 dark:divide-gray-700">
+                                    <tr class="hover:bg-gray-50 dark:hover:bg-gray-800/50">
+                                        <td class="py-3 px-4 font-medium">Theme preference</td>
+                                        <td class="py-3 px-4">Remember dark/light mode</td>
+                                        <td class="py-3 px-4">✓ Clear browser data</td>
+                                    </tr>
+                                    <tr class="hover:bg-gray-50 dark:hover:bg-gray-800/50">
+                                        <td class="py-3 px-4 font-medium">Configuration settings</td>
+                                        <td class="py-3 px-4">Delimiter, indent, token price</td>
+                                        <td class="py-3 px-4">✓ Clear browser data</td>
+                                    </tr>
+                                    <tr class="hover:bg-gray-50 dark:hover:bg-gray-800/50">
+                                        <td class="py-3 px-4 font-medium">Conversion history (last 50)</td>
+                                        <td class="py-3 px-4">Review past conversions</td>
+                                        <td class="py-3 px-4">✓ "Clear History" button</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h3 class="text-2xl font-semibold mb-4 text-gray-900 dark:text-gray-100">Security Best Practices</h3>
+                        <div class="grid md:grid-cols-2 gap-4">
+                            <div class="p-4 rounded-lg bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800">
+                                <h4 class="font-semibold text-blue-900 dark:text-blue-300 mb-2">✓ Safe to Use</h4>
+                                <ul class="text-sm space-y-1 text-blue-700 dark:text-blue-400">
+                                    <li>• Proprietary business data</li>
+                                    <li>• Customer information</li>
+                                    <li>• Internal analytics</li>
+                                    <li>• API responses</li>
+                                </ul>
+                            </div>
+                            <div class="p-4 rounded-lg bg-purple-50 dark:bg-purple-900/20 border border-purple-200 dark:border-purple-800">
+                                <h4 class="font-semibold text-purple-900 dark:text-purple-300 mb-2">🔒 Open Source</h4>
+                                <p class="text-sm text-purple-700 dark:text-purple-400">All code is client-side JavaScript. View source to verify no data transmission occurs.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="p-6 bg-gradient-to-r from-blue-500 to-purple-600 rounded-xl text-white">
+                        <h4 class="text-lg font-semibold mb-3">🛡️ Privacy Guarantee</h4>
+                        <p class="text-blue-100 text-sm mb-4">We believe in privacy-first tools. Your data is yours. This converter is designed to never compromise that principle.</p>
+                        <p class="text-blue-100 text-sm"><strong>Questions about privacy?</strong> Inspect the browser's Network tab (F12 → Network) during conversion. You'll see zero outbound requests.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Quick Reference -->
+            <section class="mb-16 p-8 rounded-2xl bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-800/50 dark:to-gray-900/50 border border-gray-200 dark:border-gray-700">
+                <h2 class="text-3xl font-bold mb-6 text-gray-900 dark:text-gray-100">Quick Reference</h2>
+                
+                <div class="grid md:grid-cols-2 gap-6 text-sm">
+                    <div>
+                        <h4 class="font-semibold mb-3 text-gray-900 dark:text-gray-100">⌨️ Keyboard Shortcuts</h4>
+                        <ul class="space-y-2 text-gray-700 dark:text-gray-300">
+                            <li><kbd class="px-2 py-1 rounded bg-gray-200 dark:bg-gray-700">Ctrl/Cmd + V</kbd> Paste JSON</li>
+                            <li><kbd class="px-2 py-1 rounded bg-gray-200 dark:bg-gray-700">Ctrl/Cmd + C</kbd> Copy TOON (after focus)</li>
+                            <li><kbd class="px-2 py-1 rounded bg-gray-200 dark:bg-gray-700">F12</kbd> Open browser console</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="font-semibold mb-3 text-gray-900 dark:text-gray-100">🔗 Related Pages</h4>
+                        <ul class="space-y-2">
+                            <li><a href="https://limenit.com/toon-format-guide" target="_blank"
+   rel="noopener noreferrer" class="text-accent-600 dark:text-accent-400 hover:underline">TOON Format Documentation</a></li>
+                            <li><a href="https://www.limenit.com/json-toon/#:~:text=How%20to%20Use%20This%20JSON%20to%20TOON%20Converter" target="_blank"
+   rel="noopener noreferrer"class="text-accent-600 dark:text-accent-400 hover:underline">How-To Guide</a></li>
+                            <li><a href="https://limenit.com/json-toon" target="_blank"
+   rel="noopener noreferrer"class="text-accent-600 dark:text-accent-400 hover:underline">Converter Tool</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- CTA Section -->
+            <section class="mt-16 p-8 rounded-2xl bg-gradient-to-r from-accent-500 to-accent-600 text-white">
+                <h3 class="text-2xl font-bold mb-4">Start Converting Now</h3>
+                <p class="text-accent-100 mb-6">Ready to optimize your LLM prompts and save on API costs? Try the converter with your own data.</p>
+                <a href="https://limenit.com/json-toon" target="_blank" rel="noopener noreferrer" class="inline-block px-6 py-3 bg-white text-accent-600 font-semibold rounded-lg hover:bg-gray-100 transition-all">
+                    Open Converter →
+                </a>
+            </section>
+
+        </article>
+    </div>
+</main>
+
+<!-- Footer -->
+<footer class="mt-16 py-8 border-t border-gray-200 dark:border-gray-800">
+    <div class="container mx-auto px-4 max-w-7xl">
+        <div class="flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-gray-600 dark:text-gray-400">
+            <p>© 2025 :imeNit. Free JSON to TOON tool documentation for developers.</p>
+            <nav class="flex gap-6">
+                <a href="/" class="hover:text-accent-600 dark:hover:text-accent-400 transition-colors">Converter</a>
+                <a href="https://limenit.com/" target="_blank" rel="noopener noreferrer" class="hover:text-accent-600 dark:hover:text-accent-400 transition-colors">Tool Docs</a>
+                <a href="https://limenit.com/toon-converter-documentation" target="_blank" rel="noopener noreferrer" class="hover:text-accent-600 dark:hover:text-accent-400 transition-colors">Format Docs</a>
+            </nav>
+        </div>
+    </div>
+</footer>
+
+<script>
+    // Theme toggle
+    const themeToggle = document.getElementById('themeToggle');
+    const html = document.documentElement;
+    
+    function setTheme(theme) {
+        if (theme === 'dark') {
+            html.classList.add('dark');
+        } else {
+            html.classList.remove('dark');
+        }
+        localStorage.setItem('theme', theme);
+    }
+    
+    const savedTheme = localStorage.getItem('theme') || 
+        (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+    setTheme(savedTheme);
+    
+    themeToggle.addEventListener('click', () => {
+        const newTheme = html.classList.contains('dark') ? 'light' : 'dark';
+        setTheme(newTheme);
+    });
+
+    // Smooth scroll for TOC
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        });
+    });
+
+    // Active TOC highlighting
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const id = entry.target.getAttribute('id');
+                document.querySelectorAll('.toc-sticky a').forEach(link => {
+                    link.classList.remove('bg-accent-100', 'dark:bg-accent-900/30', 'text-accent-700', 'dark:text-accent-300', 'font-semibold');
+                    if (link.getAttribute('href') === `#${id}`) {
+                        link.classList.add('bg-accent-100', 'dark:bg-accent-900/30', 'text-accent-700', 'dark:text-accent-300', 'font-semibold');
+                    }
+                });
+            }
+        });
+    }, { rootMargin: '-100px 0px -80% 0px' });
+
+    document.querySelectorAll('section[id]').forEach((section) => {
+        observer.observe(section);
+    });
+</script>
+</body>
+</html>
