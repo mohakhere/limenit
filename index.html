@@ -252,18 +252,18 @@ const features = [
     {
         title: "JSON to TOON Converter",
         description: "Turn JSON into TOON format that LLMs understand better. You use fewer tokens, reduce noise, and increase LLM accuracy instantly. Save historical format, export, copy, and configure your outputs.",
-        image: "https://placehold.co/1000x600/171717/ffffff?text=Human+Centered+Design+Graphic",
+        image: "./assets/toon-heo.svg",
         buttons: [
             { text: "Explore", url: "/json-toon" },
-            { text: "More Info", url: "/human-design/info" }
+            { text: "More Info", url: "/toon-converter-documentation" }
         ]
     },
     {
-        title: "Transparent & Honest",
-        description: "No hidden fees, no confusing terms. We believe in honest pricing and open communication, because that’s what a good partnership is built on.",
-        image: "https://placehold.co/1000x600/171717/ffffff?text=Transparency+Graphic",
+        title: "Interactive Trading Simulator",
+        description: "Run controlled simulations, review performance metrics, and optimize decisions through data-driven insights. Includes historical major events to test decisions under volatile conditions.",
+        image: "./assets/trade-hero.svg",
         buttons: [
-            { text: "Explore", url: "/transparency/explore" },
+            { text: "Explore", url: "/tools/trading-simulator" },
             { text: "More Info", url: "/transparency/info" }
         ]
     },
@@ -272,8 +272,8 @@ const features = [
         description: "The B2B landscape is always changing. We are too. Our roadmap is driven by a constant loop of user feedback and innovation.",
         image: "https://placehold.co/1000x600/171717/ffffff?text=Continuous+Improvement+Graphic",
         buttons: [
-            { text: "Explore", url: "/improving-1/explore" }, // Changed URL to be unique
-            { text: "More Info", url: "/improving-1/info" }    // Changed URL to be unique
+            { text: "Explore", url: "/improving-1/explore" },
+            { text: "More Info", url: "/improving-1/info" } 
         ]
     },
     {
@@ -501,7 +501,7 @@ const features = [
         <div>
           <div class="col-title mb-3">Legal & Support</div>
           <ul class="space-y-2 text-sm text-gray-300">
-            <li><a href="#" class="hover:underline">Privacy</a></li>
+            <li><a href="https://www.limenit.com/toon-converter-documentation/#privacy" class="hover:underline" target="_blank" rel="noopener noreferrer">Privacy</a></li>
             <li><a href="#" class="hover:underline">Terms</a></li>
             <li><a href="#" class="hover:underline">Support</a></li>
           </ul>
@@ -556,9 +556,9 @@ const features = [
     /* ---------- Stories carousel with outside arrows ---------- */
     (function(){
       const slides = [
-        {title:'The One-Page Guide to Tool Selection', text:"Choosing the right B2B tools can be a nightmare. We simplified it down to one page.", img:'https://picsum.photos/seed/201/1000/600'},
-        {title:'Why Complex Tools Are Holding You Back', text:'Break down the hidden costs of software complexity and find a better way forward.', img:'https://picsum.photos/seed/202/1000/600'},
-        {title:'The Future is Simple: Our 2025 B2B Tech Predictions', text:'A look at the trends we’re betting on and why user-centric design will win.', img:'https://picsum.photos/seed/203/1000/600'}
+        {title:'TOON Format Guide', text:"Understand the TOON structure, rules, and best practices for clean, token-efficient outputs.", img:'https://picsum.photos/seed/201/1000/600'},
+        {title:'TOON Format Examples Library', text:'Explore real JSON to TOON conversions, covering simple, advanced, and edge-case scenarios.', img:'https://picsum.photos/seed/202/1000/600'},
+        {title:'TOON Schema and Standards: What Format looks like in 2025', text:'A complete breakdown of TOON’s structure, required fields, nesting rules, and the logic.', img:'https://picsum.photos/seed/203/1000/600'}
       ];
       let active = 0, timer = null;
       const content = document.getElementById('storyContent');
@@ -573,7 +573,7 @@ const features = [
             <div class="md:flex-1 mt-4 md:mt-0">
               <h3 class="text-xl font-semibold">${s.title}</h3>
               <p class="mt-2 text-gray-300">${s.text}</p>
-              <div class="mt-4"><a href="#contact" class="px-4 py-2 rounded-full btn-accent text-black font-semibold">Let’s talk</a></div>
+              <div class="mt-4"><a href="https://www.limenit.com/toon-format-guide/" class="px-4 py-2 rounded-full btn-accent text-black font-semibold" target="_blank" rel="noopener noreferrer">Explore</a></div>
             </div>
           </div>`;
         // dots
@@ -669,6 +669,7 @@ const features = [
   </script>
 </body>
 </html>
+
 
 
 
