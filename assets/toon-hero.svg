@@ -11,10 +11,14 @@
       <stop offset="100%" style="stop-color:#ff6b6b;stop-opacity:0.2" />
     </radialGradient>
 
-    <linearGradient id="dataFlow" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%" style="stop-color:#ff6b6b;stop-opacity:0" />
-      <stop offset="50%" style="stop-color:#ff6b6b;stop-opacity:1" />
-      <stop offset="100%" style="stop-color:#ff6b6b;stop-opacity:0" />
+    <linearGradient id="profitGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#4ecdc4;stop-opacity:0.8" />
+      <stop offset="100%" style="stop-color:#4ecdc4;stop-opacity:0.3" />
+    </linearGradient>
+
+    <linearGradient id="lossGradient" x1="0%" y1="100%" x2="0%" y2="0%">
+      <stop offset="0%" style="stop-color:#ff6b6b;stop-opacity:0.8" />
+      <stop offset="100%" style="stop-color:#ff6b6b;stop-opacity:0.3" />
     </linearGradient>
 
     <filter id="glow">
@@ -44,299 +48,398 @@
 
   <rect width="1400" height="700" fill="#171314"/>
 
-  <!-- Left Side - JSON Structure -->
-  <g id="jsonSide" transform="translate(250, 350)">
-    <!-- Background glow -->
-    <ellipse cx="0" cy="0" rx="150" ry="180" fill="url(#circleGlow)" opacity="0.8"/>
-    
-    <!-- JSON braces structure -->
-    <g id="jsonStructure">
-      <!-- Opening brace -->
-      <path d="M -80 -120 Q -95 -120 -95 -105 L -95 -30 Q -95 -20 -85 -20" 
-            fill="none" stroke="#ff6b6b" stroke-width="4" stroke-linecap="round" opacity="0.8">
-        <animate attributeName="opacity" values="0.8;1;0.8" dur="3s" repeatCount="indefinite"/>
-      </path>
-      <path d="M -80 120 Q -95 120 -95 105 L -95 30 Q -95 20 -85 20" 
-            fill="none" stroke="#ff6b6b" stroke-width="4" stroke-linecap="round" opacity="0.8">
-        <animate attributeName="opacity" values="0.8;1;0.8" dur="3s" repeatCount="indefinite"/>
-      </path>
+  <!-- Top Left - Market Data Feed -->
+  <g id="marketData" transform="translate(300, 180)">
+    <circle cx="0" cy="0" r="90" fill="url(#circleGlow)"/>
+    <circle cx="0" cy="0" r="85" fill="none" stroke="#ff6b6b" stroke-width="2.5" opacity="0.7">
+      <animate attributeName="opacity" values="0.7;0.9;0.7" dur="3s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="0" cy="0" r="78" fill="none" stroke="#ff6b6b" stroke-width="1" opacity="0.25"/>
 
-      <!-- Nested objects representation -->
-      <g id="nestedStructures">
-        <!-- Level 1 -->
-        <rect x="-60" y="-90" width="100" height="8" rx="2" fill="#8892b0" opacity="0.6">
-          <animate attributeName="opacity" values="0.6;0.85;0.6" dur="2.5s" repeatCount="indefinite"/>
-        </rect>
-        <circle cx="-70" cy="-86" r="3" fill="#ff6b6b" opacity="0.7"/>
-        
-        <!-- Level 2 nested -->
-        <rect x="-50" y="-70" width="80" height="6" rx="2" fill="#8892b0" opacity="0.5">
-          <animate attributeName="opacity" values="0.5;0.75;0.5" dur="2.7s" repeatCount="indefinite"/>
-        </rect>
-        <circle cx="-60" cy="-67" r="2.5" fill="#4ecdc4" opacity="0.7"/>
-        
-        <rect x="-50" y="-55" width="70" height="6" rx="2" fill="#8892b0" opacity="0.5">
-          <animate attributeName="opacity" values="0.5;0.75;0.5" dur="2.9s" repeatCount="indefinite"/>
-        </rect>
-        
-        <!-- Level 3 deep nested -->
-        <rect x="-40" y="-38" width="60" height="5" rx="2" fill="#8892b0" opacity="0.4">
-          <animate attributeName="opacity" values="0.4;0.7;0.4" dur="3.1s" repeatCount="indefinite"/>
-        </rect>
-        <circle cx="-50" cy="-35.5" r="2" fill="#ffd93d" opacity="0.7"/>
-        
-        <rect x="-40" y="-26" width="55" height="5" rx="2" fill="#8892b0" opacity="0.4">
-          <animate attributeName="opacity" values="0.4;0.7;0.4" dur="3.3s" repeatCount="indefinite"/>
-        </rect>
+    <!-- Candlestick chart representation -->
+    <g id="candlesticks">
+      <!-- Green candles (bullish) -->
+      <rect x="-55" y="-15" width="10" height="25" fill="#4ecdc4" opacity="0.7">
+        <animate attributeName="height" values="25;30;25" dur="2s" repeatCount="indefinite"/>
+        <animate attributeName="y" values="-15;-17.5;-15" dur="2s" repeatCount="indefinite"/>
+      </rect>
+      <line x1="-50" y1="-25" x2="-50" y2="10" stroke="#4ecdc4" stroke-width="2" opacity="0.7"/>
 
-        <!-- Array representation -->
-        <g id="arrayBrackets">
-          <path d="M -45 -5 L -50 -5 L -50 25 L -45 25" 
-                fill="none" stroke="#a78bfa" stroke-width="2.5" opacity="0.7">
-            <animate attributeName="opacity" values="0.7;0.95;0.7" dur="2.8s" repeatCount="indefinite"/>
-          </path>
-          <rect x="-40" y="0" width="50" height="4" rx="2" fill="#8892b0" opacity="0.45"/>
-          <rect x="-40" y="8" width="45" height="4" rx="2" fill="#8892b0" opacity="0.45"/>
-          <rect x="-40" y="16" width="48" height="4" rx="2" fill="#8892b0" opacity="0.45"/>
-        </g>
+      <rect x="-30" y="-5" width="10" height="20" fill="#4ecdc4" opacity="0.7">
+        <animate attributeName="height" values="20;25;20" dur="2.3s" repeatCount="indefinite"/>
+        <animate attributeName="y" values="-5;-7.5;-5" dur="2.3s" repeatCount="indefinite"/>
+      </rect>
+      <line x1="-25" y1="-18" x2="-25" y2="15" stroke="#4ecdc4" stroke-width="2" opacity="0.7"/>
 
-        <!-- More key-value pairs -->
-        <rect x="-60" y="40" width="90" height="7" rx="2" fill="#8892b0" opacity="0.55">
-          <animate attributeName="opacity" values="0.55;0.8;0.55" dur="2.6s" repeatCount="indefinite"/>
-        </rect>
-        <circle cx="-70" cy="-43.5" r="2.5" fill="#ff6b6b" opacity="0.7"/>
-        
-        <rect x="-60" y="55" width="85" height="7" rx="2" fill="#8892b0" opacity="0.55">
-          <animate attributeName="opacity" values="0.55;0.8;0.55" dur="2.8s" repeatCount="indefinite"/>
-        </rect>
+      <!-- Red candles (bearish) -->
+      <rect x="-5" y="-20" width="10" height="18" fill="#ff6b6b" opacity="0.7">
+        <animate attributeName="height" values="18;22;18" dur="2.5s" repeatCount="indefinite"/>
+        <animate attributeName="y" values="-20;-22;-20" dur="2.5s" repeatCount="indefinite"/>
+      </rect>
+      <line x1="0" y1="-28" x2="0" y2="2" stroke="#ff6b6b" stroke-width="2" opacity="0.7"/>
 
-        <rect x="-50" y="72" width="75" height="6" rx="2" fill="#8892b0" opacity="0.5">
-          <animate attributeName="opacity" values="0.5;0.75;0.5" dur="3s" repeatCount="indefinite"/>
-        </rect>
-        <circle cx="-60" cy="75" r="2.5" fill="#4ecdc4" opacity="0.7"/>
+      <rect x="20" y="-12" width="10" height="22" fill="#4ecdc4" opacity="0.7">
+        <animate attributeName="height" values="22;28;22" dur="2.1s" repeatCount="indefinite"/>
+        <animate attributeName="y" values="-12;-15;-12" dur="2.1s" repeatCount="indefinite"/>
+      </rect>
+      <line x1="25" y1="-20" x2="25" y2="10" stroke="#4ecdc4" stroke-width="2" opacity="0.7"/>
 
-        <rect x="-60" y="90" width="80" height="7" rx="2" fill="#8892b0" opacity="0.55">
-          <animate attributeName="opacity" values="0.55;0.8;0.55" dur="2.4s" repeatCount="indefinite"/>
-        </rect>
-      </g>
-
-      <!-- Data particles flowing out -->
-      <g id="jsonParticles">
-        <circle cx="-30" cy="-80" r="2" fill="#ff6b6b" opacity="0.8">
-          <animate attributeName="cx" values="-30;50;-30" dur="3s" repeatCount="indefinite"/>
-          <animate attributeName="opacity" values="0.8;0.3;0.8" dur="3s" repeatCount="indefinite"/>
-        </circle>
-        <circle cx="-25" cy="-50" r="2" fill="#4ecdc4" opacity="0.8">
-          <animate attributeName="cx" values="-25;50;-25" dur="3.5s" repeatCount="indefinite"/>
-          <animate attributeName="opacity" values="0.8;0.3;0.8" dur="3.5s" repeatCount="indefinite"/>
-        </circle>
-        <circle cx="-20" cy="10" r="2" fill="#ffd93d" opacity="0.8">
-          <animate attributeName="cx" values="-20;50;-20" dur="3.2s" repeatCount="indefinite"/>
-          <animate attributeName="opacity" values="0.8;0.3;0.8" dur="3.2s" repeatCount="indefinite"/>
-        </circle>
-        <circle cx="-25" cy="60" r="2" fill="#a78bfa" opacity="0.8">
-          <animate attributeName="cx" values="-25;50;-25" dur="3.8s" repeatCount="indefinite"/>
-          <animate attributeName="opacity" values="0.8;0.3;0.8" dur="3.8s" repeatCount="indefinite"/>
-        </circle>
-      </g>
-    </g>
-  </g>
-
-  <!-- Center - Conversion Pipeline -->
-  <g id="conversionPipeline" transform="translate(700, 350)">
-    <!-- Main pipeline tube -->
-    <rect x="-180" y="-35" width="360" height="70" rx="35" fill="rgba(255, 107, 107, 0.05)" 
-          stroke="#ff6b6b" stroke-width="2.5" opacity="0.6">
-      <animate attributeName="opacity" values="0.6;0.8;0.6" dur="3s" repeatCount="indefinite"/>
-    </rect>
-
-    <!-- Inner pipeline segments -->
-    <g id="pipelineSegments">
-      <!-- Segment indicators -->
-      <line x1="-120" y1="-35" x2="-120" y2="35" stroke="#ff6b6b" stroke-width="1.5" opacity="0.3"/>
-      <line x1="-40" y1="-35" x2="-40" y2="35" stroke="#ff6b6b" stroke-width="1.5" opacity="0.3"/>
-      <line x1="40" y1="-35" x2="40" y2="35" stroke="#ff6b6b" stroke-width="1.5" opacity="0.3"/>
-      <line x1="120" y1="-35" x2="120" y2="35" stroke="#ff6b6b" stroke-width="1.5" opacity="0.3"/>
+      <rect x="45" y="-8" width="10" height="16" fill="#ff6b6b" opacity="0.7">
+        <animate attributeName="height" values="16;20;16" dur="2.7s" repeatCount="indefinite"/>
+        <animate attributeName="y" values="-8;-10;-8" dur="2.7s" repeatCount="indefinite"/>
+      </rect>
+      <line x1="50" y1="-15" x2="50" y2="8" stroke="#ff6b6b" stroke-width="2" opacity="0.7"/>
     </g>
 
-    <!-- Data stream flowing through pipeline -->
-    <g id="dataStream">
-      <rect x="-200" y="-15" width="80" height="30" rx="15" fill="url(#dataFlow)" opacity="0.8">
-        <animate attributeName="x" values="-200;-120;-40;40;120;200" dur="4s" repeatCount="indefinite"/>
-        <animate attributeName="opacity" values="0;0.8;0.8;0.8;0.8;0" keyTimes="0;0.1;0.4;0.7;0.9;1" dur="4s" repeatCount="indefinite"/>
+    <!-- Price ticker flowing -->
+    <g id="priceTicker">
+      <rect x="-60" y="35" width="120" height="20" rx="10" fill="rgba(255, 107, 107, 0.1)" stroke="#ff6b6b" stroke-width="1.5" opacity="0.6"/>
+      
+      <!-- Animated price blocks -->
+      <rect x="-55" y="38" width="18" height="14" rx="2" fill="#4ecdc4" opacity="0.5">
+        <animate attributeName="x" values="-55;60" dur="4s" repeatCount="indefinite"/>
+        <animate attributeName="opacity" values="0.5;0.8;0.5" dur="4s" repeatCount="indefinite"/>
+      </rect>
+      <rect x="-80" y="38" width="18" height="14" rx="2" fill="#ff6b6b" opacity="0.5">
+        <animate attributeName="x" values="-80;60" dur="4.5s" repeatCount="indefinite"/>
+        <animate attributeName="opacity" values="0.5;0.8;0.5" dur="4.5s" repeatCount="indefinite"/>
       </rect>
     </g>
 
-    <!-- Processing nodes inside pipeline -->
-    <g id="processingNodes">
-      <!-- Parser node -->
-      <circle cx="-150" cy="0" r="15" fill="rgba(255, 107, 107, 0.2)" stroke="#ff6b6b" stroke-width="2" opacity="0.7">
-        <animate attributeName="opacity" values="0.7;0.7;1;0.7;0.7" keyTimes="0;0.15;0.2;0.25;1" dur="4s" repeatCount="indefinite"/>
-        <animate attributeName="r" values="15;18;15" keyTimes="0;0.5;1" dur="1s" begin="0.6s" repeatCount="1" fill="freeze"/>
-      </circle>
-      <circle cx="-150" cy="0" r="8" fill="#ff6b6b" opacity="0.4">
-        <animate attributeName="opacity" values="0.4;0.4;0.8;0.4;0.4" keyTimes="0;0.15;0.2;0.25;1" dur="4s" repeatCount="indefinite"/>
+    <!-- Data stream particles -->
+    <circle cx="-40" cy="-30" r="2" fill="#4ecdc4" opacity="0">
+      <animate attributeName="cy" values="-30;60;-30" dur="3s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0;0.8;0" dur="3s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="30" cy="-35" r="2" fill="#ff6b6b" opacity="0">
+      <animate attributeName="cy" values="-35;60;-35" dur="3.5s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0;0.8;0" dur="3.5s" repeatCount="indefinite"/>
+    </circle>
+  </g>
+
+  <!-- Top Right - Strategy Input -->
+  <g id="strategyInput" transform="translate(1100, 180)">
+    <circle cx="0" cy="0" r="90" fill="url(#circleGlow)"/>
+    <circle cx="0" cy="0" r="85" fill="none" stroke="#ff6b6b" stroke-width="2.5" opacity="0.7">
+      <animate attributeName="opacity" values="0.7;0.9;0.7" dur="3s" begin="0.3s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="0" cy="0" r="78" fill="none" stroke="#ff6b6b" stroke-width="1" opacity="0.25"/>
+
+    <!-- Strategy controls/sliders -->
+    <g id="strategyControls">
+      <!-- Risk slider -->
+      <line x1="-50" y1="-35" x2="50" y2="-35" stroke="#8892b0" stroke-width="3" opacity="0.4"/>
+      <circle cx="20" cy="-35" r="6" fill="#ff6b6b" opacity="0.8" stroke="#ff6b6b" stroke-width="2">
+        <animate attributeName="cx" values="20;-20;20" dur="4s" repeatCount="indefinite"/>
       </circle>
 
-      <!-- Transform node -->
-      <circle cx="-70" cy="0" r="15" fill="rgba(78, 205, 196, 0.2)" stroke="#4ecdc4" stroke-width="2" opacity="0.7">
-        <animate attributeName="opacity" values="0.7;0.7;0.7;1;0.7;0.7" keyTimes="0;0.35;0.4;0.45;0.5;1" dur="4s" repeatCount="indefinite"/>
-        <animate attributeName="r" values="15;18;15" keyTimes="0;0.5;1" dur="1s" begin="1.6s" repeatCount="1" fill="freeze"/>
-      </circle>
-      <circle cx="-70" cy="0" r="8" fill="#4ecdc4" opacity="0.4">
-        <animate attributeName="opacity" values="0.4;0.4;0.4;0.8;0.4;0.4" keyTimes="0;0.35;0.4;0.45;0.5;1" dur="4s" repeatCount="indefinite"/>
+      <!-- Timeframe slider -->
+      <line x1="-50" y1="-10" x2="50" y2="-10" stroke="#8892b0" stroke-width="3" opacity="0.4"/>
+      <circle cx="-15" cy="-10" r="6" fill="#4ecdc4" opacity="0.8" stroke="#4ecdc4" stroke-width="2">
+        <animate attributeName="cx" values="-15;25;-15" dur="4.5s" repeatCount="indefinite"/>
       </circle>
 
-      <!-- Validate node -->
-      <circle cx="10" cy="0" r="15" fill="rgba(255, 217, 61, 0.2)" stroke="#ffd93d" stroke-width="2" opacity="0.7">
-        <animate attributeName="opacity" values="0.7;0.7;0.7;0.7;1;0.7" keyTimes="0;0.55;0.6;0.65;0.7;1" dur="4s" repeatCount="indefinite"/>
-        <animate attributeName="r" values="15;18;15" keyTimes="0;0.5;1" dur="1s" begin="2.6s" repeatCount="1" fill="freeze"/>
-      </circle>
-      <circle cx="10" cy="0" r="8" fill="#ffd93d" opacity="0.4">
-        <animate attributeName="opacity" values="0.4;0.4;0.4;0.4;0.8;0.4" keyTimes="0;0.55;0.6;0.65;0.7;1" dur="4s" repeatCount="indefinite"/>
+      <!-- Position size slider -->
+      <line x1="-50" y1="15" x2="50" y2="15" stroke="#8892b0" stroke-width="3" opacity="0.4"/>
+      <circle cx="5" cy="15" r="6" fill="#ffd93d" opacity="0.8" stroke="#ffd93d" stroke-width="2">
+        <animate attributeName="cx" values="5;-30;5" dur="3.8s" repeatCount="indefinite"/>
       </circle>
 
-      <!-- Serialize node -->
-      <circle cx="90" cy="0" r="15" fill="rgba(167, 139, 250, 0.2)" stroke="#a78bfa" stroke-width="2" opacity="0.7">
-        <animate attributeName="opacity" values="0.7;0.7;0.7;0.7;0.7;1" keyTimes="0;0.75;0.8;0.85;0.9;0.95" dur="4s" repeatCount="indefinite"/>
-        <animate attributeName="r" values="15;18;15" keyTimes="0;0.5;1" dur="1s" begin="3.6s" repeatCount="1" fill="freeze"/>
+      <!-- Buy/Sell signals -->
+      <g id="signals" transform="translate(0, 45)">
+        <!-- Buy signal (up arrow) -->
+        <path d="M -25 5 L -25 -5 L -30 0 L -25 -5 L -20 0 Z" fill="#4ecdc4" opacity="0.7">
+          <animate attributeName="opacity" values="0.7;1;0.7" dur="1.5s" repeatCount="indefinite"/>
+        </path>
+        <circle cx="-25" cy="0" r="12" fill="none" stroke="#4ecdc4" stroke-width="2" opacity="0.5"/>
+
+        <!-- Sell signal (down arrow) -->
+        <path d="M 25 -5 L 25 5 L 20 0 L 25 5 L 30 0 Z" fill="#ff6b6b" opacity="0.7">
+          <animate attributeName="opacity" values="0.7;1;0.7" dur="1.5s" begin="0.75s" repeatCount="indefinite"/>
+        </path>
+        <circle cx="25" cy="0" r="12" fill="none" stroke="#ff6b6b" stroke-width="2" opacity="0.5"/>
+      </g>
+    </g>
+
+    <!-- Strategy particles -->
+    <circle cx="-30" cy="40" r="2" fill="#ffd93d" opacity="0">
+      <animate attributeName="cy" values="40;70;40" dur="3.2s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0;0.8;0" dur="3.2s" repeatCount="indefinite"/>
+    </circle>
+  </g>
+
+  <!-- Center - Simulation Engine -->
+  <g id="simulationEngine" transform="translate(700, 350)">
+    <ellipse cx="0" cy="0" rx="120" ry="80" fill="url(#pulseGradient)" opacity="0">
+      <animate attributeName="opacity" values="0;0.6;0.4;0" keyTimes="0;0.25;0.5;0.7" dur="6s" repeatCount="indefinite"/>
+      <animate attributeName="rx" values="120;150;120" keyTimes="0;0.5;1" dur="4s" begin="1.5s" repeatCount="1" fill="freeze"/>
+      <animate attributeName="ry" values="80;100;80" keyTimes="0;0.5;1" dur="4s" begin="1.5s" repeatCount="1" fill="freeze"/>
+    </ellipse>
+
+    <!-- CPU-like processing core -->
+    <g id="processingCore">
+      <rect x="-50" y="-50" width="100" height="100" rx="8" fill="rgba(255, 107, 107, 0.08)" 
+            stroke="#ff6b6b" stroke-width="2.5" opacity="0.7">
+        <animate attributeName="opacity" values="0.7;0.95;0.7" dur="2s" repeatCount="indefinite"/>
+      </rect>
+
+      <!-- Grid pattern inside -->
+      <g id="gridPattern" opacity="0.4">
+        <line x1="-50" y1="-17" x2="50" y2="-17" stroke="#ff6b6b" stroke-width="1"/>
+        <line x1="-50" y1="17" x2="50" y2="17" stroke="#ff6b6b" stroke-width="1"/>
+        <line x1="-17" y1="-50" x2="-17" y2="50" stroke="#ff6b6b" stroke-width="1"/>
+        <line x1="17" y1="-50" x2="17" y2="50" stroke="#ff6b6b" stroke-width="1"/>
+      </g>
+
+      <!-- Central processing indicator -->
+      <circle cx="0" cy="0" r="25" fill="none" stroke="#ff6b6b" stroke-width="2.5" opacity="0.6" filter="url(#glow)">
+        <animate attributeName="r" values="25;30;25" dur="2s" repeatCount="indefinite"/>
+        <animate attributeName="opacity" values="0.6;0.9;0.6" dur="2s" repeatCount="indefinite"/>
       </circle>
-      <circle cx="90" cy="0" r="8" fill="#a78bfa" opacity="0.4">
-        <animate attributeName="opacity" values="0.4;0.4;0.4;0.4;0.4;0.8" keyTimes="0;0.75;0.8;0.85;0.9;0.95" dur="4s" repeatCount="indefinite"/>
+
+      <!-- Rotating calculation symbols -->
+      <g id="calculations">
+        <text x="-8" y="8" fill="#ff6b6b" font-size="20" font-weight="bold" opacity="0.7">×</text>
+        <text x="-8" y="8" fill="#4ecdc4" font-size="20" font-weight="bold" opacity="0">+
+          <animate attributeName="opacity" values="0;0.7;0" dur="2s" repeatCount="indefinite"/>
+        </text>
+        <text x="-8" y="8" fill="#ffd93d" font-size="20" font-weight="bold" opacity="0">÷
+          <animate attributeName="opacity" values="0;0;0.7;0;0" keyTimes="0;0.5;0.75;0.85;1" dur="2s" repeatCount="indefinite"/>
+        </text>
+      </g>
+
+      <!-- Corner indicators (like CPU pins) -->
+      <circle cx="-45" cy="-45" r="3" fill="#4ecdc4" opacity="0.6">
+        <animate attributeName="opacity" values="0.6;1;0.6" dur="1s" repeatCount="indefinite"/>
+      </circle>
+      <circle cx="45" cy="-45" r="3" fill="#4ecdc4" opacity="0.6">
+        <animate attributeName="opacity" values="0.6;1;0.6" dur="1s" begin="0.25s" repeatCount="indefinite"/>
+      </circle>
+      <circle cx="45" cy="45" r="3" fill="#4ecdc4" opacity="0.6">
+        <animate attributeName="opacity" values="0.6;1;0.6" dur="1s" begin="0.5s" repeatCount="indefinite"/>
+      </circle>
+      <circle cx="-45" cy="45" r="3" fill="#4ecdc4" opacity="0.6">
+        <animate attributeName="opacity" values="0.6;1;0.6" dur="1s" begin="0.75s" repeatCount="indefinite"/>
       </circle>
     </g>
 
-    <!-- Connecting pulses between nodes -->
-    <g id="nodePulses" opacity="0.6">
-      <line x1="-135" y1="0" x2="-85" y2="0" stroke="#ff6b6b" stroke-width="2" opacity="0">
-        <animate attributeName="opacity" values="0;0;0.8;0;0" keyTimes="0;0.2;0.3;0.35;1" dur="4s" repeatCount="indefinite"/>
-      </line>
-      <line x1="-55" y1="0" x2="-5" y2="0" stroke="#4ecdc4" stroke-width="2" opacity="0">
-        <animate attributeName="opacity" values="0;0;0;0.8;0;0" keyTimes="0;0.4;0.5;0.55;0.6;1" dur="4s" repeatCount="indefinite"/>
-      </line>
-      <line x1="25" y1="0" x2="75" y2="0" stroke="#ffd93d" stroke-width="2" opacity="0">
-        <animate attributeName="opacity" values="0;0;0;0;0.8;0" keyTimes="0;0.6;0.7;0.75;0.8;1" dur="4s" repeatCount="indefinite"/>
-      </line>
-    </g>
+    <!-- Data flowing in from top -->
+    <g id="inflowStreams">
+      <path d="M -280 -170 Q -140 -85 0 -50" fill="none" stroke="#ff6b6b" stroke-width="2" opacity="0" stroke-dasharray="5,5">
+        <animate attributeName="opacity" values="0;0.6;0.6" keyTimes="0;0.2;1" dur="6s" repeatCount="indefinite"/>
+        <animate attributeName="stroke-dashoffset" values="0;-100" dur="3s" repeatCount="indefinite"/>
+      </path>
+      <path d="M 280 -170 Q 140 -85 0 -50" fill="none" stroke="#ff6b6b" stroke-width="2" opacity="0" stroke-dasharray="5,5">
+        <animate attributeName="opacity" values="0;0.6;0.6" keyTimes="0;0.2;1" dur="6s" repeatCount="indefinite"/>
+        <animate attributeName="stroke-dashoffset" values="0;-100" dur="3s" repeatCount="indefinite"/>
+      </path>
 
-    <!-- Energy particles in pipeline -->
-    <g id="energyBits">
-      <circle cx="-180" cy="-20" r="2" fill="#ff6b6b" filter="url(#softGlow)">
-        <animate attributeName="cx" values="-180;180" dur="4s" repeatCount="indefinite"/>
-        <animate attributeName="opacity" values="0;0.9;0.9;0" keyTimes="0;0.1;0.9;1" dur="4s" repeatCount="indefinite"/>
+      <!-- Flowing particles -->
+      <circle r="3" fill="#4ecdc4" filter="url(#softGlow)">
+        <animateMotion path="M -280 -170 Q -140 -85 0 -50" dur="2s" begin="0.5s" repeatCount="indefinite"/>
+        <animate attributeName="opacity" values="0;0.9;0.9;0" keyTimes="0;0.2;0.8;1" dur="2s" begin="0.5s" repeatCount="indefinite"/>
       </circle>
-      <circle cx="-180" cy="20" r="2" fill="#4ecdc4" filter="url(#softGlow)">
-        <animate attributeName="cx" values="-180;180" dur="4s" begin="0.5s" repeatCount="indefinite"/>
-        <animate attributeName="opacity" values="0;0.9;0.9;0" keyTimes="0;0.1;0.9;1" dur="4s" begin="0.5s" repeatCount="indefinite"/>
-      </circle>
-      <circle cx="-180" cy="0" r="2" fill="#ffd93d" filter="url(#softGlow)">
-        <animate attributeName="cx" values="-180;180" dur="4s" begin="1s" repeatCount="indefinite"/>
-        <animate attributeName="opacity" values="0;0.9;0.9;0" keyTimes="0;0.1;0.9;1" dur="4s" begin="1s" repeatCount="indefinite"/>
+      <circle r="3" fill="#ffd93d" filter="url(#softGlow)">
+        <animateMotion path="M 280 -170 Q 140 -85 0 -50" dur="2s" begin="0.8s" repeatCount="indefinite"/>
+        <animate attributeName="opacity" values="0;0.9;0.9;0" keyTimes="0;0.2;0.8;1" dur="2s" begin="0.8s" repeatCount="indefinite"/>
       </circle>
     </g>
   </g>
 
-  <!-- Right Side - TOON Structure -->
-  <g id="toonSide" transform="translate(1150, 350)">
-    <!-- Background glow -->
-    <ellipse cx="0" cy="0" rx="150" ry="180" fill="url(#circleGlow)" opacity="0.8"/>
-    
-    <!-- TOON format structure (tree-like) -->
-    <g id="toonStructure">
-      <!-- Root node -->
-      <circle cx="0" cy="-120" r="12" fill="#ff6b6b" opacity="0.8" stroke="#ff6b6b" stroke-width="2">
-        <animate attributeName="opacity" values="0.8;1;0.8" dur="3s" begin="0.5s" repeatCount="indefinite"/>
-        <animate attributeName="r" values="12;15;12" keyTimes="0;0.5;1" dur="2s" begin="3.8s" repeatCount="1" fill="freeze"/>
+  <!-- Bottom Left - Portfolio Analytics -->
+  <g id="portfolioAnalytics" transform="translate(300, 520)">
+    <circle cx="0" cy="0" r="90" fill="url(#circleGlow)"/>
+    <circle cx="0" cy="0" r="85" fill="none" stroke="#ff6b6b" stroke-width="2.5" opacity="0.7">
+      <animate attributeName="opacity" values="0.7;0.9;0.7" dur="3s" begin="0.6s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="0" cy="0" r="78" fill="none" stroke="#ff6b6b" stroke-width="1" opacity="0.25"/>
+
+    <!-- Pie chart segments -->
+    <g id="pieChart">
+      <!-- Segment 1 (40%) -->
+      <path d="M 0 0 L 0 -45 A 45 45 0 0 1 38.97 22.5 Z" fill="#4ecdc4" opacity="0" stroke="#4ecdc4" stroke-width="1.5">
+        <animate attributeName="opacity" values="0;0;0;0;0.7;0.7" keyTimes="0;0.6;0.65;0.7;0.75;1" dur="6s" repeatCount="indefinite"/>
+      </path>
+      
+      <!-- Segment 2 (30%) -->
+      <path d="M 0 0 L 38.97 22.5 A 45 45 0 0 1 -13.5 43.35 Z" fill="#ffd93d" opacity="0" stroke="#ffd93d" stroke-width="1.5">
+        <animate attributeName="opacity" values="0;0;0;0;0;0.7;0.7" keyTimes="0;0.65;0.7;0.73;0.76;0.8;1" dur="6s" repeatCount="indefinite"/>
+      </path>
+      
+      <!-- Segment 3 (20%) -->
+      <path d="M 0 0 L -13.5 43.35 A 45 45 0 0 1 -43.35 -13.5 Z" fill="#ff6b6b" opacity="0" stroke="#ff6b6b" stroke-width="1.5">
+        <animate attributeName="opacity" values="0;0;0;0;0;0;0.6;0.6" keyTimes="0;0.7;0.75;0.78;0.81;0.84;0.87;1" dur="6s" repeatCount="indefinite"/>
+      </path>
+      
+      <!-- Segment 4 (10%) -->
+      <path d="M 0 0 L -43.35 -13.5 A 45 45 0 0 1 0 -45 Z" fill="#a78bfa" opacity="0" stroke="#a78bfa" stroke-width="1.5">
+        <animate attributeName="opacity" values="0;0;0;0;0;0;0;0.6;0.6" keyTimes="0;0.75;0.8;0.83;0.86;0.89;0.92;0.95;1" dur="6s" repeatCount="indefinite"/>
+      </path>
+
+      <!-- Center circle -->
+      <circle cx="0" cy="0" r="20" fill="#171314" opacity="0">
+        <animate attributeName="opacity" values="0;0;0;0;0.9;0.9" keyTimes="0;0.6;0.65;0.7;0.75;1" dur="6s" repeatCount="indefinite"/>
+      </circle>
+    </g>
+
+    <!-- Legend dots -->
+    <g id="legend" opacity="0">
+      <circle cx="-55" cy="60" r="3" fill="#4ecdc4"/>
+      <circle cx="-20" cy="60" r="3" fill="#ffd93d"/>
+      <circle cx="15" cy="60" r="3" fill="#ff6b6b"/>
+      <circle cx="50" cy="60" r="3" fill="#a78bfa"/>
+      <animate attributeName="opacity" values="0;0;0;0;0;0.7;0.7" keyTimes="0;0.75;0.8;0.85;0.9;0.93;1" dur="6s" repeatCount="indefinite"/>
+    </g>
+  </g>
+
+  <!-- Bottom Right - Performance Metrics -->
+  <g id="performanceMetrics" transform="translate(1100, 520)">
+    <circle cx="0" cy="0" r="90" fill="url(#circleGlow)"/>
+    <circle cx="0" cy="0" r="85" fill="none" stroke="#ff6b6b" stroke-width="2.5" opacity="0.7">
+      <animate attributeName="opacity" values="0.7;0.9;0.7" dur="3s" begin="0.9s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="0" cy="0" r="78" fill="none" stroke="#ff6b6b" stroke-width="1" opacity="0.25"/>
+
+    <!-- Profit/Loss Chart -->
+    <g id="plChart">
+      <!-- Chart line (profit) -->
+      <path d="M -55 30 L -40 20 L -25 25 L -10 10 L 5 -5 L 20 -15 L 35 -20 L 50 -25" 
+            fill="none" stroke="#4ecdc4" stroke-width="3" stroke-linecap="round" opacity="0">
+        <animate attributeName="opacity" values="0;0;0;0;0;0.8;0.8" keyTimes="0;0.6;0.65;0.7;0.75;0.8;1" dur="6s" repeatCount="indefinite"/>
+      </path>
+
+      <!-- Profit area fill -->
+      <path d="M -55 30 L -40 20 L -25 25 L -10 10 L 5 -5 L 20 -15 L 35 -20 L 50 -25 L 50 30 L -55 30 Z" 
+            fill="url(#profitGradient)" opacity="0">
+        <animate attributeName="opacity" values="0;0;0;0;0;0.4;0.4" keyTimes="0;0.6;0.65;0.7;0.75;0.8;1" dur="6s" repeatCount="indefinite"/>
+      </path>
+
+      <!-- Data points -->
+      <circle cx="-55" cy="30" r="3" fill="#4ecdc4" opacity="0">
+        <animate attributeName="opacity" values="0;0;0;0;0;0.9;0.9" keyTimes="0;0.6;0.65;0.7;0.75;0.8;1" dur="6s" repeatCount="indefinite"/>
+      </circle>
+      <circle cx="-10" cy="10" r="3" fill="#4ecdc4" opacity="0">
+        <animate attributeName="opacity" values="0;0;0;0;0;0;0.9;0.9" keyTimes="0;0.65;0.7;0.75;0.8;0.83;0.86;1" dur="6s" repeatCount="indefinite"/>
+      </circle>
+      <circle cx="20" cy="-15" r="3" fill="#4ecdc4" opacity="0">
+        <animate attributeName="opacity" values="0;0;0;0;0;0;0;0.9;0.9" keyTimes="0;0.7;0.75;0.8;0.83;0.86;0.89;0.92;1" dur="6s" repeatCount="indefinite"/>
+      </circle>
+      <circle cx="50" cy="-25" r="3" fill="#4ecdc4" opacity="0">
+        <animate attributeName="opacity" values="0;0;0;0;0;0;0;0;0.9" keyTimes="0;0.75;0.8;0.83;0.86;0.89;0.92;0.95;1" dur="6s" repeatCount="indefinite"/>
       </circle>
 
-      <!-- Main branches -->
-      <g id="mainBranches">
-        <!-- Branch lines -->
-        <path d="M 0 -108 L -40 -70" stroke="#ff6b6b" stroke-width="2.5" opacity="0" stroke-linecap="round">
-          <animate attributeName="opacity" values="0;0;0;0;0.7;0.7" keyTimes="0;0.85;0.88;0.9;0.93;1" dur="4s" repeatCount="indefinite"/>
-        </path>
-        <path d="M 0 -108 L 40 -70" stroke="#ff6b6b" stroke-width="2.5" opacity="0" stroke-linecap="round">
-          <animate attributeName="opacity" values="0;0;0;0;0.7;0.7" keyTimes="0;0.85;0.88;0.9;0.93;1" dur="4s" repeatCount="indefinite"/>
-        </path>
+      <!-- Axes -->
+      <line x1="-60" y1="35" x2="60" y2="35" stroke="#8892b0" stroke-width="1.5" opacity="0.3"/>
+      <line x1="-55" y1="40" x2="-55" y2="-30" stroke="#8892b0" stroke-width="1.5" opacity="0.3"/>
+    </g>
 
-        <!-- Level 1 nodes -->
-        <circle cx="-40" cy="-70" r="10" fill="#4ecdc4" opacity="0" stroke="#4ecdc4" stroke-width="2">
-          <animate attributeName="opacity" values="0;0;0;0;0.8;0.8" keyTimes="0;0.85;0.88;0.92;0.95;1" dur="4s" repeatCount="indefinite"/>
-        </circle>
-        <circle cx="40" cy="-70" r="10" fill="#4ecdc4" opacity="0" stroke="#4ecdc4" stroke-width="2">
-          <animate attributeName="opacity" values="0;0;0;0;0.8;0.8" keyTimes="0;0.85;0.88;0.92;0.95;1" dur="4s" repeatCount="indefinite"/>
-        </circle>
+    <!-- Win rate indicator -->
+    <g id="winRate" transform="translate(0, 60)" opacity="0">
+      <circle cx="0" cy="0" r="15" fill="none" stroke="#4ecdc4" stroke-width="3" opacity="0.3"/>
+      <path d="M 0 -15 A 15 15 0 1 1 -0.1 -15" fill="none" stroke="#4ecdc4" stroke-width="3" stroke-linecap="round" opacity="0.8">
+        <animate attributeName="stroke-dasharray" values="0,100;70,100" dur="2s" begin="5s" fill="freeze"/>
+      </path>
+      <animate attributeName="opacity" values="0;0;0;0;0;0;0;0.8;0.8" keyTimes="0;0.75;0.8;0.83;0.86;0.89;0.92;0.95;1" dur="6s" repeatCount="indefinite"/>
+    </g>
+  </g>
 
-        <!-- Sub-branches left -->
-        <path d="M -40 -60 L -65 -30" stroke="#4ecdc4" stroke-width="2" opacity="0" stroke-linecap="round">
-          <animate attributeName="opacity" values="0;0;0;0;0;0.6;0.6" keyTimes="0;0.88;0.91;0.93;0.95;0.97;1" dur="4s" repeatCount="indefinite"/>
-        </path>
-        <path d="M -40 -60 L -15 -30" stroke="#4ecdc4" stroke-width="2" opacity="0" stroke-linecap="round">
-          <animate attributeName="opacity" values="0;0;0;0;0;0.6;0.6" keyTimes="0;0.88;0.91;0.93;0.95;0.97;1" dur="4s" repeatCount="indefinite"/>
-        </path>
+  <!-- Data flow connections -->
+  <g id="dataConnections" opacity="0.4">
+    <!-- From market to engine -->
+    <path d="M 330 240 Q 515 295 650 350" fill="none" stroke="#ff6b6b" stroke-width="1.5" stroke-dasharray="5,5">
+      <animate attributeName="stroke-dashoffset" values="0;-50" dur="2s" repeatCount="indefinite"/>
+    </path>
 
-        <!-- Sub-branches right -->
-        <path d="M 40 -60 L 15 -30" stroke="#4ecdc4" stroke-width="2" opacity="0" stroke-linecap="round">
-          <animate attributeName="opacity" values="0;0;0;0;0;0.6;0.6" keyTimes="0;0.88;0.91;0.93;0.95;0.97;1" dur="4s" repeatCount="indefinite"/>
-        </path>
-        <path d="M 40 -60 L 65 -30" stroke="#4ecdc4" stroke-width="2" opacity="0" stroke-linecap="round">
-          <animate attributeName="opacity" values="0;0;0;0;0;0.6;0.6" keyTimes="0;0.88;0.91;0.93;0.95;0.97;1" dur="4s" repeatCount="indefinite"/>
-        </path>
+    <!-- From strategy to engine -->
+    <path d="M 1070 240 Q 885 295 750 350" fill="none" stroke="#ff6b6b" stroke-width="1.5" stroke-dasharray="5,5">
+      <animate attributeName="stroke-dashoffset" values="0;-50" dur="2s" begin="0.3s" repeatCount="indefinite"/>
+    </path>
 
-        <!-- Level 2 nodes -->
-        <circle cx="-65" cy="-30" r="8" fill="#ffd93d" opacity="0" stroke="#ffd93d" stroke-width="1.5">
-          <animate attributeName="opacity" values="0;0;0;0;0;0.7;0.7" keyTimes="0;0.9;0.93;0.95;0.97;0.98;1" dur="4s" repeatCount="indefinite"/>
-        </circle>
-        <circle cx="-15" cy="-30" r="8" fill="#ffd93d" opacity="0" stroke="#ffd93d" stroke-width="1.5">
-          <animate attributeName="opacity" values="0;0;0;0;0;0.7;0.7" keyTimes="0;0.9;0.93;0.95;0.97;0.98;1" dur="4s" repeatCount="indefinite"/>
-        </circle>
-        <circle cx="15" cy="-30" r="8" fill="#ffd93d" opacity="0" stroke="#ffd93d" stroke-width="1.5">
-          <animate attributeName="opacity" values="0;0;0;0;0;0.7;0.7" keyTimes="0;0.9;0.93;0.95;0.97;0.98;1" dur="4s" repeatCount="indefinite"/>
-        </circle>
-        <circle cx="65" cy="-30" r="8" fill="#ffd93d" opacity="0" stroke="#ffd93d" stroke-width="1.5">
-          <animate attributeName="opacity" values="0;0;0;0;0;0.7;0.7" keyTimes="0;0.9;0.93;0.95;0.97;0.98;1" dur="4s" repeatCount="indefinite"/>
-        </circle>
+    <!-- From engine to portfolio -->
+    <path d="M 650 400 Q 475 460 330 490" fill="none" stroke="#4ecdc4" stroke-width="1.5" opacity="0" stroke-dasharray="5,5">
+      <animate attributeName="opacity" values="0;0;0;0.5;0.5" keyTimes="0;0.4;0.45;0.5;1" dur="6s" repeatCount="indefinite"/>
+      <animate attributeName="stroke-dashoffset" values="0;-50" dur="2s" begin="2.4s" repeatCount="indefinite"/>
+    </path>
 
-        <!-- Leaf nodes (deeper levels) -->
-        <g id="leafBranches">
-          <path d="M -65 -22 L -75 5" stroke="#ffd93d" stroke-width="1.5" opacity="0" stroke-linecap="round">
-            <animate attributeName="opacity" values="0;0;0;0;0;0;0.5;0.5" keyTimes="0;0.92;0.94;0.96;0.97;0.98;0.99;1" dur="4s" repeatCount="indefinite"/>
-          </path>
-          <path d="M -65 -22 L -55 5" stroke="#ffd93d" stroke-width="1.5" opacity="0" stroke-linecap="round">
-            <animate attributeName="opacity" values="0;0;0;0;0;0;0.5;0.5" keyTimes="0;0.92;0.94;0.96;0.97;0.98;0.99;1" dur="4s" repeatCount="indefinite"/>
-          </path>
+    <!-- From engine to performance -->
+    <path d="M 750 400 Q 925 460 1070 490" fill="none" stroke="#4ecdc4" stroke-width="1.5" opacity="0" stroke-dasharray="5,5">
+      <animate attributeName="opacity" values="0;0;0;0.5;0.5" keyTimes="0;0.4;0.45;0.5;1" dur="6s" repeatCount="indefinite"/>
+      <animate attributeName="stroke-dashoffset" values="0;-50" dur="2s" begin="2.7s" repeatCount="indefinite"/>
+    </path>
+  </g>
 
-          <circle cx="-75" cy="5" r="6" fill="#a78bfa" opacity="0" stroke="#a78bfa" stroke-width="1.5">
-            <animate attributeName="opacity" values="0;0;0;0;0;0;0.6;0.6" keyTimes="0;0.93;0.95;0.97;0.98;0.99;0.995;1" dur="4s" repeatCount="indefinite"/>
-          </circle>
-          <circle cx="-55" cy="5" r="6" fill="#a78bfa" opacity="0" stroke="#a78bfa" stroke-width="1.5">
-            <animate attributeName="opacity" values="0;0;0;0;0;0;0.6;0.6" keyTimes="0;0.93;0.95;0.97;0.98;0.99;0.995;1" dur="4s" repeatCount="indefinite"/>
-          </circle>
+  <!-- Ambient particles -->
+  <g id="ambientParticles" opacity="0.4">
+    <circle cx="150" cy="350" r="2" fill="#ff6b6b">
+      <animate attributeName="opacity" values="0.2;0.7;0.2" dur="3s" repeatCount="indefinite"/>
+      <animate attributeName="cy" values="350;345;350" dur="3s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="1250" cy="350" r="2" fill="#4ecdc4">
+      <animate attributeName="opacity" values="0.3;0.8;0.3" dur="4s" repeatCount="indefinite"/>
+      <animate attributeName="cy" values="350;345;350" dur="4s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="700" cy="80" r="1.5" fill="#ffd93d">
+      <animate attributeName="opacity" values="0.2;0.6;0.2" dur="3.5s" repeatCount="indefinite"/>
+      <animate attributeName="cy" values="80;75;80" dur="3.5s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="400" cy="620" r="1.5" fill="#ff6b6b">
+      <animate attributeName="opacity" values="0.3;0.7;0.3" dur="4.5s" repeatCount="indefinite"/>
+      <animate attributeName="cy" values="620;615;620" dur="4.5s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="1000" cy="620" r="1.5" fill="#4ecdc4">
+      <animate attributeName="opacity" values="0.2;0.6;0.2" dur="3.8s" repeatCount="indefinite"/>
+      <animate attributeName="cy" values="620;615;620" dur="3.8s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="500" cy="250" r="1.5" fill="#a78bfa">
+      <animate attributeName="opacity" values="0.25;0.65;0.25" dur="4.2s" repeatCount="indefinite"/>
+      <animate attributeName="cy" values="250;245;250" dur="4.2s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="900" cy="250" r="1.5" fill="#ffd93d">
+      <animate attributeName="opacity" values="0.3;0.7;0.3" dur="3.6s" repeatCount="indefinite"/>
+      <animate attributeName="cy" values="250;245;250" dur="3.6s" repeatCount="indefinite"/>
+    </circle>
+  </g>
 
-          <!-- More leaf patterns -->
-          <path d="M 15 -22 L 5 5" stroke="#ffd93d" stroke-width="1.5" opacity="0" stroke-linecap="round">
-            <animate attributeName="opacity" values="0;0;0;0;0;0;0.5;0.5" keyTimes="0;0.92;0.94;0.96;0.97;0.98;0.99;1" dur="4s" repeatCount="indefinite"/>
-          </path>
-          <path d="M 15 -22 L 25 5" stroke="#ffd93d" stroke-width="1.5" opacity="0" stroke-linecap="round">
-            <animate attributeName="opacity" values="0;0;0;0;0;0;0.5;0.5" keyTimes="0;0.92;0.94;0.96;0.97;0.98;0.99;1" dur="4s" repeatCount="indefinite"/>
-          </path>
-          
-          <circle cx="5" cy="5" r="6" fill="#a78bfa" opacity="0" stroke="#a78bfa" stroke-width="1.5">
-            <animate attributeName="opacity" values="0;0;0;0;0;0;0.6;0.6" keyTimes="0;0.93;0.95;0.97;0.98;0.99;0.995;1" dur="4s" repeatCount="indefinite"/>
-          </circle>
-          <circle cx="25" cy="5" r="6" fill="#a78bfa" opacity="0" stroke="#a78bfa" stroke-width="1.5">
-            <animate attributeName="opacity" values="0;0;0;0;0;0;0.6;0.6" keyTimes="0;0.93;0.95;0.97;0.98;0.99;0.995;1" dur="4s" repeatCount="indefinite"/>
-          </circle>
-        </g>
+  <!-- Trade execution flashes -->
+  <g id="tradeFlashes">
+    <!-- Buy flash -->
+    <circle cx="700" cy="350" r="80" fill="#4ecdc4" opacity="0" filter="url(#strongGlow)">
+      <animate attributeName="opacity" values="0;0.3;0" keyTimes="0;0.5;1" dur="0.5s" begin="2.5s" repeatCount="1" fill="freeze"/>
+    </circle>
+    
+    <!-- Sell flash -->
+    <circle cx="700" cy="350" r="80" fill="#ff6b6b" opacity="0" filter="url(#strongGlow)">
+      <animate attributeName="opacity" values="0;0.3;0" keyTimes="0;0.5;1" dur="0.5s" begin="4.5s" repeatCount="1" fill="freeze"/>
+    </circle>
+  </g>
 
-        <!-- Additional lower branches -->
-        <path d="M 0 -108 L -30 40" stroke="#ff6b6b" stroke-width="2.5" opacity="0" stroke-linecap="round">
-          <animate attributeName="opacity" values="0;0;0;0;0.7;0.7" keyTimes="0;0.85;0.88;0.9;0.93;1" dur="4s" repeatCount="indefinite"/>
-        </path>
-        <path d="M 0 -108 L 30 40" stroke="#ff6b6b" stroke-width="2.5" opacity="0" stroke-linecap="round">
-          <animate attributeName="opacity" values="0;0;0;0;0.7;0.7" keyTimes="0;0.85;0.88;0.9;0.93;1" dur="4s" repeatCount="indefinite"/>
-        </path>
+  <!-- Success ripple effect from center -->
+  <g id="successRipple">
+    <circle cx="700" cy="350" r="50" fill="none" stroke="#4ecdc4" stroke-width="3" opacity="0">
+      <animate attributeName="r" values="50;150;250" dur="2s" begin="5.5s" repeatCount="1" fill="freeze"/>
+      <animate attributeName="opacity" values="0;0.6;0" keyTimes="0;0.3;1" dur="2s" begin="5.5s" repeatCount="1" fill="freeze"/>
+      <animate attributeName="stroke-width" values="3;2;1" dur="2s" begin="5.5s" repeatCount="1" fill="freeze"/>
+    </circle>
+    <circle cx="700" cy="350" r="50" fill="none" stroke="#4ecdc4" stroke-width="3" opacity="0">
+      <animate attributeName="r" values="50;150;250" dur="2s" begin="5.8s" repeatCount="1" fill="freeze"/>
+      <animate attributeName="opacity" values="0;0.6;0" keyTimes="0;0.3;1" dur="2s" begin="5.8s" repeatCount="1" fill="freeze"/>
+      <animate attributeName="stroke-width" values="3;2;1" dur="2s" begin="5.8s" repeatCount="1" fill="freeze"/>
+    </circle>
+  </g>
 
-        <circle cx="-30" cy="40" r="9" fill="#4ecdc4" opacity="0" stroke="#4ecdc4" stroke-width="2">
-          <animate attributeName="opacity" values="0;0;0;0;0.8;0.8" keyTimes="0;0.85;0.88;0.92;0.95;1" dur="4s" repeatCount="indefinite"/>
-        </circle>
+  <!-- Money/profit symbols floating up -->
+  <g id="profitSymbols" opacity="0.7">
+    <text x="650" y="400" fill="#4ecdc4" font-size="24" font-weight="bold" opacity="0">$
+      <animate attributeName="y" values="400;250;400" dur="3s" begin="5s" repeatCount="1" fill="freeze"/>
+      <animate attributeName="opacity" values="0;0.8;0" keyTimes="0;0.3;1" dur="3s" begin="5s" repeatCount="1" fill="freeze"/>
+    </text>
+    <text x="720" y="420" fill="#4ecdc4" font-size="20" font-weight="bold" opacity="0">+
+      <animate attributeName="y" values="420;270;420" dur="3s" begin="5.3s" repeatCount="1" fill="freeze"/>
+      <animate attributeName="opacity" values="0;0.7;0" keyTimes="0;0.3;1" dur="3s" begin="5.3s" repeatCount="1" fill="freeze"/>
+    </text>
+    <text x="680" y="380" fill="#4ecdc4" font-size="18" font-weight="bold" opacity="0">↑
+      <animate attributeName="y" values="380;240;380" dur="3s" begin="5.6s" repeatCount="1" fill="freeze"/>
+      <animate attributeName="opacity" values="0;0.8;0" keyTimes="0;0.3;1" dur="3s" begin="5.6s" repeatCount="1" fill="freeze"/>
+    </text>
+  </g>
+</svg>
