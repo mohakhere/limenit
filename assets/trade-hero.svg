@@ -371,4 +371,75 @@
   <!-- Ambient particles -->
   <g id="ambientParticles" opacity="0.4">
     <circle cx="150" cy="350" r="2" fill="#ff6b6b">
-      <animate attributeName="opacity" values="0.2;0.
+      <animate attributeName="opacity" values="0.2;0.7;0.2" dur="3s" repeatCount="indefinite"/>
+      <animate attributeName="cy" values="350;345;350" dur="3s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="1250" cy="350" r="2" fill="#4ecdc4">
+      <animate attributeName="opacity" values="0.3;0.8;0.3" dur="4s" repeatCount="indefinite"/>
+      <animate attributeName="cy" values="350;345;350" dur="4s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="700" cy="80" r="1.5" fill="#ffd93d">
+      <animate attributeName="opacity" values="0.2;0.6;0.2" dur="3.5s" repeatCount="indefinite"/>
+      <animate attributeName="cy" values="80;75;80" dur="3.5s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="400" cy="620" r="1.5" fill="#ff6b6b">
+      <animate attributeName="opacity" values="0.3;0.7;0.3" dur="4.5s" repeatCount="indefinite"/>
+      <animate attributeName="cy" values="620;615;620" dur="4.5s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="1000" cy="620" r="1.5" fill="#4ecdc4">
+      <animate attributeName="opacity" values="0.2;0.6;0.2" dur="3.8s" repeatCount="indefinite"/>
+      <animate attributeName="cy" values="620;615;620" dur="3.8s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="500" cy="250" r="1.5" fill="#a78bfa">
+      <animate attributeName="opacity" values="0.25;0.65;0.25" dur="4.2s" repeatCount="indefinite"/>
+      <animate attributeName="cy" values="250;245;250" dur="4.2s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="900" cy="250" r="1.5" fill="#ffd93d">
+      <animate attributeName="opacity" values="0.3;0.7;0.3" dur="3.6s" repeatCount="indefinite"/>
+      <animate attributeName="cy" values="250;245;250" dur="3.6s" repeatCount="indefinite"/>
+    </circle>
+  </g>
+
+  <!-- Trade execution flashes -->
+  <g id="tradeFlashes">
+    <!-- Buy flash -->
+    <circle cx="700" cy="350" r="80" fill="#4ecdc4" opacity="0" filter="url(#strongGlow)">
+      <animate attributeName="opacity" values="0;0.3;0" keyTimes="0;0.5;1" dur="0.5s" begin="2.5s" repeatCount="1" fill="freeze"/>
+    </circle>
+    
+    <!-- Sell flash -->
+    <circle cx="700" cy="350" r="80" fill="#ff6b6b" opacity="0" filter="url(#strongGlow)">
+      <animate attributeName="opacity" values="0;0.3;0" keyTimes="0;0.5;1" dur="0.5s" begin="4.5s" repeatCount="1" fill="freeze"/>
+    </circle>
+  </g>
+
+  <!-- Success ripple effect from center -->
+  <g id="successRipple">
+    <circle cx="700" cy="350" r="50" fill="none" stroke="#4ecdc4" stroke-width="3" opacity="0">
+      <animate attributeName="r" values="50;150;250" dur="2s" begin="5.5s" repeatCount="1" fill="freeze"/>
+      <animate attributeName="opacity" values="0;0.6;0" keyTimes="0;0.3;1" dur="2s" begin="5.5s" repeatCount="1" fill="freeze"/>
+      <animate attributeName="stroke-width" values="3;2;1" dur="2s" begin="5.5s" repeatCount="1" fill="freeze"/>
+    </circle>
+    <circle cx="700" cy="350" r="50" fill="none" stroke="#4ecdc4" stroke-width="3" opacity="0">
+      <animate attributeName="r" values="50;150;250" dur="2s" begin="5.8s" repeatCount="1" fill="freeze"/>
+      <animate attributeName="opacity" values="0;0.6;0" keyTimes="0;0.3;1" dur="2s" begin="5.8s" repeatCount="1" fill="freeze"/>
+      <animate attributeName="stroke-width" values="3;2;1" dur="2s" begin="5.8s" repeatCount="1" fill="freeze"/>
+    </circle>
+  </g>
+
+  <!-- Money/profit symbols floating up -->
+  <g id="profitSymbols" opacity="0.7">
+    <text x="650" y="400" fill="#4ecdc4" font-size="24" font-weight="bold" opacity="0">$
+      <animate attributeName="y" values="400;250;400" dur="3s" begin="5s" repeatCount="1" fill="freeze"/>
+      <animate attributeName="opacity" values="0;0.8;0" keyTimes="0;0.3;1" dur="3s" begin="5s" repeatCount="1" fill="freeze"/>
+    </text>
+    <text x="720" y="420" fill="#4ecdc4" font-size="20" font-weight="bold" opacity="0">+
+      <animate attributeName="y" values="420;270;420" dur="3s" begin="5.3s" repeatCount="1" fill="freeze"/>
+      <animate attributeName="opacity" values="0;0.7;0" keyTimes="0;0.3;1" dur="3s" begin="5.3s" repeatCount="1" fill="freeze"/>
+    </text>
+    <text x="680" y="380" fill="#4ecdc4" font-size="18" font-weight="bold" opacity="0">↑
+      <animate attributeName="y" values="380;240;380" dur="3s" begin="5.6s" repeatCount="1" fill="freeze"/>
+      <animate attributeName="opacity" values="0;0.8;0" keyTimes="0;0.3;1" dur="3s" begin="5.6s" repeatCount="1" fill="freeze"/>
+    </text>
+  </g>
+</svg>
