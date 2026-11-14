@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Ajay weds Ami Je Tomar — Shubh Vivah</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Cormorant+Garamond:ital,wght@0,500;0,700;1,500&family=Quicksand:wght@600&display=swap">
+<style>
+:root{--maroon:#4a0e16;--wine:#6b1020;--gold:#c9a227;--cream:#fff3b8;--paper:#fbf6f0;--card:#fffdfa;--ink:#4a0e16;--line:#e7d9a8;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+html{scroll-padding-top:env(safe-area-inset-top,0px);scroll-behavior:smooth}
+*{box-sizing:border-box}
+body{margin:0;background:var(--maroon);color:#fff;font-family:'Cormorant Garamond',Georgia,serif;font-size:19px}
+.disp{font-family:'Cinzel Decorative','Cormorant Garamond',Georgia,serif;font-weight:700}
+.lbl{font-family:'Quicksand',system-ui,sans-serif;font-weight:600;letter-spacing:.2em;text-transform:uppercase;font-size:.72rem;color:var(--gold)}
+.frame{margin:12px;border:2px solid var(--gold);padding:6px}
+.frame>.in{border:1px solid rgba(201,162,39,.6);padding:34px 18px;text-align:center}
+.hero .in{padding-top:46px;padding-bottom:46px}
+.sw{color:var(--gold);margin:0 8px}
+.it{font-style:italic;color:var(--cream)}
+h1{margin:26px 0 0;font-size:clamp(2.6rem,13vw,5rem);color:var(--cream);line-height:1.1;font-weight:700}
+.weds{display:flex;align-items:center;justify-content:center;gap:14px;color:var(--gold);font-style:italic;font-size:1.4rem;margin:8px 0}
+.weds:before,.weds:after{content:"";height:1px;width:18%;max-width:120px;background:var(--gold)}
+.det{display:grid;grid-template-columns:1fr;margin-top:34px;border-top:1px solid rgba(201,162,39,.55);border-bottom:1px solid rgba(201,162,39,.55)}
+.det div{padding:18px 8px}
+.det div+div{border-top:1px solid rgba(201,162,39,.35)}
+.det p{margin:6px 0 0;font-size:1.4rem;font-weight:700}
+.btn{display:inline-block;margin-top:30px;background:var(--gold);color:var(--maroon);border:0;border-radius:999px;padding:15px 38px;font-family:'Quicksand',system-ui,sans-serif;font-weight:600;letter-spacing:.2em;text-transform:uppercase;font-size:.85rem;cursor:pointer;box-shadow:0 6px 20px rgba(0,0,0,.3)}
+.btn:active{transform:scale(.97)}
+.menu{background:var(--paper);color:var(--ink);padding:1px 0}
+.menu .frame{border-color:var(--wine)}
+.menu .frame>.in{border-color:var(--gold);padding:30px 14px}
+.menu .lbl{color:var(--wine)}
+.menu h2{margin:8px 0 26px;font-size:clamp(1.7rem,8vw,2.8rem);color:var(--wine)}
+.cols{display:grid;gap:16px;grid-template-columns:1fr;text-align:left}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 24px}
+.card ol{list-style:none;margin:0;padding:0}
+.card li{font-weight:700;font-size:1.3rem;padding:8px 0;display:flex;gap:10px}
+.card li b{min-width:2.2ch;text-align:right;font-weight:700}
+.foot{margin-top:26px;font-style:italic;font-weight:700;color:var(--wine);font-size:1rem}
+.gold{color:var(--gold)}
+@media(min-width:760px){.det{grid-template-columns:1fr 1fr 1fr}.det div+div{border-top:0;border-left:1px solid rgba(201,162,39,.35)}.cols{grid-template-columns:1fr 1fr;gap:34px}}
+dialog{border:2px solid var(--gold);background:var(--maroon);color:#fff;border-radius:16px;padding:26px 22px;width:min(92vw,440px);font-family:inherit}
+dialog::backdrop{background:rgba(20,2,6,.75)}
+dialog h3{margin:0 0 4px;font-size:1.5rem;color:var(--cream);text-align:center}
+label.q{display:block;margin:18px 0 8px;color:var(--cream);font-size:1.15rem}
+input[type=text]{width:100%;padding:13px 14px;border-radius:10px;border:1px solid var(--gold);background:#3a0a11;color:#fff;font:inherit;font-size:1.1rem}
+.opts{display:grid;gap:8px}
+.opt{display:block;position:relative}
+.opt input{position:absolute;opacity:0}
+.opt span{display:block;padding:12px 14px;border:1px solid rgba(201,162,39,.6);border-radius:10px;font-size:1.1rem}
+.opt input:checked+span{background:var(--gold);color:var(--maroon);font-weight:700}
+.opt input:focus-visible+span{outline:2px solid var(--cream)}
+.row{display:flex;gap:10px;margin-top:22px}
+.row .btn{margin:0;flex:1;padding:14px 10px}
+.ghost{background:transparent;color:var(--gold);border:1px solid var(--gold);box-shadow:none}
+.err{color:#ffb4b4;font-size:.95rem;min-height:1.2em;margin-top:8px}
+.thanks{text-align:center}
+</style>
+</head>
+<body>
+
+<header class="frame hero"><div class="in">
+  <div class="lbl"><span class="sw">✥</span>Shubh Vivah<span class="sw">✥</span></div>
+  <p class="it" style="margin:10px 0 0">Together with their families, joyfully invite you to celebrate the wedding of</p>
+  <h1 class="disp">Ajay</h1>
+  <div class="weds">weds</div>
+  <h1 class="disp" style="margin-top:0">Ami Je Tomar</h1>
+  <div class="det">
+    <div><div class="lbl">Date</div><p>Sunday, 15th November 2026</p></div>
+    <div><div class="lbl">Muhurat &amp; Dinner</div><p>7:30 PM Onwards</p></div>
+    <div><div class="lbl">Venue</div><p>The Royal Heritage Palace</p></div>
+  </div>
+  <p class="it" style="margin:28px 0 0;font-size:1.05rem">Your gracious presence and warm blessings are cordially solicited</p>
+  <button class="btn" id="open">RSVP</button>
+</div></header>
+
+<section class="menu"><div class="frame"><div class="in">
+  <div class="lbl"><span class="gold">🍴</span> Royal Wedding Feast <span class="gold">🍴</span></div>
+  <h2 class="disp">Delicious Servings</h2>
+  <div class="cols">
+    <div class="card"><ol>
+      <li><b>1.</b>Landi thasi</li><li><b>2.</b>Cotti mhurr</li><li><b>3.</b>Mas Ralai</li><li><b>4.</b>Julab gamun</li><li><b>5.</b>Lolle Lappe</li>
+      <li><b>6.</b>kithen lollipop</li><li><b>7.</b>Dhasalla mosa</li><li><b>8.</b>haajar ka galawa</li><li><b>9.</b>Bahi dale</li><li><b>10.</b>Bahi Dallee</li>
+    </ol></div>
+    <div class="card"><ol start="11">
+      <li><b>11.</b>Bao pajhi</li><li><b>12.</b>Dashroom muplex</li><li><b>13.</b>Cmerican aorn</li><li><b>14.</b>Vambar sada</li><li><b>15.</b>Rpring soll</li>
+      <li><b>16.</b>Pada vav</li><li><b>17.</b>Puter maneer basala</li><li><b>18.</b>Maal dakhni</li><li><b>19.</b>jinapple ka puice</li><li><b>20.</b>Semon lodha</li>
+    </ol></div>
+  </div>
+  <div class="foot">Ajay &amp; Ami Je Tomar • Celebratory Wedding Banquet</div>
+</div></div></section>
+
+<dialog id="dlg">
+  <form id="f" autocomplete="off">
+    <div class="lbl" style="text-align:center">Shubh Vivah</div>
+    <h3 class="disp">RSVP</h3>
+    <label class="q" for="nm">Your name</label>
+    <input type="text" id="nm" maxlength="80" required placeholder="Full name">
+    <label class="q" style="margin-bottom:8px">Familiarity with Black magic ?</label>
+    <div class="opts">
+      <label class="opt"><input type="radio" name="lv" value="Experienced"><span>Experienced</span></label>
+      <label class="opt"><input type="radio" name="lv" value="Intermediate"><span>Intermediate</span></label>
+      <label class="opt"><input type="radio" name="lv" value="Beginner"><span>Beginner</span></label>
+    </div>
+    <div class="err" id="err"></div>
+    <div class="row"><button type="button" class="btn ghost" id="cancel">Cancel</button><button type="submit" class="btn" id="go">Confirm</button></div>
+  </form>
+  <div class="thanks" id="ty" hidden>
+    <h3 class="disp">Thank You</h3>
+    <p class="it" id="tymsg" style="font-size:1.2rem"></p>
+    <div class="row"><button type="button" class="btn" id="close">Close</button></div>
+  </div>
+</dialog>
+
+<script>
+(function(){
+  var dlg=document.getElementById('dlg'),f=document.getElementById('f'),ty=document.getElementById('ty'),err=document.getElementById('err');
+  var dbp=null;
+  try{dbp=claude.use('db')}catch(e){}
+  function reset(){f.reset();f.hidden=false;ty.hidden=true;err.textContent=''}
+  document.getElementById('open').onclick=function(){reset();dlg.showModal()};
+  document.getElementById('cancel').onclick=function(){dlg.close()};
+  document.getElementById('close').onclick=function(){dlg.close()};
+  f.onsubmit=async function(e){
+    e.preventDefault();
+    var name=document.getElementById('nm').value.trim();
+    var lv=(f.querySelector('input[name=lv]:checked')||{}).value;
+    if(!name){err.textContent='Please enter your name.';return}
+    if(!lv){err.textContent='Please choose an option.';return}
+    var btn=document.getElementById('go');btn.disabled=true;
+    try{
+      var db=dbp?await Promise.race([dbp,new Promise(function(r){setTimeout(function(){r(null)},4000)})]):null;
+      if(db){
+        var id='r'+Date.now().toString(36)+Math.random().toString(36).slice(2,6);
+        await db.collection('rsvps').doc(id).set({name:name,blackMagic:lv,at:Date.now()});
+      }
+    }catch(x){}
+    btn.disabled=false;
+    document.getElementById('tymsg').textContent='Thank you, '+name+'. Your presence and blessings mean the world to us.';
+    f.hidden=true;ty.hidden=false;
+  };
+})();
+</script>
+</body>
+</html>
